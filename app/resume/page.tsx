@@ -194,7 +194,7 @@ export default function ResumePage() {
           </button>
         ))}
         <button onClick={toggleAll} className="rounded-full border border-black px-3 py-1">{allChecked ? 'Unselect all' : 'Select all'}</button>
-        <button onClick={handlePrint} className="rounded-full border border-black px-3 py-1 bg-black text-white">Export selected</button>
+        <button onClick={handlePrint} className="rounded-full border px-3 py-1 bg-orange-500 text-white">Export selected</button>
       </div>
 
       <div className="mt-8 space-y-6">
