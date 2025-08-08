@@ -1,13 +1,18 @@
 "use client"
 import Reveal from '@/components/Reveal'
-import Spline from "@splinetool/react-spline";
-
+import SplineHero from '@/components/SplineHero'
+import { useEffect, useState } from 'react';
 
 export default function Main() {
+  const [isDesktop, setIsDesktop] = useState(0);
+  useEffect(() => {
+    setIsDesktop(window.innerWidth)
+  }, []);
+
   return (
     <div className="bg-white">
-      <section className="relative isolate px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl py-28 sm:py-40">
+      <section className="relative isolate px-4 lg:px-6">
+        <div className="mx-auto max-w-5xl py-14 sm:py-20">
           <div className="text-center">
             <Reveal>
               <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-6xl">
@@ -26,11 +31,15 @@ export default function Main() {
               </div>
             </Reveal>
           </div>
+          {
+      (isDesktop >=1600)? 
           <Reveal delay={0.15}>
-            <div className="relative mt-16 sm:mt-24">
-              <Spline scene="https://prod.spline.design/XC3QU6uKeiLLeHRv/scene.splinecode" className="rounded-xl border-0" />
+            <div className="mt-16 sm:mt-24">
+              <SplineHero scene="https://prod.spline.design/XC3QU6uKeiLLeHRv/scene.splinecode" />
             </div>
           </Reveal>
+          : null
+          }
         </div>
       </section>
     </div>

@@ -2,10 +2,7 @@
 
 import React, { useCallback, useEffect, useRef } from "react"
 import dynamic from "next/dynamic"
-
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-})
+import Spline from "@splinetool/react-spline"
 
 type SplineHeroProps = {
   scene: string
@@ -46,7 +43,7 @@ export default function SplineHero({ scene, className }: SplineHeroProps) {
     <div
       ref={containerRef}
       className={[
-        "w-full h-[48vh] sm:h-[56vh] md:h-[64vh] lg:h-[72vh] xl:h-[78vh] max-h-[860px]",
+        "w-full h-[32vh] sm:h-[36vh] md:h-[40vh] lg:h-[44vh] xl:h-[48vh] max-h-[500px]",
         "overflow-hidden rounded-xl border border-gray-200 bg-white",
         className ?? "",
       ].join(" ")}
@@ -62,4 +59,4 @@ export default function SplineHero({ scene, className }: SplineHeroProps) {
       />
     </div>
   )
-} 
+}
