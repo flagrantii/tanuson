@@ -1,5 +1,6 @@
 "use client"
 import Reveal from '@/components/Reveal'
+import Spline from '@splinetool/react-spline'
 
 export default function Main() {
   return (
@@ -24,11 +25,13 @@ export default function Main() {
               </div>
             </Reveal>
           </div>
-          {/* <Reveal delay={0.15}>
-            <div className="mt-16 sm:mt-24">
-              <SplineHero scene="https://prod.spline.design/XC3QU6uKeiLLeHRv/scene.splinecode" />
-            </div>
-          </Reveal> */}
+          <Reveal delay={0.15}>
+            <main>
+              <Spline
+                scene="https://prod.spline.design/XC3QU6uKeiLLeHRv/scene.splinecode" 
+              />
+            </main>
+          </Reveal>
         </div>
       </section>
     </div>
