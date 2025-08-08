@@ -20,8 +20,8 @@ export default function ServicesPage() {
             <h3 className="text-lg font-semibold">{s.title}</h3>
             <p className="text-sm text-gray-600 mt-2">{s.desc}</p>
             <div className="mt-4 flex gap-3">
-              <a href="/contact" className="rounded-full border border-black px-4 py-1.5 text-sm hover:bg-black hover:text-white transition-colors">Request a Quote</a>
-              <a href="/contact" className="rounded-full px-4 py-1.5 text-sm underline underline-offset-4">Hire Me</a>
+              <a href="/contacts" className="rounded-full border border-black px-4 py-1.5 text-sm hover:bg-black hover:text-white transition-colors">Request a Quote</a>
+              <a href="/contacts" className="rounded-full px-4 py-1.5 text-sm underline underline-offset-4">Hire Me</a>
             </div>
           </motion.div>
         ))}

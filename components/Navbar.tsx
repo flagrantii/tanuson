@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Resume', href: '/resume' },
   { name: 'Services', href: '/services' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Contact', href: '/contacts' },
 ]
 
 export default function Navbar() {
