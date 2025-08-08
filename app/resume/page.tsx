@@ -160,7 +160,12 @@ export default function ResumePage() {
   const allChecked = useMemo(() => Object.values(selected).every(Boolean), [selected])
   const printRef = useRef<HTMLDivElement>(null)
 
-  const handlePrint = useReactToPrint({ contentRef: printRef , preserveAfterPrint: true})
+  const handlePrint = useReactToPrint({ contentRef: printRef, pageStyle: `
+    @page { size: A4; margin: 12mm; }
+    @media print {
+      html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  `})
 
   const toggle = (key: SectionKey) => setSelected((s) => ({ ...s, [key]: !s[key] }))
   const toggleAll = () => setSelected((s) => {

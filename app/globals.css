@@ -34,3 +34,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   body { animation: none; opacity: 1; }
 }
+
+/* Ensure printing is not affected by animations or opacity on iOS */
+@media print {
+  body { animation: none !important; opacity: 1 !important; }
+}
