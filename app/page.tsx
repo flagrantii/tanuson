@@ -1,6 +1,6 @@
 "use client"
-import { motion } from 'framer-motion'
 import Reveal from '@/components/Reveal'
+import SplineHero from '@/components/SplineHero'
 
 export default function Main() {
   return (
@@ -26,10 +26,8 @@ export default function Main() {
             </Reveal>
           </div>
           <Reveal delay={0.15}>
-            <div className="mt-16 sm:mt-24 rounded-xl border border-gray-200 p-4">
-              <div className="aspect-[16/9] w-full rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 text-sm">
-                3D Scene Placeholder (Spline/Three.js)
-              </div>
+            <div className="mt-16 sm:mt-24">
+              <SplineHero scene="https://prod.spline.design/XC3QU6uKeiLLeHRv/scene.splinecode" />
             </div>
           </Reveal>
         </div>
