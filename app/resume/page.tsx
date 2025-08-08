@@ -160,12 +160,23 @@ export default function ResumePage() {
   const allChecked = useMemo(() => Object.values(selected).every(Boolean), [selected])
   const printRef = useRef<HTMLDivElement>(null)
 
-  const handlePrint = useReactToPrint({ contentRef: printRef, pageStyle: `
-    @page { size: A4; margin: 12mm; }
-    @media print {
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    pageStyle: `
+      @page { size: A4; margin: 12mm; }
       html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    }
-  `})
+      body { animation: none !important; opacity: 1 !important; }
+      [data-print-root] { display: block !important; overflow: visible !important; }
+      [data-print-root] section,
+      [data-print-root] div,
+      [data-print-root] li { 
+        break-inside: avoid; page-break-inside: avoid; 
+        -webkit-column-break-inside: avoid; 
+        -webkit-region-break-inside: avoid; 
+      }
+      img { max-width: 100% !important; page-break-inside: avoid; break-inside: avoid; }
+    `,
+  })
 
   const toggle = (key: SectionKey) => setSelected((s) => ({ ...s, [key]: !s[key] }))
   const toggleAll = () => setSelected((s) => {
@@ -213,8 +224,13 @@ export default function ResumePage() {
       </div>
 
       {/* Hidden print container */}
-      <div className="fixed -left-[10000px] top-0 w-[794px] bg-white">
-        <div ref={printRef} className="p-6 max-w-4xl">
+      <div>
+        <div
+          ref={printRef}
+          data-print-root
+          style={{ display: 'none' }}
+          className="p-6 w-[794px] bg-white"
+        >
           {selected.header && <ResumeHeader />}
           {selected.objective && <ObjectiveSection />}
           {selected.work && <WorkSection />}
