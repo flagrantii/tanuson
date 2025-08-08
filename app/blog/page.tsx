@@ -9,9 +9,42 @@ type FeedItem = {
   pubDate?: string
   contentSnippet?: string
   categories?: string[]
+  [key: string]: any
 }
 
 const MEDIUM_FEED = process.env.NEXT_PUBLIC_MEDIUM_RSS || ''
+
+function extractTextFromHtml(html: string): string {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function buildSnippet(item: FeedItem): string {
+  const candidates: string[] = []
+  if (item.contentSnippet) candidates.push(item.contentSnippet)
+  if (item['content:encodedSnippet']) candidates.push(item['content:encodedSnippet'])
+  if (item['content:encoded']) candidates.push(extractTextFromHtml(String(item['content:encoded'])))
+
+  let text = candidates.find(Boolean) || ''
+  text = extractTextFromHtml(text)
+
+  const MIN = 300
+  const MAX = 500
+  const TARGET = 400
+
+  if (text.length <= MIN) return text
+
+  let slice = text.slice(0, Math.min(MAX, Math.max(TARGET, MIN)))
+  const period = slice.lastIndexOf('. ')
+  const space = slice.lastIndexOf(' ')
+  const cut = period >= MIN ? period + 1 : space >= MIN ? space : slice.length
+  slice = slice.slice(0, cut)
+  return slice + (text.length > slice.length ? '…' : '')
+}
 
 async function fetchText(url: string) {
   const res = await fetch(url, {
@@ -83,16 +116,19 @@ export default async function BlogPage() {
       )}
 
       <div className="mt-8 grid gap-6">
-        {items.map((item) => (
-          <article key={item.link} className="rounded-lg border p-5">
-            <h3 className="text-lg font-semibold"><a href={item.link} target="_blank" rel="noreferrer">{item.title}</a></h3>
-            <p className="text-xs text-gray-500 mt-1">{item.pubDate}</p>
-            {item.contentSnippet && (
-              <p className="text-sm text-gray-600 mt-3">{item.contentSnippet}</p>
-            )}
-            <a className="mt-3 inline-block text-sm underline underline-offset-4" href={item.link} target="_blank" rel="noreferrer">Read more on Medium</a>
-          </article>
-        ))}
+        {items.map((item) => {
+          const snippet = buildSnippet(item)
+          return (
+            <article key={item.link} className="rounded-lg border p-5">
+              <h3 className="text-lg font-semibold"><a href={item.link} target="_blank" rel="noreferrer">{item.title}</a></h3>
+              <p className="text-xs text-gray-500 mt-1">{item.pubDate}</p>
+              {snippet && (
+                <p className="text-sm text-gray-600 mt-3">{snippet}</p>
+              )}
+              <a className="mt-3 inline-block text-sm underline underline-offset-4" href={item.link} target="_blank" rel="noreferrer">Read more on Medium</a>
+            </article>
+          )
+        })}
       </div>
     </div>
   )
