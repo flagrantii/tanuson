@@ -147,6 +147,16 @@ function ProjectsSection() {
 }
 
 export default function ResumePage() {
+  const sectionDefs: Array<{ key: SectionKey; label: string }> = [
+    { key: 'header', label: 'Header' },
+    { key: 'objective', label: 'Objective' },
+    { key: 'work', label: 'Work' },
+    { key: 'tech', label: 'Technologies' },
+    { key: 'education', label: 'Education' },
+    { key: 'activities', label: 'Activities' },
+    { key: 'projects', label: 'Projects' },
+  ]
+
   const [selected, setSelected] = useState<Record<SectionKey, boolean>>({
     header: true,
     objective: true,
@@ -158,6 +168,7 @@ export default function ResumePage() {
   })
 
   const allChecked = useMemo(() => Object.values(selected).every(Boolean), [selected])
+  const noneChecked = useMemo(() => Object.values(selected).every((v) => !v), [selected])
   const printRef = useRef<HTMLDivElement>(null)
 
   const handlePrint = useReactToPrint({
@@ -178,49 +189,74 @@ export default function ResumePage() {
     `,
   })
 
+  const setPreset = (preset: 'full' | 'core' | 'minimal') => {
+    if (preset === 'full') {
+      setSelected({ header: true, objective: true, work: true, tech: true, education: true, activities: true, projects: true })
+    } else if (preset === 'core') {
+      setSelected({ header: true, objective: true, work: true, tech: true, education: true, activities: false, projects: false })
+    } else {
+      setSelected({ header: true, objective: false, work: true, tech: true, education: true, activities: false, projects: false })
+    }
+  }
+
   const toggle = (key: SectionKey) => setSelected((s) => ({ ...s, [key]: !s[key] }))
   const toggleAll = () => setSelected((s) => {
     const next = !allChecked
     return Object.keys(s).reduce((acc, k) => ({ ...acc, [k]: next }), {} as Record<SectionKey, boolean>)
   })
 
+  const labelFor = (k: SectionKey) => sectionDefs.find((d) => d.key === k)?.label || ''
+
+  const Wrapper = ({ k, children }: { k: SectionKey; children: React.ReactNode }) => (
+    <div className={`${selected[k] ? '' : 'opacity-50'} transition-opacity`}>
+      <div className="mb-2 flex items-center gap-2 text-xs text-gray-600">
+        <input
+          type="checkbox"
+          checked={selected[k]}
+          onChange={() => toggle(k)}
+          className="h-4 w-4 rounded border-gray-300"
+          aria-label={`Include ${labelFor(k)} in export`}
+        />
+        <span>Include in export</span>
+        <span className="ml-auto text-gray-400">{selected[k] ? 'Included' : 'Excluded'}</span>
+      </div>
+      {children}
+    </div>
+  )
+
   return (
     <div className="px-6 lg:px-8 mx-auto max-w-4xl py-16">
       <h1 className="text-3xl sm:text-4xl font-semibold">Resume</h1>
-      <p className="mt-3 text-gray-600">Select sections to export as PDF.</p>
+      <p className="mt-3 text-gray-600">Choose sections to export as PDF. Toggles are above each section; preview dims excluded sections.</p>
 
-      <div className="mt-4 flex flex-wrap gap-3 text-sm">
-        {(
-          [
-            ['header','Header'],
-            ['objective','Objective'],
-            ['work','Work'],
-            ['tech','Technologies'],
-            ['education','Education'],
-            ['activities','Activities'],
-            ['projects','Projects'],
-          ] as [SectionKey, string][]
-        ).map(([key, label]) => (
-          <button
-            key={key}
-            onClick={() => toggle(key)}
-            className={`rounded-full border px-3 py-1 ${selected[key] ? 'bg-black text-white border-black' : 'border-gray-300 hover:bg-black hover:text-white'}`}
-          >
-            {label}
-          </button>
-        ))}
-        <button onClick={toggleAll} className="rounded-full border border-black px-3 py-1">{allChecked ? 'Unselect all' : 'Select all'}</button>
-        <button onClick={handlePrint} className="rounded-full border px-3 py-1 bg-orange-500 text-white">Export selected</button>
+      <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
+        <label className="flex items-center gap-2 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={allChecked}
+            onChange={toggleAll}
+            className="h-4 w-4 rounded border-gray-300"
+            aria-label="Select all sections"
+          />
+          <span>{allChecked ? 'All selected' : 'Select all'}</span>
+        </label>
+        <div className="h-4 w-px bg-gray-300" />
+        <button onClick={() => setPreset('full')} className="rounded-full border px-3 py-1">Full</button>
+        <button onClick={() => setPreset('core')} className="rounded-full border px-3 py-1">Core</button>
+        <button onClick={() => setPreset('minimal')} className="rounded-full border px-3 py-1">Minimal</button>
+        <div className="h-4 w-px bg-gray-300" />
+        <span className="text-xs text-gray-500">Included: {Object.values(selected).filter(Boolean).length}/{sectionDefs.length}</span>
+        <button onClick={handlePrint} disabled={noneChecked} className={`ml-auto rounded-full border px-3 py-1 ${noneChecked ? 'opacity-50 cursor-not-allowed' : 'bg-orange-500 text-white border-orange-500'}`}>Export selected</button>
       </div>
 
       <div className="mt-8 space-y-6">
-        <ResumeHeader />
-        <ObjectiveSection />
-        <WorkSection />
-        <TechSection />
-        <EducationSection />
-        <ActivitiesSection />
-        <ProjectsSection />
+        <Wrapper k="header"><ResumeHeader /></Wrapper>
+        <Wrapper k="objective"><ObjectiveSection /></Wrapper>
+        <Wrapper k="work"><WorkSection /></Wrapper>
+        <Wrapper k="tech"><TechSection /></Wrapper>
+        <Wrapper k="education"><EducationSection /></Wrapper>
+        <Wrapper k="activities"><ActivitiesSection /></Wrapper>
+        <Wrapper k="projects"><ProjectsSection /></Wrapper>
       </div>
 
       {/* Hidden print container */}

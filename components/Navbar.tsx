@@ -73,8 +73,8 @@ export default function Navbar() {
               <div className="flex items-center justify-between">
                 <a href="/" className="-m-1.5 p-1.5">
                   <span className="sr-only">Tanuson</span>
-                  <img className="h-8 w-auto" src="/bulb.png" alt="logo" />
-                </a>
+                  <p className="text-2xl font-bold">Tanuson.</p>
+                  </a>
                 <button
                   type="button"
                   className="-m-2.5 rounded-md p-2.5 text-gray-700"
