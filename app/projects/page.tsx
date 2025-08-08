@@ -33,9 +33,10 @@ export default function ProjectsPage() {
       <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((web: WebItem) => (
           <motion.article key={web.id} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} className="flex flex-col gap-3 rounded-lg border p-5">
+            <a href={`/projects/${web.slug}`}>
             <div className="flex items-center gap-3">
               <div>
-                <h3 className="text-lg font-semibold"><a href={`/projects/${web.slug}`}>{web.title}</a></h3>
+                <h3 className="text-lg font-semibold">{web.title}</h3>
                 <p className="text-xs text-gray-500">{web.category.title}</p>
               </div>
             </div>
@@ -45,6 +46,7 @@ export default function ProjectsPage() {
                 <span key={t} className="text-xs rounded-full border border-gray-300 px-2 py-0.5">{t}</span>
               ))}
             </div>
+            </a>
           </motion.article>
         ))}
       </div>
