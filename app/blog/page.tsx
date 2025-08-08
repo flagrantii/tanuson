@@ -1,5 +1,8 @@
 import Parser from 'rss-parser'
 
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 type FeedItem = {
   title?: string
   link?: string
@@ -13,12 +16,26 @@ const MEDIUM_FEED = process.env.NEXT_PUBLIC_MEDIUM_RSS || ''
 export default async function BlogPage() {
   const parser: Parser = new Parser()
   let items: FeedItem[] = []
+  let errorMsg: string | null = null
 
   if (MEDIUM_FEED) {
     try {
-      const feed = await parser.parseURL(MEDIUM_FEED)
+      const res = await fetch(MEDIUM_FEED, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; TanusonSite/1.0; +https://personal.tanuson.work)',
+          'Accept': 'application/rss+xml, application/xml;q=0.9,*/*;q=0.8',
+        },
+        cache: 'no-store',
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const xml = await res.text()
+      const feed = await parser.parseString(xml)
       items = (feed.items as FeedItem[]).slice(0, 10)
-    } catch (e) {
+      if (!items || items.length === 0) {
+        errorMsg = 'No posts found from the configured feed.'
+      }
+    } catch (e: any) {
+      errorMsg = `Failed to fetch RSS feed. ${e?.message ?? 'Check the URL or network.'}`
       items = []
     }
   }
@@ -32,6 +49,10 @@ export default async function BlogPage() {
         <div className="mt-6 rounded-md border p-4 text-sm text-gray-600">
           Set <code className="px-1 py-0.5 bg-gray-100">NEXT_PUBLIC_MEDIUM_RSS</code> to your Medium RSS URL (e.g. https://medium.com/feed/@username).
         </div>
+      )}
+
+      {MEDIUM_FEED && errorMsg && (
+        <div className="mt-6 rounded-md border p-4 text-sm text-gray-600">{errorMsg}</div>
       )}
 
       <div className="mt-8 grid gap-6">
