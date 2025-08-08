@@ -12,7 +12,7 @@ export default function Main() {
   return (
     <div className="bg-white">
       <section className="relative isolate px-4 lg:px-6">
-        <div className="mx-auto max-w-5xl py-14 sm:py-20">
+        <div className="mx-auto max-w-5xl py-10 sm:py-12">
           <div className="text-center">
             <Reveal>
               <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-6xl">
@@ -34,7 +34,7 @@ export default function Main() {
           {
       (isDesktop >=1600)? 
           <Reveal delay={0.15}>
-            <div className="mt-16 sm:mt-24">
+            <div className="mt-8 sm:mt-12">
               <SplineHero scene="https://prod.spline.design/XC3QU6uKeiLLeHRv/scene.splinecode" />
             </div>
           </Reveal>
