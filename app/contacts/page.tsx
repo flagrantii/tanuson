@@ -17,21 +17,16 @@ export default function ContactPage() {
     }
     try {
       setState('loading')
-      const res = await fetch(formEndpoint, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(Object.assign(document.createElement('form'), { elements: [] }))
-      })
       const fd = new FormData()
       fd.append('name', name)
       fd.append('email', email)
       fd.append('message', message)
-      const r2 = await fetch(formEndpoint, { method: 'POST', body: fd })
-      if (r2.ok) {
-        setState('success')
-        setName(''); setEmail(''); setMessage('')
-      } else throw new Error('Failed')
+      const res = await fetch(formEndpoint, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+      if (!res.ok) throw new Error('Request failed')
+      setState('success')
+      setName(''); setEmail(''); setMessage('')
     } catch (e) {
+      console.error(e)
       setState('error')
     }
   }

@@ -208,7 +208,7 @@ export default function ResumePage() {
       </div>
 
       {/* Hidden print container */}
-      <div className="hidden">
+      <div className="fixed -left-[10000px] top-0 w-[794px] bg-white">
         <div ref={printRef} className="p-6 max-w-4xl">
           {selected.header && <ResumeHeader />}
           {selected.objective && <ObjectiveSection />}
