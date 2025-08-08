@@ -160,7 +160,7 @@ export default function ResumePage() {
   const allChecked = useMemo(() => Object.values(selected).every(Boolean), [selected])
   const printRef = useRef<HTMLDivElement>(null)
 
-  const handlePrint = useReactToPrint({ content: () => printRef.current })
+  const handlePrint = useReactToPrint({ contentRef: printRef , preserveAfterPrint: true})
 
   const toggle = (key: SectionKey) => setSelected((s) => ({ ...s, [key]: !s[key] }))
   const toggleAll = () => setSelected((s) => {
