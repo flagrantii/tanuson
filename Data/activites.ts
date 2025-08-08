@@ -28,4 +28,13 @@
         'Leveraged Google tools to enhance teaching and learning experiences campus‑wide.',
       ],
     },
+    {
+      role: 'Lead Software Engineer',
+      org: 'Engineering Student Committee, Chulalongkorn University',
+      period: 'Aug 2025 – Present',
+      bullets: [
+        'Led development of a useful product for the Engineering Student Committee, Chulalongkorn University.',
+        'Created a software engineer environment for team members'
+      ],
+    }
   ]

@@ -40,17 +40,6 @@ export type TimelineItem = {
       ],
     },
     {
-      company: 'TechCare',
-      role: 'Back‑end Developer',
-      type: 'Part‑Time',
-      period: 'Feb 2024 – Jun 2024',
-      bullets: [
-        'Designed user and system schemas with APIs for optimal functionality and performance.',
-        'Implemented API fetching mechanisms and monitoring for reliability and observability.',
-        'Architected database structure for a delivery application focused on scalability and integrity.',
-      ],
-    },
-    {
       company: 'Freelance',
       role: 'Software Engineer / Project Manager',
       type: 'Since 2022',

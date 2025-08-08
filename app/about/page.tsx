@@ -146,22 +146,24 @@ export default function AboutPage() {
               transition={{ duration: 0.4, delay: idx * 0.05 }}
               className="rounded-lg border p-5 hover:shadow-md transition-shadow"
             >
-              <div className="flex items-center gap-3">
-                <img src={c.author.imageUrl} alt="provider" className="h-8 w-8 rounded" />
-                <div className="min-w-0">
-                  <h3 className="text-sm font-semibold truncate"><a href={c.href} target="_blank" rel="noopener">{c.title}</a></h3>
-                  <p className="text-xs text-gray-500">{c.category.title} — {c.category.org}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <img src={c.author.imageUrl} alt="provider" className="h-8 w-8 sm:h-9 sm:w-9 rounded" />
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-semibold line-clamp-2"><a href={c.href} target="_blank" rel="noopener">{c.title}</a></h3>
+                    <p className="text-xs text-gray-500">{c.category.title} — {c.category.org}</p>
+                  </div>
                 </div>
               </div>
-              <p className="mt-3 text-sm text-gray-700 line-clamp-3">{c.description}</p>
+              <p className="mt-3 text-sm text-gray-700 line-clamp-4">{c.description}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {c.skills?.slice(0,6).map((s: string) => (
                   <span key={s} className="rounded-full border border-gray-300 px-2 py-0.5 text-[11px]">{s}</span>
                 ))}
               </div>
-              <div className="mt-4 flex items-center justify-between text-xs text-gray-600">
-                <time>{c.date}</time>
-                <div className="flex gap-3">
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-600">
+                <time className="order-2 sm:order-1">{c.date}</time>
+                <div className="order-1 sm:order-2 flex flex-wrap items-center gap-3">
                   <a className="underline underline-offset-4" href={c.href} target="_blank" rel="noopener">Credential</a>
                   {c.author.cersimage && (
                     <button onClick={() => setCertModal(c.author.cersimage)} className="underline underline-offset-4">Preview</button>

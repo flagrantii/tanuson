@@ -2,10 +2,10 @@ export type SkillGroup = { title: string; skills: string[] }
 
 export const skillGroups: SkillGroup[] = [
   { title: 'Programming Languages', skills: ['JavaScript', 'TypeScript', 'Golang', 'Java', 'Python', 'C++', 'SQL'] },
-  { title: 'Frameworks / Libraries', skills: ['Next.js', 'Nest.js', 'Go Fiber', 'React', 'Prisma', 'Django', 'GORM'] },
-  { title: 'Databases', skills: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Supabase'] },
+  { title: 'Frameworks / Libraries', skills: ['Next.js', 'Nest.js', 'Fiber', 'Gin', 'React', 'Prisma', 'Django', 'GORM', 'Drizzle'] },
+  { title: 'Databases', skills: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Supabase', 'Qdrant'] },
   { title: 'Tools', skills: ['Git', 'Docker', 'Kubernetes'] },
-  { title: 'Cloud and DevOps', skills: ['AWS', 'DigitalOcean', 'Firebase', 'Vercel', 'GitHub Actions', 'Grafana', 'Argo CD'] },
-  { title: 'AI', skills: ['Python (ML)'] },
-  { title: 'DevOps', skills: ['Docker', 'GitHub'] },
+  { title: 'Cloud', skills: ['AWS', 'GCP', 'DigitalOcean', 'Firebase', 'Vercel'] },
+  { title: 'AI', skills: ['Python (ML)', 'PyTorch', 'TensorFlow', 'Spark', 'Kafka','RAG', 'LangChain'] },
+  { title: 'DevOps', skills: ['Docker', 'Kubernetes', 'Helm', 'Argo CD', 'Gitlab CI/CD', 'Jenkins', 'Github Actions', 'Prometheus', 'Grafana'] },
 ]
