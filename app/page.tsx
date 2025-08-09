@@ -75,7 +75,7 @@ export default function Main() {
 
   return (
     <div className="bg-white">
-      <section className="relative isolate px-4 lg:px-6">
+      <section className="relative isolate px-4 lg:px-6 flex justify-center mb-auto">
         <div className="mx-auto max-w-5xl py-12 flex flex-col gap-12">
           <div className="text-center">
             <Reveal>
@@ -95,7 +95,7 @@ export default function Main() {
               </div>
             </Reveal>
           </div>
-          <div className="w-full max-w-2xl sm:w-108 mx-auto h-96 sm:h-128 rounded-lg border border-border overflow-hidden animate-enter">
+          <div className="w-full max-w-8xl sm:w-full mx-auto h-96 sm:h-128 rounded-lg border border-border overflow-hidden animate-enter">
             {showFallback ? (
               <div className="w-full h-full flex items-center justify-center bg-gray-50">
                 <div className="text-center p-8">

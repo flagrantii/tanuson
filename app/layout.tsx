@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-white text-black antialiased`}>
         <Navbar />
-        <main className="min-h-screen">
+        <main>
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
