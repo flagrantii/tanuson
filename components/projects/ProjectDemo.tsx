@@ -7,7 +7,6 @@ type ProjectDemoProps = {
 
 export default function ProjectDemo({ isDemo, liveUrl }: ProjectDemoProps) {
   if (!isDemo || !liveUrl) return null
-
   return (
     <section className="mt-8">
       <h2 className="text-xl font-semibold">Live Demo</h2>
@@ -18,11 +17,11 @@ export default function ProjectDemo({ isDemo, liveUrl }: ProjectDemoProps) {
           <span className="h-2 w-2 rounded-full bg-green-400" />
           <div className="ml-3 truncate text-xs text-gray-500">{liveUrl}</div>
         </div>
-        <div className="aspect-[16/9] w-full">
+        <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
           <iframe
             src={liveUrl}
             title="Live Demo"
-            className="w-full h-full"
+            style={{ aspectRatio: '16/9'}}
             allow="clipboard-write; encrypted-media; fullscreen"
           />
         </div>

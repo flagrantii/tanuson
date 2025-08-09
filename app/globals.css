@@ -39,3 +39,21 @@ body {
 @media print {
   body { animation: none !important; opacity: 1 !important; }
 }
+
+@media (max-width: 1200px) {
+  iframe {
+    zoom: 0.7 /* Adjust for medium screens like tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  iframe {
+    zoom: 0.5; /* Adjust for smaller screens like phones */
+  }
+}
+
+@media (max-width: 480px) {
+  iframe {
+    zoom: 0.4
+  }
+}
