@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import { webItems, type WebItem } from '@/Data/web'
 import { motion } from 'framer-motion'
 
-const FILTERS = ['All', 'UX/UI', 'Frontend', 'Fullstack', 'AI', 'DevOps']
+const FILTERS = ['All', 'UX/UI', 'Frontend', 'Fullstack', 'AI', 'DevOps', 'Have Demo']
 
 export default function ProjectsPage() {
   const [active, setActive] = useState<string>('All')
