@@ -28,6 +28,8 @@ export default function Estimator() {
     timeline: 'normal',
     notes: ''
   });
+  // Add a local state for the pages input as string
+  const [pagesInput, setPagesInput] = useState(form.pages.toString());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<EstimateResult | null>(null);
@@ -54,6 +56,11 @@ export default function Estimator() {
     }
     setInlineSuggestions(sugg);
   }, [mode, form, description]);
+
+  // Sync pagesInput when form.pages changes (e.g. mode switch)
+  useEffect(() => {
+    setPagesInput(form.pages.toString());
+  }, [form.pages]);
 
   function updateForm<K extends keyof StructuredFormInput>(k: K, v: StructuredFormInput[K]) {
     setForm(f => ({ ...f, [k]: v }));
@@ -166,7 +173,32 @@ export default function Estimator() {
           </div>
           <div>
             <label htmlFor="pages" className="block text-sm font-medium">Pages / Screens</label>
-            <input id="pages" type="number" min={1} value={form.pages} onChange={e=>updateForm('pages', Number(e.target.value))} className="mt-1 w-full border rounded p-2 text-sm" aria-describedby="pagesHelp" />
+            <input
+              id="pages"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              min={1}
+              value={pagesInput}
+              onChange={e => {
+                // Allow empty string or only digits
+                const val = e.target.value;
+                if (/^\d*$/.test(val)) setPagesInput(val);
+              }}
+              onBlur={() => {
+                // On blur, parse and update form.pages
+                const n = parseInt(pagesInput, 10);
+                if (!isNaN(n) && n > 0) {
+                  updateForm('pages', n);
+                  setPagesInput(n.toString());
+                } else {
+                  // fallback to previous valid value
+                  setPagesInput(form.pages.toString());
+                }
+              }}
+              className="mt-1 w-full border rounded p-2 text-sm"
+              aria-describedby="pagesHelp"
+            />
             <p id="pagesHelp" className={tooltipClass}>Unique pages or screen views.</p>
           </div>
           <div>

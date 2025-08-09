@@ -44,12 +44,6 @@ export default function ServicesPage() {
 							>
 								Request a Quote
 							</a>
-							<a
-								href="/contacts"
-								className="rounded-full px-4 py-1.5 text-sm underline underline-offset-4"
-							>
-								Hire Me
-							</a>
 						</div>
 					</motion.div>
 				))}
