@@ -96,7 +96,7 @@ function InteractiveObject() {
       >
         <torusKnotGeometry args={[1, 0.35, 220, 32]} />
         <meshPhysicalMaterial
-          color={active ? "#d4d4d4" : hovered ? "#0a0a0a" : "#e5e5e5"}
+          color={active ? "#d4d4d4" : hovered ? "##ff9c04" : "#e5e5e5"}
           metalness={active ? 0.2 : 0.4}
           roughness={active ? 0.1 : 0.35}
           clearcoat={0.8}
@@ -121,7 +121,7 @@ export default function InteractiveScene() {
       camera={{ position: [0, 0, 4], fov: 70 }}
       shadows
       gl={{ antialias: true }}
-      style={{ width: "100%", height: "100%", backgroundColor: "white" }}
+      style={{ width: "100%", height: "100%", backgroundColor: "black" }}
     >
       {/* Lighting */}
       <ambientLight intensity={0.6} />
