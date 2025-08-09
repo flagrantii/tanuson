@@ -34,7 +34,6 @@ function InteractiveObject() {
   const group = useRef<THREE.Group>(null!);
   const meshRef = useRef<THREE.Mesh>(null!);
   const [hovered, setHovered] = useState(false);
-  const [active, setActive] = useState(false);
   const target = useRef({ x: 0, y: 0 });
 
   const prefersReducedMotion = useMemo(() => {
@@ -90,21 +89,20 @@ function InteractiveObject() {
         ref={meshRef}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
-        onClick={() => setActive((v) => !v)}
         castShadow
         receiveShadow
       >
         <torusKnotGeometry args={[1, 0.35, 220, 32]} />
         <meshPhysicalMaterial
-          color={active ? "#d4d4d4" : hovered ? "#ff9c04" : "#e5e5e5"}
-          metalness={active ? 0.2 : 0.4}
-          roughness={active ? 0.1 : 0.35}
+          color={hovered ? "#ff9c04" : "#e5e5e5"}
+          metalness={0.4}
+          roughness={0.35}
           clearcoat={0.8}
           clearcoatRoughness={0.2}
           sheen={0.3}
-          transmission={active ? 0.55 : 0}
+          transmission={hovered ? 0.55 : 0}
           ior={1.2}
-          thickness={active ? 0.5 : 0}
+          thickness={hovered ? 0.5 : 0}
           envMapIntensity={1.2}
         />
       </mesh>
