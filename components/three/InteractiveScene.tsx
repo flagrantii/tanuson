@@ -55,7 +55,7 @@ function InteractiveObject() {
         0.08
       );
       meshRef.current.rotation.z += delta * 0.1;
-      const s = THREE.MathUtils.lerp(meshRef.current.scale.x, hovered ? 1.05 : 1, 0.2);
+      const s = THREE.MathUtils.lerp(meshRef.current.scale.x, hovered ? 1.25 : 1, 0.2);
       meshRef.current.scale.setScalar(s);
     }
   });
@@ -100,9 +100,9 @@ function InteractiveObject() {
           clearcoat={0.8}
           clearcoatRoughness={0.2}
           sheen={0.3}
-          transmission={hovered ? 0.55 : 0}
+          transmission={0.55}
           ior={1.2}
-          thickness={hovered ? 0.5 : 0}
+          thickness={0.5}
           envMapIntensity={1.2}
         />
       </mesh>
