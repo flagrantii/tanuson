@@ -157,7 +157,7 @@ export const webItems: WebItem[] = [
     techStack: ['Next.js', 'Golang', 'Gin', 'PostgreSQL', 'DigitalOcean', 'AWS S3'],
     techStackResume: ['Golang', 'Microservices'],
     images: ['/projects/rpkm/rpkm-1.png', '/projects/rpkm/rpkm-2.png', '/projects/rpkm/rpkm-3.png'],
-    isDemo: true,
+    isDemo: false,
     icon: '/icon/rpkm.png',
     features: [
       'Student registration',
@@ -317,7 +317,7 @@ export const webItems: WebItem[] = [
     slug: 'cu-openhouse',
     title: 'CU Openhouse',
     href: {
-      demoUrl: 'https://servus-page.vercel.app/',
+      demoUrl: '',
       repoUrl: '',
     },
     description: 'Scalable service for Chulalongkorn Openhouse 2025 supporting 12,000 concurrent users and 120,000 registered users. QR scanning, real‑time updates.',
@@ -327,7 +327,7 @@ export const webItems: WebItem[] = [
     techStack: ['Next.js', 'Golang', 'Line LIFF', 'PostgreSQL', 'Redis', 'Vercel'],
     techStackResume: ['Next.js', 'Golang', 'Line LIFF', 'PostgreSQL'],
     images: ['/projects/openhouse/openhouse-1.png', '/projects/openhouse/openhouse-2.png'],
-    isDemo: true,
+    isDemo: false,
     icon: '/icon/openhouse.png',
     features: [
       'QR scanning',
@@ -341,7 +341,7 @@ export const webItems: WebItem[] = [
     slug: 'tucu-football-match',
     title: 'TUCU Football Match',
     href: {
-      demoUrl: 'https://servus-page.vercel.app/',
+      demoUrl: '',
       repoUrl: '',
     },
     description: 'Announcements and registration platform supporting up to 3,000 concurrent registrations; user base over 20,000.',
@@ -351,7 +351,7 @@ export const webItems: WebItem[] = [
     techStack: ['Next.js', 'Golang', 'AWS S3', 'AWS Amplify', 'DigitalOcean', 'PostgreSQL'],
     techStackResume: ['Golang', 'AWS S3', 'PostgreSQL'],
     images: ['/projects/football/football-1.png', '/projects/football/football-2.png'],
-    isDemo: true,
+    isDemo: false,
     icon: '/icon/football.png',
     features: [
       'Announcements',
