@@ -21,7 +21,6 @@ export default function ProjectDemo({ isDemo, liveUrl }: ProjectDemoProps) {
           <iframe
             src={liveUrl}
             title="Live Demo"
-            style={{ aspectRatio: '16/9'}}
             allow="clipboard-write; encrypted-media; fullscreen"
           />
         </div>
