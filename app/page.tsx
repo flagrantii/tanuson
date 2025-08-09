@@ -75,7 +75,7 @@ export default function Main() {
 
   return (
     <div className="bg-white">
-      <section className="relative isolate px-4 lg:px-6 flex justify-center mb-auto">
+      <section className="relative isolate px-4 lg:px-6 flex justify-center mb-4 sm:mb-20">
         <div className="mx-auto max-w-5xl py-12 flex flex-col gap-12">
           <div className="text-center">
             <Reveal>
