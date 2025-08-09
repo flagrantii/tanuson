@@ -326,7 +326,7 @@ export const webItems: WebItem[] = [
     tags: ['AI', 'Integration'],
     techStack: ['Next.js', 'Golang', 'Line LIFF', 'PostgreSQL', 'Redis', 'Vercel'],
     techStackResume: ['Next.js', 'Golang', 'Line LIFF', 'PostgreSQL'],
-    images: ['/projects/openhouse/openhouse-1.png', '/projects/openhouse/openhouse-2.png'],
+    images: [],
     isDemo: false,
     icon: '/icon/openhouse.png',
     features: [
@@ -350,7 +350,7 @@ export const webItems: WebItem[] = [
     tags: ['AI', 'Integration'],
     techStack: ['Next.js', 'Golang', 'AWS S3', 'AWS Amplify', 'DigitalOcean', 'PostgreSQL'],
     techStackResume: ['Golang', 'AWS S3', 'PostgreSQL'],
-    images: ['/projects/football/football-1.png', '/projects/football/football-2.png'],
+    images: [],
     isDemo: false,
     icon: '/icon/football.png',
     features: [
