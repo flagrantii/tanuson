@@ -131,7 +131,7 @@ export default function InteractiveScene() {
       <Stars radius={50} depth={20} count={1000} factor={4} saturation={0} fade speed={0.5} />
 
       <InteractiveObject />
-      {/* <Satellites /> */}
+      <Satellites />
       <Sparkles count={80} scale={12} size={1.1} speed={0.25} noise={0.2} color="#ffffff" />
 
       {/* Realistic ambient lighting */}
