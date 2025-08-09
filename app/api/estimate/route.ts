@@ -96,8 +96,9 @@ export async function POST(req: Request) {
     const description = body.description; // already length validated
     const prompt = `You are an assistant that extracts project scoping attributes from a free-form software project description for a freelance fullstack/AI engineer.\nReturn a JSON object with fields:\nprojectType (landing|web-app|script|mobile|other), pages (integer), complexity (low|medium|high), auth (boolean), adminPanel (boolean), aiFeatures (none|basic|advanced), timeline (flexible|normal|rushed), notes (short summary of key features).\nIf uncertain, make reasonable assumptions and note them in notes. Base choices on description below.\nDescription: """${description.replace(/[`$]/g,'')}"""`;
 
+    const configModel = process.env.OPENAI_MODEL || 'gpt-4o-mini';
     const completion = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: configModel,
       messages: [
         { role: 'system', content: 'You extract structured estimation inputs as valid JSON only. No prose.' },
         { role: 'user', content: prompt }
