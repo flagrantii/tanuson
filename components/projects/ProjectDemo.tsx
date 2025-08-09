@@ -17,14 +17,16 @@ export default function ProjectDemo({ isDemo, liveUrl }: ProjectDemoProps) {
           <span className="h-2 w-2 rounded-full bg-green-400" />
           <div className="ml-3 truncate text-xs text-gray-500">{liveUrl}</div>
         </div>
-        <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+        <div className="relative w-full aspect-[16/9] overflow-hidden">
           <iframe
             src={liveUrl}
             title="Live Demo"
+            className="border-none demo-iframe"
             allow="clipboard-write; encrypted-media; fullscreen"
           />
         </div>
       </div>
     </section>
+
   )
-} 
+}

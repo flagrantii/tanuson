@@ -37,23 +37,40 @@ body {
   body { animation: none !important; opacity: 1 !important; }
 }
 
-@media (max-width: 1200px) {
-  iframe {
-    zoom: 0.7; /* Adjust for medium screens like tablets */
-    aspect-ratio: 16/9;
-  }
+/* Demo iframe responsive styles */
+.demo-iframe {
+  width: 142%;
+  height: 150%;
+  transform: scale(0.7);
+  transform-origin: top left;
 }
 
+/* Mobile devices */
 @media (max-width: 768px) {
-  iframe {
-    zoom: 0.5; /* Adjust for smaller screens like phones */
-    aspect-ratio: 16/9;
+  .demo-iframe {
+    width: 400%;
+    height: 400%;
+    transform: scale(0.25);
+    transform-origin: top left;
   }
 }
 
+/* Small mobile devices */
 @media (max-width: 480px) {
-  iframe {
-    zoom: 0.4;
-    aspect-ratio: 16/9;
+  .demo-iframe {
+    width: 500%;
+    height: 500%;
+    transform: scale(0.2);
+    transform-origin: top left;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .demo-iframe {
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: top left;
   }
 }
