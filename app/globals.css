@@ -48,9 +48,9 @@ body {
 /* Mobile devices */
 @media (max-width: 768px) {
   .demo-iframe {
-    width: 400%;
-    height: 400%;
-    transform: scale(0.25);
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
     transform-origin: top left;
   }
 }
@@ -58,9 +58,9 @@ body {
 /* Small mobile devices */
 @media (max-width: 480px) {
   .demo-iframe {
-    width: 500%;
-    height: 500%;
-    transform: scale(0.2);
+    width: 250%;
+    height: 250%;
+    transform: scale(0.4);
     transform-origin: top left;
   }
 }
