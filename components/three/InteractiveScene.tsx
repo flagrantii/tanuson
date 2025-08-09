@@ -94,7 +94,7 @@ function InteractiveObject() {
       >
         <torusKnotGeometry args={[1, 0.35, 220, 32]} />
         <meshPhysicalMaterial
-          color={hovered ? "#ff9c04" : "#e5e5e5"}
+          color={"#e5e5e5"}
           metalness={0.4}
           roughness={0.35}
           clearcoat={0.8}
