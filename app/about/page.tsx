@@ -27,7 +27,7 @@ export default function AboutPage() {
           <ol className="relative border-l border-gray-200">
             {timelineItems.map((item, idx) => (
               <motion.li
-                key={item.company}
+                key={item.id}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="show"

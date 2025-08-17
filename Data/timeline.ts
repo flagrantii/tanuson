@@ -1,4 +1,5 @@
 export type TimelineItem = {
+    id: number
     company: string
     role: string
     type: string
@@ -8,16 +9,28 @@ export type TimelineItem = {
   
   export const timelineItems: TimelineItem[] = [
     {
+      id: 1,
+      company: 'LINE MAN Wongnai',
+      role: 'Site Reliability Engineer',
+      type: 'Part-Time',
+      period: 'Aug 2025 – Now',
+      bullets: [
+        'Platform team'
+      ],
+    },
+    {
+      id: 2,
       company: 'LINE MAN Wongnai',
       role: 'Software Engineer',
       type: 'Internship',
-      period: 'May 2025 – Now',
+      period: 'May 2025 – July 2025',
       bullets: [
         'Designed and implemented scalable backend services in Go handling 200k+ RPS and >1M DB ops.',
         'Implemented fault‑tolerant services to ensure seamless UX during traffic surges.',
       ],
     },
     {
+      id: 3,
       company: 'Swipe',
       role: 'Full‑Stack Developer',
       type: 'Part‑Time',
@@ -29,6 +42,7 @@ export type TimelineItem = {
       ],
     },
     {
+      id: 4,
       company: 'Blockfint',
       role: 'Software Developer',
       type: 'Internship',
@@ -40,6 +54,7 @@ export type TimelineItem = {
       ],
     },
     {
+      id: 5,
       company: 'Freelance',
       role: 'Software Engineer / Project Manager',
       type: 'Since 2022',
