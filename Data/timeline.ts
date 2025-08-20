@@ -54,13 +54,16 @@ export const timelineItems: TimelineItem[] = [
   {
     id: 5,
     company: "Freelance",
-    role: "Software Engineer / Project Manager",
+    role: "Solo Full-Stack Operator",
     type: "Since 2022",
     period: "Since 2022",
     bullets: [
-      "Built bespoke websites for businesses and startups; ensured consistent branding and UX.",
-      "Developed e‑commerce solutions with secure payments; custom dashboards in Next.js.",
-      "Implemented inventory and order systems handling 5,000+ monthly transactions.",
+      "Collected client requirements and translated them into technical solutions.",
+      "Designed UI/UX flows and architected backend systems for scalability.",
+      "Built full-stack applications (Next.js, Node.js) with custom dashboards and secure payments.",
+      "Set up CI/CD pipelines and deployed to cloud platforms with monitoring.",
+      "Led small teams: task delegation, code reviews, and technical guidance.",
+      "Delivered projects end-to-end — from client briefing to production launch.",
     ],
   },
 ];
