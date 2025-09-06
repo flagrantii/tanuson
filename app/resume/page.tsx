@@ -29,7 +29,7 @@ function ResumeHeader() {
         <span>tanuson679@gmail.com</span>
         <a className="underline" href="https://www.linkedin.com/in/tanuson-deachaboonchana-743a3029b/" target="_blank" rel="noopener">linkedin</a>
         <a className="underline" href="https://github.com/flagrantii" target="_blank" rel="noopener">github</a>
-        <a className="underline" href="https://tanuson-page.vercel.app" target="_blank" rel="noopener">tanuson-page.vercel.app</a>
+        <a className="underline" href="https://personal.tanuson.work" target="_blank" rel="noopener">tanuson-page.vercel.app</a>
         <span>Suan luang, Bangkok, Thailand</span>
       </div>
     </header>

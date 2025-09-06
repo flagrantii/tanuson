@@ -14,7 +14,10 @@ export const timelineItems: TimelineItem[] = [
     role: "Software Engineer, platform",
     type: "Part-Time",
     period: "Aug 2025 – Now",
-    bullets: ["Developed Observability system"],
+    bullets: ["Developed and implemented observability migration design to handle large-scale transactions, supporting 200K+ logs per second.",
+      "Designed a seamless migration strategy ensuring zero disruption to user experience during platform transition.",
+      "Enhanced monitoring and alerting capabilities to proactively identify and resolve issues in massive log processing pipelines."
+    ],
   },
   {
     id: 2,
@@ -25,6 +28,7 @@ export const timelineItems: TimelineItem[] = [
     bullets: [
       "Designed and implemented scalable backend services in Go handling 200k+ RPS and >1M DB ops.",
       "Implemented fault‑tolerant services to ensure seamless UX during traffic surges.",
+      "Reduced database load spike by designing new infrastructure to handle large-scale transactions."
     ],
   },
   {
@@ -63,7 +67,7 @@ export const timelineItems: TimelineItem[] = [
       "Built full-stack applications (Next.js, Node.js) with custom dashboards and secure payments.",
       "Set up CI/CD pipelines and deployed to cloud platforms with monitoring.",
       "Led small teams: task delegation, code reviews, and technical guidance.",
-      "Delivered projects end-to-end — from client briefing to production launch.",
+      "Delivered projects end-to-end from client briefing to production launch.",
     ],
   },
 ];
