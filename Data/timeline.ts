@@ -62,12 +62,17 @@ export const timelineItems: TimelineItem[] = [
     type: "Since 2022",
     period: "Since 2022",
     bullets: [
-      "Collected client requirements and translated them into technical solutions.",
-      "Designed UI/UX flows and architected backend systems for scalability.",
-      "Built full-stack applications (Next.js, Node.js) with custom dashboards and secure payments.",
-      "Set up CI/CD pipelines and deployed to cloud platforms with monitoring.",
-      "Led small teams: task delegation, code reviews, and technical guidance.",
-      "Delivered projects end-to-end from client briefing to production launch.",
+      "Translated diverse client needs into clear, scalable technical solutions that directly supported business goals.",
+
+      "Designed intuitive UI/UX flows and scalable backend systems, balancing user experience with performance.",
+      
+      "Built and launched full-stack applications (Next.js, Node.js) featuring custom dashboards, secure payments, and smooth integrations.",
+      
+      "Engineered CI/CD pipelines and cloud deployments with real-time monitoring, ensuring reliability at scale.",
+      
+      "Led small cross-functional teams setting direction, reviewing code, and mentoring developers.",
+      
+      "Delivered end-to-end projects: from client briefing and system design to final production launch, on time and within scope.",
     ],
   },
 ];

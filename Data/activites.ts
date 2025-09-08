@@ -2,7 +2,7 @@
 
   export const activities: ActivityItem[] = [
     {
-      role: 'Software Engineer',
+      role: 'Lead Software Engineer',
       org: 'Information System Development, SGCU',
       period: 'Jun 2024 – Present',
       bullets: [
@@ -12,7 +12,7 @@
       ],
     },
     {
-      role: 'Core Team',
+      role: 'Core Team & Lead Software Engineer',
       org: 'Thinc. (Thailand Incubator)',
       period: 'Aug 2024 – Present',
       bullets: [
