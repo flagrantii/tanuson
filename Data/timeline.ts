@@ -10,6 +10,15 @@ export type TimelineItem = {
 export const timelineItems: TimelineItem[] = [
   {
     id: 1,
+    company: "Mee Palnag Mai",
+    role: "Techinical Lead & Co-Founder",
+    type: "Co-Founder",
+    period: "Nov-2025 – Now",
+    bullets: ["My first Software House Startup Company",
+    ],
+  },
+  {
+    id: 2,
     company: "LINE MAN Wongnai",
     role: "Software Engineer, platform",
     type: "Part-Time",
@@ -20,7 +29,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     company: "LINE MAN Wongnai",
     role: "Software Engineer, backend",
     type: "Internship",
@@ -32,7 +41,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     company: "Swipe",
     role: "Full‑Stack Developer",
     type: "Part‑Time",
@@ -44,7 +53,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     company: "Blockfint",
     role: "Software Developer",
     type: "Internship",
@@ -56,7 +65,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     company: "Freelance",
     role: "Solo Full-Stack Operator",
     type: "Since 2022",
