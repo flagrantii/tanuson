@@ -67,4 +67,38 @@ export const cers = [
     },
     skills: ["ML", "AI", "LookML","SQL","Data Analysis","Data Visualization"],
   },
+  {
+    id: 4,
+    title: 'AI Engineer Agentic Track: The Complete Agent & MCP Course',
+    href: 'https://www.udemy.com/certificate/UC-38ae6e43-1326-41c8-b5c6-12bd25424b1a/',
+    description:
+      'Learners develop a deep understanding of agentic AI architectures, including multi-agent collaboration, memory systems, feedback loops, and real-time tool integrations. Through 8 real-world projects, students build advanced AI systems capable of web search, file handling, Python execution, and automated decision-making — similar to real digital assistants or AI copilots.',
+    date: 'May 2025',
+    datetime: '2020-03-16',
+    category: { title: 'Udemy', org: 'Udemy' },
+    author: {
+      href: '#',
+      imageUrl:
+        '/icon/udemy.png',
+      cersimage: '/cert/cer_aiagent.jpg',
+    },
+    skills: ["AI", "Agentic", "MCP"],
+  },
+  {
+    id: 5,
+    title: 'Software Architecture & Technology of Large-Scale Systems',
+    href: 'https://www.udemy.com/certificate/UC-0e982c08-430a-456e-969b-e1ce3ae0d817/',
+    description:
+      'This advanced course guides experienced software developers through the transition from developer to solution architect. It covers the architecture of large-scale systems, deep dives into non-functional requirements (performance, scalability, reliability, security), and the internal workings of key tools and platforms like Node.js, Redis, Kafka, Cassandra, ELK, Hadoop, Docker, and Kubernetes. By the end you’ll understand how to make meaningful architectural decisions, build high-performance production systems, and lead system design with confidence.',
+    date: 'Nov 2025',
+    datetime: '2020-03-16',
+    category: { title: 'Udemy', org: 'Udemy' },
+    author: {
+      href: '#',
+      imageUrl:
+      '/icon/udemy.png',
+      cersimage: '/cert/cer_arch.png',
+    },
+    skills: ["Software Architecture", "System Design", "System Architecture", "Software Engineering"],
+  },
   ]
