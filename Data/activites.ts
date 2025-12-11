@@ -34,7 +34,8 @@
       period: 'Aug 2025 – Present',
       bullets: [
         'Led development of a useful product for the Engineering Student Committee, Chulalongkorn University.',
-        'Created a software engineer environment for team members'
+        'Created a software engineer environment for team members.',
+        'Led the software engineering team in developing solutions, troubleshooting issues, reviewing code, and designing system architecture to ensure smooth and efficient operations.',
       ],
     }
   ]

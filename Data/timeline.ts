@@ -11,11 +11,16 @@ export const timelineItems: TimelineItem[] = [
   {
     id: 1,
     company: "Mee Palnag Mai",
-    role: "Techinical Lead & Co-Founder",
+    role: "Technical Lead & Co-Founder",
     type: "Co-Founder",
     period: "Nov-2025 – Now",
-    bullets: ["My first Software House Startup Company",
-    ],
+    bullets: [
+      "Co-founded a software development startup, establishing the company’s technical direction and development standards.",
+      "Led end-to-end technical execution for a client project, from requirements discovery to deployment.",
+      "Designed system architectures and selected appropriate technologies to ensure scalability and maintainability.",
+      "Mentored engineers, reviewed code, and created workflows that improved team efficiency and software quality.",
+      "Collaborated with clients to translate business needs into actionable technical solutions."
+    ],    
   },
   {
     id: 2,
@@ -23,9 +28,11 @@ export const timelineItems: TimelineItem[] = [
     role: "Software Engineer, platform",
     type: "Part-Time",
     period: "Aug 2025 – Now",
-    bullets: ["Developed and implemented observability migration design to handle large-scale transactions, supporting 200K+ logs per second.",
-      "Designed a seamless migration strategy ensuring zero disruption to user experience during platform transition.",
-      "Enhanced monitoring and alerting capabilities to proactively identify and resolve issues in massive log processing pipelines."
+    bullets: [
+      "Developed a unified observability pipeline using OpenTelemetry and ClickHouse to improve telemetry completeness and system scalability.",
+      "Implemented high-throughput ingestion pipelines and performed load tests supporting 200K+ logs/sec and 400K+ traces/sec.",
+      "Optimized system architecture, schemas, and retention strategies to reduce query latency and operational costs.",
+      "Contributed to the design of a near-real-time deployment regression detection system to improve platform reliability."
     ],
   },
   {
