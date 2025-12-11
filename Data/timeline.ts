@@ -10,7 +10,7 @@ export type TimelineItem = {
 export const timelineItems: TimelineItem[] = [
   {
     id: 1,
-    company: "Mee Palnag Mai",
+    company: "Mee Palang Mai Co., Ltd.",
     role: "Technical Lead & Co-Founder",
     type: "Co-Founder",
     period: "Nov-2025 – Now",
