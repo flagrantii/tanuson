@@ -32,7 +32,9 @@ export const timelineItems: TimelineItem[] = [
       "Developed a unified observability pipeline using OpenTelemetry and ClickHouse to improve telemetry completeness and system scalability.",
       "Implemented high-throughput ingestion pipelines and performed load tests supporting 200K+ logs/sec and 400K+ traces/sec.",
       "Optimized system architecture, schemas, and retention strategies to reduce query latency and operational costs.",
-      "Contributed to the design of a near-real-time deployment regression detection system to improve platform reliability."
+      "Contributed to the design of a near-real-time deployment regression detection system to improve platform reliability.",
+      "Designed UX/UI, system architecture, and implemented a centralized Platform Portal serving as a single source of truth for all engineers across the organization.",
+      "Collaborated with multiple engineering teams to gather requirements, identify pain points, and design an intuitive platform portal that improves developer experience and operational efficiency."
     ],
   },
   {
@@ -79,15 +81,10 @@ export const timelineItems: TimelineItem[] = [
     period: "Since 2022",
     bullets: [
       "Translated diverse client needs into clear, scalable technical solutions that directly supported business goals.",
-
       "Designed intuitive UI/UX flows and scalable backend systems, balancing user experience with performance.",
-      
       "Built and launched full-stack applications (Next.js, Node.js) featuring custom dashboards, secure payments, and smooth integrations.",
-      
       "Engineered CI/CD pipelines and cloud deployments with real-time monitoring, ensuring reliability at scale.",
-      
       "Led small cross-functional teams setting direction, reviewing code, and mentoring developers.",
-      
       "Delivered end-to-end projects: from client briefing and system design to final production launch, on time and within scope.",
     ],
   },
