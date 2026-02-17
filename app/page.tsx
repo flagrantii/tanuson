@@ -61,6 +61,7 @@ function SceneErrorBoundary({ children }: { children: React.ReactNode }) {
 export default function Main() {
   const [isDesktop, setIsDesktop] = useState(0);
   const [showFallback, setShowFallback] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     setIsDesktop(window.innerWidth);
@@ -71,22 +72,38 @@ export default function Main() {
     if (!gl) {
       setShowFallback(true);
     }
+    
+    // Force loading for 1 second to allow InteractiveScene to render
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white relative">
+      {/* Loading overlay */}
+      <div 
+        className={`fixed inset-0 z-50 bg-white flex items-center justify-center transition-opacity duration-500 pointer-events-none ${
+          isLoading ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
+          <p className="font-editorial text-gray-500 text-sm italic">Loading experience...</p>
+        </div>
+      </div>
       <section className="relative isolate px-4 lg:px-6 flex justify-center mb-4 sm:mb-20">
         <div className="mx-auto max-w-5xl py-12 flex flex-col gap-12">
           <div className="text-center">
             <Reveal>
-              <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-6xl">
-                Building thoughtful experiences across UX, Frontend, Backend, AI and DevOps
-              </h1>
+              <h1 className="font-editorial text-4xl font-medium tracking-tight text-gray-900 sm:text-6xl italic">
+              Designing intelligence  that feels human.            </h1>
             </Reveal>
             <Reveal delay={0.05}>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Minimal, fast, and deliberate. Explore my work, process, and writing.
-              </p>
+              <p className="font-editorial mt-6 text-lg leading-8 text-gray-600">
+              Fragments of practice and thinking.              </p>
             </Reveal>
             <Reveal delay={0.1}>
               <div className="mt-10 flex items-center justify-center gap-x-4">

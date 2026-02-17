@@ -6,5 +6,5 @@ export const skillGroups: SkillGroup[] = [
   { title: 'Databases', skills: ['PostgreSQL', 'Clickhouse', 'MongoDB', 'Redis', 'MySQL', 'Supabase', 'Qdrant'] },
   { title: 'Cloud', skills: ['AWS', 'GCP', 'DigitalOcean', 'Firebase', 'Vercel'] },
   { title: 'AI', skills: ['Python (ML)', 'PyTorch', 'TensorFlow', 'Spark', 'Kafka','RAG', 'LangChain', 'Agentic AI', 'MCP'] },
-  { title: 'DevOps', skills: ['Docker', 'Kubernetes', 'Helm', 'Argo CD', 'Gitlab CI/CD', 'Jenkins', 'Github Actions', 'Prometheus', 'Grafana', 'OpenTelemetry', 'Vector'] },
+  { title: 'DevOps', skills: ['Docker', 'Kubernetes', 'Helm', 'Argo CD', 'Gitlab CI/CD', 'Jenkins', 'Github Actions', 'Prometheus', 'Grafana', 'OpenTelemetry', 'Vector', 'Terraform'] },
 ]
