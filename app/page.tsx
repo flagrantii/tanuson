@@ -76,7 +76,7 @@ export default function Main() {
     // Force loading for 1 second to allow InteractiveScene to render
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 700);
     
     return () => clearTimeout(timer);
   }, []);
