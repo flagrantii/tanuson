@@ -36,6 +36,29 @@ type Rss2JsonResponse = {
 
 const MEDIUM_FEED = process.env.NEXT_PUBLIC_MEDIUM_RSS || ''
 
+// Convert Medium profile/publication URL to RSS feed URL
+function getMediumFeedUrl(url: string): string {
+  if (!url) return url
+  
+  // Already a feed URL
+  if (url.includes('/feed/')) return url
+  
+  // Handle @username format: https://medium.com/@username -> https://medium.com/feed/@username
+  const userMatch = url.match(/medium\.com\/@([^\/\?]+)/)
+  if (userMatch) {
+    return `https://medium.com/feed/@${userMatch[1]}`
+  }
+  
+  // Handle publication: https://medium.com/publication-name -> https://medium.com/feed/publication-name
+  const pubMatch = url.match(/medium\.com\/([^@\/\?][^\/\?]*)/)
+  if (pubMatch && !['feed', 'tag', 'search', 'me', 'new-story'].includes(pubMatch[1])) {
+    return `https://medium.com/feed/${pubMatch[1]}`
+  }
+  
+  // Return as-is if we can't parse it
+  return url
+}
+
 function extractTextFromHtml(html: string): string {
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
@@ -112,7 +135,8 @@ export default async function BlogPage() {
 
   if (MEDIUM_FEED) {
     try {
-      items = await fetchViaProxy(MEDIUM_FEED)
+      const feedUrl = getMediumFeedUrl(MEDIUM_FEED)
+      items = await fetchViaProxy(feedUrl)
       items = items.slice(0, 10)
       
       if (!items || items.length === 0) {
