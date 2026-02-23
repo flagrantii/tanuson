@@ -1,5 +1,3 @@
-import Parser from 'rss-parser'
-
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
@@ -8,8 +6,32 @@ type FeedItem = {
   link?: string
   pubDate?: string
   contentSnippet?: string
+  description?: string
   categories?: string[]
   [key: string]: any
+}
+
+type Rss2JsonResponse = {
+  status: string
+  feed: {
+    url: string
+    title: string
+    link: string
+    author: string
+    description: string
+    image: string
+  }
+  items: Array<{
+    title: string
+    pubDate: string
+    link: string
+    guid: string
+    author: string
+    thumbnail: string
+    description: string
+    content: string
+    categories: string[]
+  }>
 }
 
 const MEDIUM_FEED = process.env.NEXT_PUBLIC_MEDIUM_RSS || ''
@@ -19,6 +41,12 @@ function extractTextFromHtml(html: string): string {
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
     .replace(/\s+/g, ' ')
     .trim()
 }
@@ -26,8 +54,10 @@ function extractTextFromHtml(html: string): string {
 function buildSnippet(item: FeedItem): string {
   const candidates: string[] = []
   if (item.contentSnippet) candidates.push(item.contentSnippet)
+  if (item.description) candidates.push(item.description)
   if (item['content:encodedSnippet']) candidates.push(item['content:encodedSnippet'])
   if (item['content:encoded']) candidates.push(extractTextFromHtml(String(item['content:encoded'])))
+  if (item.content) candidates.push(item.content)
 
   let text = candidates.find(Boolean) || ''
   text = extractTextFromHtml(text)
@@ -46,51 +76,45 @@ function buildSnippet(item: FeedItem): string {
   return slice + (text.length > slice.length ? '…' : '')
 }
 
-async function fetchText(url: string) {
-  const res = await fetch(url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (compatible; TanusonSite/1.0; +https://personal.tanuson.work)',
-      'Accept': 'application/rss+xml, application/xml;q=0.9,*/*;q=0.8',
-    },
+async function fetchViaProxy(feedUrl: string): Promise<FeedItem[]> {
+  // Use rss2json.com as a proxy to bypass Medium's 403 block
+  const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`
+  
+  const res = await fetch(proxyUrl, {
     cache: 'no-store',
+    headers: {
+      'Accept': 'application/json',
+    },
   })
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const contentType = res.headers.get('content-type') || ''
-  const text = await res.text()
-  return { text, contentType }
-}
-
-function extractRssLinkFromHtml(html: string): string | null {
-  const linkRegex = /<link[^>]*rel=["']alternate["'][^>]*type=["']application\/(?:rss\+xml|atom\+xml)["'][^>]*href=["']([^"']+)["'][^>]*>/i
-  const match = html.match(linkRegex)
-  return match ? match[1] : null
+  
+  if (!res.ok) throw new Error(`Proxy HTTP ${res.status}`)
+  
+  const data: Rss2JsonResponse = await res.json()
+  
+  if (data.status !== 'ok') {
+    throw new Error('RSS proxy returned error status')
+  }
+  
+  return data.items.map(item => ({
+    title: item.title,
+    link: item.link,
+    pubDate: item.pubDate,
+    description: item.description,
+    content: item.content,
+    contentSnippet: extractTextFromHtml(item.description || item.content || ''),
+    categories: item.categories,
+  }))
 }
 
 export default async function BlogPage() {
-  const parser: Parser = new Parser()
   let items: FeedItem[] = []
   let errorMsg: string | null = null
 
   if (MEDIUM_FEED) {
     try {
-      // First fetch whatever URL is provided
-      let { text, contentType } = await fetchText(MEDIUM_FEED)
-
-      // If not XML, try to discover an RSS link from the HTML
-      if (!/xml|rss|atom/i.test(contentType)) {
-        const rssUrl = extractRssLinkFromHtml(text)
-        if (!rssUrl) throw new Error('Provided URL did not return RSS/XML and no RSS link was found in HTML.')
-        const second = await fetchText(rssUrl)
-        text = second.text
-        contentType = second.contentType
-      }
-
-      // Safeguard: trim leading junk before XML (some proxies inject chars)
-      const xmlStart = text.indexOf('<')
-      const xml = xmlStart > 0 ? text.slice(xmlStart) : text
-
-      const feed = await parser.parseString(xml)
-      items = (feed.items as FeedItem[]).slice(0, 10)
+      items = await fetchViaProxy(MEDIUM_FEED)
+      items = items.slice(0, 10)
+      
       if (!items || items.length === 0) {
         errorMsg = 'No posts found from the configured feed.'
       }
