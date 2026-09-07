@@ -1,3 +1,6 @@
+import Reveal from '@/components/motion/Reveal'
+import SplitText from '@/components/motion/SplitText'
+
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
@@ -149,35 +152,70 @@ export default async function BlogPage() {
   }
 
   return (
-    <div className="px-6 lg:px-8 mx-auto max-w-5xl py-16">
-      <h1 className="text-3xl sm:text-4xl font-semibold">Blog</h1>
-      <p className="mt-3 text-gray-600">Latest writing on design, engineering, and process.</p>
+    <div>
+      <div className="gutter grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-end gap-x-12 gap-y-6 pb-8 pt-[clamp(36px,5vw,56px)]">
+        <h1 className="m-0 font-display text-[clamp(56px,8.5vw,110px)] leading-[.93] tracking-tightest">
+          <SplitText text="Notes &" emphasis="writing." />
+        </h1>
+        <Reveal delay={0.18}>
+          <p className="m-0 font-body text-[clamp(17px,1.6vw,20px)] font-light leading-[1.4] text-copy">
+            Occasional writing on platform engineering, Go, and the parts of design that
+            survive contact with production.
+          </p>
+        </Reveal>
+      </div>
 
-      {!MEDIUM_FEED && (
-        <div className="mt-6 rounded-md border p-4 text-sm text-gray-600">
-          Set <code className="px-1 py-0.5 bg-gray-100">NEXT_PUBLIC_MEDIUM_RSS</code> to your Medium RSS URL (e.g. https://medium.com/feed/@username or publication feed).
+      {items.length === 0 ? (
+        <div className="gutter pb-20">
+          <div className="hatch flex min-h-[220px] items-center justify-center border border-ink p-8 text-center font-mono text-[12px] leading-[1.8] text-muted">
+            {!MEDIUM_FEED
+              ? '[ no feed configured · set NEXT_PUBLIC_MEDIUM_RSS ]'
+              : `[ ${errorMsg ?? 'the feed returned nothing — check back shortly'} ]`}
+          </div>
+        </div>
+      ) : (
+        <div className="gutter flex flex-col border-t border-hair pb-20">
+          {items.map((item, i) => {
+            const snippet = buildSnippet(item)
+            return (
+              <Reveal key={item.link ?? i} delay={i * 0.04}>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group grid grid-cols-1 gap-5 border-b border-hair py-6 text-inherit no-underline sm:grid-cols-[minmax(120px,160px)_1fr]"
+                >
+                  <div className="font-mono text-[11px] text-muted">
+                    <span className="mr-2 text-rust">{String(i + 1).padStart(2, '0')}</span>
+                    {item.pubDate
+                      ? new Date(item.pubDate).toLocaleDateString('en-US', {
+                          month: 'short',
+                          year: 'numeric',
+                        })
+                      : ''}
+                  </div>
+                  <div>
+                    <div className="font-display text-[clamp(24px,2.6vw,32px)] leading-[1.1] transition-colors group-hover:text-rust">
+                      {item.title}
+                    </div>
+                    {snippet && (
+                      <p className="m-0 mt-2 max-w-2xl font-body text-[16px] font-light leading-[1.5] text-copy">
+                        {snippet}
+                      </p>
+                    )}
+                    <span className="mt-3 inline-block font-mono text-[11px] text-muted">
+                      read on medium{' '}
+                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                        ↗
+                      </span>
+                    </span>
+                  </div>
+                </a>
+              </Reveal>
+            )
+          })}
         </div>
       )}
-
-      {MEDIUM_FEED && errorMsg && (
-        <div className="mt-6 rounded-md border p-4 text-sm text-gray-600">{errorMsg}</div>
-      )}
-
-      <div className="mt-8 grid gap-6">
-        {items.map((item) => {
-          const snippet = buildSnippet(item)
-          return (
-            <article key={item.link} className="rounded-lg border p-5">
-              <h3 className="text-lg font-semibold"><a href={item.link} target="_blank" rel="noreferrer">{item.title}</a></h3>
-              <p className="text-xs text-gray-500 mt-1">{item.pubDate}</p>
-              {snippet && (
-                <p className="text-sm text-gray-600 mt-3">{snippet}</p>
-              )}
-              <a className="mt-3 inline-block text-sm underline underline-offset-4" href={item.link} target="_blank" rel="noreferrer">Read more on Medium</a>
-            </article>
-          )
-        })}
-      </div>
     </div>
   )
-} 
+}
