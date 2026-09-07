@@ -1,281 +1,316 @@
 "use client"
-import { useMemo, useRef, useState } from 'react'
-import { useReactToPrint } from 'react-to-print'
-import { ActivityItem, activities } from '@/Data/activites'
-import { TimelineItem, timelineItems } from '@/Data/timeline'
-import { WebItem, webItems } from '@/Data/web'
-import { formatDate } from '@/lib/utils/date'
-import { SkillGroup, skillGroups } from '@/Data/skills'
 
-type SectionKey =
-  | 'header'
-  | 'objective'
-  | 'work'
-  | 'tech'
-  | 'education'
-  | 'activities'
-  | 'projects'
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import Reveal from '@/components/motion/Reveal'
+import {
+  CONTACT,
+  EDUCATION_RESUME,
+  EXTRA,
+  JOBS,
+  MODE_SECTIONS,
+  OBJECTIVE,
+  RESUME_MODES,
+  RESUME_PROJECT_SLUGS,
+  SECTION_KEYS,
+  SECTION_LABELS,
+  TECH,
+  type ResumeMode,
+  type SectionKey,
+} from '@/Data/site'
+import { webs } from '@/Data/web'
 
-const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-[13px] font-semibold tracking-wide uppercase mt-6 mb-2">{children}</h2>
-)
-
-function ResumeHeader() {
+/** Two-column row used throughout the résumé body: meta rail + content. */
+function Row({
+  meta,
+  children,
+  className = '',
+}: {
+  meta: React.ReactNode
+  children: React.ReactNode
+  className?: string
+}) {
   return (
-    <header>
-      <h1 className="text-3xl font-bold tracking-tight">Tanuson Deachaboonchana</h1>
-      <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-gray-700">
-        <span>+66 614839393</span>
-        <span>tanuson679@gmail.com</span>
-        <a className="underline" href="https://www.linkedin.com/in/tanuson-deachaboonchana-743a3029b/" target="_blank" rel="noopener">linkedin</a>
-        <a className="underline" href="https://github.com/flagrantii" target="_blank" rel="noopener">github</a>
-        <a className="underline" href="https://personal.tanuson.work" target="_blank" rel="noopener">personal.tanuson.work</a>
-        <span>Suan luang, Bangkok, Thailand</span>
-      </div>
-    </header>
+    <div
+      className={`resume-row print-avoid-break grid grid-cols-1 gap-5 border-t border-hair py-[18px] sm:grid-cols-[minmax(120px,150px)_1fr] ${className}`}
+    >
+      <div className="resume-meta font-mono text-[12px] leading-[1.6] text-muted">{meta}</div>
+      <div className="resume-body">{children}</div>
+    </div>
   )
 }
 
-function ObjectiveSection() {
+/**
+ * Section heading. The number is dropped when printing, where the label becomes
+ * a centred uppercase rule-underlined heading in the conventional résumé style.
+ */
+function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
-    <section>
-      <SectionTitle>Objective</SectionTitle>
-      <p className="text-[12px] leading-5 text-gray-800">
-        Dedicated software developer focused on building scalable, high‑performance web applications. Proven experience across full‑stack development, backend architecture, frontend engineering, and cloud infrastructure. I aim to leverage my expertise to create impactful digital solutions that enhance user experiences and drive business outcomes.
-      </p>
-    </section>
-  )
-}
-
-function WorkSection() {
-  return (
-    <section>
-      <SectionTitle>Work Experience</SectionTitle>
-      <div className="space-y-3">
-        {timelineItems.map((w: TimelineItem) => (
-          <div key={w.company} className="text-[12px]">
-            <div className="flex items-baseline justify-between">
-              <p className="font-semibold">{w.role} <span className="text-gray-500 font-normal">— {w.type}</span></p>
-              <p className="text-gray-500">{w.period}</p>
-            </div>
-            <p className="text-gray-800">{w.company}</p>
-            <ul className="mt-1 list-disc ml-5 space-y-1">
-              {w.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function TechSection() {
-  return (
-    <section>
-      <SectionTitle>Technologies and Languages</SectionTitle>
-      <div className="grid sm:grid-cols-2 gap-4 text-[12px]">
-        {skillGroups.map((g: SkillGroup) => (
-          <div key={g.title}>
-            <p className="font-medium">{g.title}</p>
-            <p className="text-gray-800 mt-1">{g.skills.join(', ')}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function EducationSection() {
-  return (
-    <section>
-      <SectionTitle>Education</SectionTitle>
-      <div className="text-[12px]">
-        <div className="flex items-baseline justify-between">
-          <p className="font-semibold">Bachelor of Engineering Program in Computer Engineering</p>
-          <p className="text-gray-500">Aug 2023 – Present</p>
-        </div>
-        <p className="text-gray-800">Chulalongkorn University <span className="text-gray-500">(Not graduated yet)</span></p>
-        <p className="mt-1 text-gray-700">Related Courseworks: Data Structures and Algorithms, Database Systems, OOP, Software Engineering, Computer Networks, Operating Systems, Data Science, System Design</p>
-      </div>
-    </section>
-  )
-}
-
-function ActivitiesSection() {
-  return (
-    <section>
-      <SectionTitle>Extracurricular Activities</SectionTitle>
-      <div className="space-y-3 text-[12px]">
-        {activities.map((a: ActivityItem) => (
-          <div key={a.org}>
-            <div className="flex items-baseline justify-between">
-              <p className="font-semibold">{a.role}</p>
-              <p className="text-gray-500">{a.period}</p>
-            </div>
-            <p className="text-gray-800">{a.org}</p>
-            <ul className="mt-1 list-disc ml-5 space-y-1">
-              {a.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function ProjectsSection() {
-  return (
-    <section>
-      <SectionTitle>Projects</SectionTitle>
-      <div className="space-y-2 text-[12px]">
-        {webItems.filter((p: WebItem) => p.isShowResume).map((p: WebItem) => (
-          <div key={p.title}>
-            <div className="flex items-baseline justify-between">
-              <p className="font-semibold">{p.title} <span className="text-gray-500">{p.techStackResume.join(', ')}</span></p>
-              <p className="text-gray-500">{formatDate(p.datetime)}</p>
-            </div>
-            <p className="text-gray-700">{p.description}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+    <div className="resume-section-label mb-2.5 font-mono text-[11px] text-rust">
+      <span className="resume-section-num">{n} </span>
+      <span className="resume-section-text">{children}</span>
+    </div>
   )
 }
 
 export default function ResumePage() {
-  const sectionDefs: Array<{ key: SectionKey; label: string }> = [
-    { key: 'header', label: 'Header' },
-    { key: 'objective', label: 'Objective' },
-    { key: 'work', label: 'Work' },
-    { key: 'tech', label: 'Technologies' },
-    { key: 'education', label: 'Education' },
-    { key: 'activities', label: 'Activities' },
-    { key: 'projects', label: 'Projects' },
-  ]
+  const [mode, setMode] = useState<ResumeMode>('Full')
+  const [sections, setSections] = useState<Set<SectionKey>>(new Set(SECTION_KEYS))
 
-  const [selected, setSelected] = useState<Record<SectionKey, boolean>>({
-    header: true,
-    objective: true,
-    work: true,
-    tech: true,
-    education: true,
-    activities: true,
-    projects: true,
-  })
+  const show = (k: SectionKey) => sections.has(k)
+  const showBullets = mode !== 'Minimal'
+  const jobs = mode === 'Minimal' ? JOBS.filter((j) => j.core) : JOBS
 
-  const allChecked = useMemo(() => Object.values(selected).every(Boolean), [selected])
-  const noneChecked = useMemo(() => Object.values(selected).every((v) => !v), [selected])
-  const printRef = useRef<HTMLDivElement>(null)
+  const resumeProjects = useMemo(
+    () =>
+      RESUME_PROJECT_SLUGS.map((s) => webs.find((p) => p.slug === s)).filter(
+        (p): p is (typeof webs)[number] => !!p,
+      ),
+    [],
+  )
 
-  const handlePrint = useReactToPrint({
-    contentRef: printRef,
-    pageStyle: `
-      @page { size: A4; margin: 12mm; }
-      html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      body { animation: none !important; opacity: 1 !important; }
-      [data-print-root] { display: block !important; overflow: visible !important; }
-      [data-print-root] section,
-      [data-print-root] div,
-      [data-print-root] li { 
-        break-inside: avoid; page-break-inside: avoid; 
-        -webkit-column-break-inside: avoid; 
-        -webkit-region-break-inside: avoid; 
-      }
-      img { max-width: 100% !important; page-break-inside: avoid; break-inside: avoid; }
-    `,
-  })
-
-  const setPreset = (preset: 'full' | 'core' | 'minimal') => {
-    if (preset === 'full') {
-      setSelected({ header: true, objective: true, work: true, tech: true, education: true, activities: true, projects: true })
-    } else if (preset === 'core') {
-      setSelected({ header: true, objective: true, work: true, tech: true, education: true, activities: false, projects: false })
-    } else {
-      setSelected({ header: true, objective: false, work: true, tech: true, education: true, activities: false, projects: false })
-    }
+  const pickMode = (m: ResumeMode) => {
+    setMode(m)
+    setSections(new Set(MODE_SECTIONS[m]))
   }
 
-  const toggle = (key: SectionKey) => setSelected((s) => ({ ...s, [key]: !s[key] }))
-  const toggleAll = () => setSelected((s) => {
-    const next = !allChecked
-    return Object.keys(s).reduce((acc, k) => ({ ...acc, [k]: next }), {} as Record<SectionKey, boolean>)
-  })
-
-  const labelFor = (k: SectionKey) => sectionDefs.find((d) => d.key === k)?.label || ''
-
-  const Wrapper = ({ k, children }: { k: SectionKey; children: React.ReactNode }) => (
-    <div className={`${selected[k] ? '' : 'opacity-50'} transition-opacity`}>
-      <div className="mb-2 flex items-center gap-2 text-xs text-gray-600">
-        <input
-          type="checkbox"
-          checked={selected[k]}
-          onChange={() => toggle(k)}
-          className="h-4 w-4 rounded border-gray-300"
-          aria-label={`Include ${labelFor(k)} in export`}
-        />
-        <span>Include in export</span>
-        <span className="ml-auto text-gray-400">{selected[k] ? 'Included' : 'Excluded'}</span>
-      </div>
-      {children}
-    </div>
-  )
+  const toggle = (k: SectionKey) =>
+    setSections((prev) => {
+      const next = new Set(prev)
+      if (next.has(k)) next.delete(k)
+      else next.add(k)
+      return next
+    })
 
   return (
-    <div className="px-6 lg:px-8 mx-auto max-w-4xl py-16">
-      <h1 className="text-3xl sm:text-4xl font-semibold">Resume</h1>
-      <p className="mt-3 text-gray-600">Choose sections to export as PDF. Toggles are above each section; preview dims excluded sections.</p>
-
-      <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-        <label className="flex items-center gap-2 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={allChecked}
-            onChange={toggleAll}
-            className="h-4 w-4 rounded border-gray-300"
-            aria-label="Select all sections"
-          />
-          <span>{allChecked ? 'All selected' : 'Select all'}</span>
-        </label>
-        <div className="h-4 w-px bg-gray-300" />
-        <button onClick={() => setPreset('full')} className="rounded-full border px-3 py-1">Full</button>
-        <button onClick={() => setPreset('core')} className="rounded-full border px-3 py-1">Core</button>
-        <button onClick={() => setPreset('minimal')} className="rounded-full border px-3 py-1">Minimal</button>
-        <div className="h-4 w-px bg-gray-300" />
-        <span className="text-xs text-gray-500">Included: {Object.values(selected).filter(Boolean).length}/{sectionDefs.length}</span>
-        <button onClick={handlePrint} disabled={noneChecked} className={`ml-auto rounded-full border px-3 py-1 ${noneChecked ? 'opacity-50 cursor-not-allowed' : 'bg-orange-500 text-white border-orange-500'}`}>Export selected</button>
-      </div>
-
-      <div className="mt-8 space-y-6">
-        <Wrapper k="header"><ResumeHeader /></Wrapper>
-        <Wrapper k="objective"><ObjectiveSection /></Wrapper>
-        <Wrapper k="work"><WorkSection /></Wrapper>
-        <Wrapper k="tech"><TechSection /></Wrapper>
-        <Wrapper k="education"><EducationSection /></Wrapper>
-        <Wrapper k="activities"><ActivitiesSection /></Wrapper>
-        <Wrapper k="projects"><ProjectsSection /></Wrapper>
-      </div>
-
-      {/* Hidden print container */}
-      <div>
-        <div
-          ref={printRef}
-          data-print-root
-          style={{ display: 'none' }}
-          className="p-6 w-[794px] bg-white"
-        >
-          {selected.header && <ResumeHeader />}
-          {selected.objective && <ObjectiveSection />}
-          {selected.work && <WorkSection />}
-          {selected.tech && <TechSection />}
-          {selected.education && <EducationSection />}
-          {selected.activities && <ActivitiesSection />}
-          {selected.projects && <ProjectsSection />}
+    <div
+      data-resume
+      className="grid grid-cols-1 gap-x-14 gap-y-10 px-[var(--gutter)] pb-16 pt-[clamp(32px,4vw,48px)] lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]"
+    >
+      {/* Sidebar ---------------------------------------------------------- */}
+      <div className="resume-aside flex max-w-[400px] flex-col gap-7">
+        <div>
+          <h1 className="resume-name m-0 font-display text-[clamp(38px,3.6vw,48px)] leading-none tracking-tightest">
+            Tanuson Deachaboonchana
+          </h1>
+          <p className="resume-tagline m-0 mt-3.5 font-body text-[17px] font-light leading-[1.45] text-copy">
+            Software engineer — platform, backend, and the interfaces on top.{' '}
+            {CONTACT.location}.
+          </p>
         </div>
+
+        {show('contact') && (
+        <div className="resume-contact flex flex-col border-t border-hair pt-3.5 font-mono text-[12px] leading-[1.9] text-copy">
+          <a href={CONTACT.phoneHref} className="no-underline hover:text-rust">
+            {CONTACT.phone}
+          </a>
+          <a href={`mailto:${CONTACT.email}`} className="no-underline hover:text-rust">
+            {CONTACT.email}
+          </a>
+          <a href={CONTACT.github} target="_blank" rel="noopener" className="no-underline hover:text-rust">
+            {CONTACT.githubLabel}
+          </a>
+          <a href={CONTACT.linkedin} target="_blank" rel="noopener" className="no-underline hover:text-rust">
+            linkedin<span className="print-hide"> ↗</span>
+          </a>
+          <a href={CONTACT.site} className="no-underline hover:text-rust">
+            {CONTACT.siteLabel}
+          </a>
+        </div>
+        )}
+
+        {/* Export controls — never printed */}
+        <div data-noprint className="border-t border-hair pt-3.5">
+          <div className="mb-2.5 font-mono text-[11px] text-muted">version</div>
+          <div className="flex flex-col gap-1.5">
+            {RESUME_MODES.map((m) => {
+              const on = mode === m
+              return (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => pickMode(m)}
+                  aria-pressed={on}
+                  className={`flex cursor-pointer items-center justify-between border border-ink px-3 py-2.5 text-left font-mono text-[12px] transition-colors duration-300 ${
+                    on ? 'bg-ink text-cream' : 'bg-transparent text-ink hover:bg-ink/5'
+                  }`}
+                >
+                  <span>{m}</span>
+                  <span className="opacity-60">{MODE_SECTIONS[m].length}/7</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="mb-2 mt-[18px] font-mono text-[11px] text-muted">include in export</div>
+          <div className="flex flex-col">
+            {SECTION_KEYS.map((k) => {
+              const on = show(k)
+              return (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => toggle(k)}
+                  role="checkbox"
+                  aria-checked={on}
+                  className={`flex cursor-pointer items-center gap-2.5 border-0 bg-transparent py-[7px] text-left font-mono text-[12px] transition-colors ${
+                    on ? 'text-ink' : 'text-muted'
+                  }`}
+                >
+                  <motion.span
+                    aria-hidden
+                    animate={{ backgroundColor: on ? '#17150f' : 'rgba(0,0,0,0)' }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-block h-3 w-3 shrink-0 border border-ink"
+                  />
+                  {SECTION_LABELS[k]}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="mb-3.5 mt-2.5 font-mono text-[11px] text-muted">
+            {sections.size} / 7 sections included
+          </div>
+
+          <motion.button
+            type="button"
+            onClick={() => window.print()}
+            whileHover={{ y: -1 }}
+            whileTap={{ y: 0 }}
+            className="w-full cursor-pointer border-0 bg-ink px-4 py-3.5 font-mono text-[12px] font-medium text-cream"
+          >
+            Export selected as PDF →
+          </motion.button>
+
+          <a
+            href="/resume/Tanuson-Deachaboonchana_Resume_Mar2025.pdf"
+            target="_blank"
+            rel="noopener"
+            className="mt-3 block text-center font-mono text-[11px] text-muted no-underline hover:text-rust"
+          >
+            or download the Mar 2025 PDF ↗
+          </a>
+        </div>
+      </div>
+
+      {/* Body ------------------------------------------------------------- */}
+      <div className="resume-main flex flex-col gap-10">
+        {show('objective') && (
+          <Reveal>
+            <SectionLabel n="01">objective</SectionLabel>
+            <p className="m-0 font-body text-[clamp(19px,1.8vw,22px)] font-light leading-[1.4]">
+              {OBJECTIVE}
+            </p>
+          </Reveal>
+        )}
+
+        {show('experience') && (
+          <Reveal>
+            <SectionLabel n="02">work experience</SectionLabel>
+            <div className="flex flex-col">
+              {jobs.map((j) => (
+                <Row
+                  key={`${j.co}-${j.role}`}
+                  meta={
+                    <>
+                      {j.range}
+                      <br />
+                      {j.kind}
+                    </>
+                  }
+                >
+                  <div className="font-display text-[clamp(22px,2vw,26px)]">{j.role}</div>
+                  <div className="mb-2 font-body text-[16px] text-copy">{j.co}</div>
+                  {showBullets && (
+                    <ul className="list-disc pl-[18px] font-body text-[16px] font-light leading-[1.5] text-copy">
+                      {j.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </Row>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
+        {show('tech') && (
+          <Reveal>
+            <SectionLabel n="03">technologies and languages</SectionLabel>
+            <div className="flex flex-col">
+              {TECH.map((t) => (
+                <Row key={t.k} meta={t.k} className="tech-row !py-2.5">
+                  <span className="font-body text-[16px] font-light leading-[1.45]">{t.v}</span>
+                </Row>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
+        {show('education') && (
+          <Reveal>
+            <SectionLabel n="04">education</SectionLabel>
+            <Row meta={EDUCATION_RESUME.range}>
+              <div className="font-display text-[clamp(22px,2vw,26px)]">
+                {EDUCATION_RESUME.degree}
+              </div>
+              <div className="font-body text-[16px] text-copy">{EDUCATION_RESUME.school}</div>
+              {showBullets && (
+                <p className="m-0 mt-2 font-body text-[16px] font-light leading-[1.5] text-copy">
+                  {EDUCATION_RESUME.coursework}
+                </p>
+              )}
+            </Row>
+          </Reveal>
+        )}
+
+        {show('extra') && (
+          <Reveal>
+            <SectionLabel n="05">extracurricular activities</SectionLabel>
+            <div className="flex flex-col">
+              {EXTRA.map((e) => (
+                <Row key={e.org} meta={e.range}>
+                  <div className="font-display text-[clamp(20px,1.8vw,22px)]">{e.org}</div>
+                  <div className="mb-1.5 font-body text-[16px] text-copy">{e.role}</div>
+                  {showBullets && (
+                    <ul className="list-disc pl-[18px] font-body text-[16px] font-light leading-[1.5] text-copy">
+                      {e.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </Row>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
+        {show('projects') && (
+          <Reveal>
+            <SectionLabel n="06">projects</SectionLabel>
+            <div className="flex flex-col">
+              {resumeProjects.map((p) => (
+                <Row key={p.slug} meta={p.date} className="project-row !py-3">
+                  <Link href={p.href} className="text-inherit no-underline">
+                    <div className="resume-proj-title font-display text-[clamp(20px,1.8vw,22px)] hover:text-rust">
+                      {p.title}{' '}
+                      <span className="resume-proj-stack font-mono text-[11px] text-muted">
+                        {p.stackLine}
+                      </span>
+                    </div>
+                    <div className="resume-proj-desc font-body text-[16px] font-light leading-[1.45] text-copy">
+                      {p.description}
+                    </div>
+                  </Link>
+                </Row>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
       </div>
     </div>
   )
-} 
+}

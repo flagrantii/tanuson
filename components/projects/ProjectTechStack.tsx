@@ -1,22 +1,30 @@
-import React from 'react'
+"use client"
+
+import { motion, useReducedMotion } from 'framer-motion'
 
 type ProjectTechStackProps = {
-  techStack?: string[]
+  stack?: string[]
 }
 
-export default function ProjectTechStack({ techStack }: ProjectTechStackProps) {
-  if (!techStack || techStack.length === 0) return null
+export default function ProjectTechStack({ stack }: ProjectTechStackProps) {
+  const reduced = useReducedMotion()
+  if (!stack || stack.length === 0) return null
 
   return (
-    <section className="mt-8">
-      <h2 className="text-xl font-semibold">Tech Stack</h2>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {techStack.map((tech) => (
-          <span key={tech} className="rounded-full border border-gray-300 px-3 py-1 text-xs">
-            {tech}
-          </span>
-        ))}
-      </div>
-    </section>
+    <div className="flex flex-wrap gap-1.5">
+      {stack.map((s, i) => (
+        <motion.span
+          key={s}
+          initial={reduced ? undefined : { opacity: 0, y: 6 }}
+          whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35, delay: i * 0.04 }}
+          whileHover={reduced ? undefined : { y: -2 }}
+          className="cursor-default rounded-full border border-ink px-[9px] py-[5px] font-mono text-[11px]"
+        >
+          {s}
+        </motion.span>
+      ))}
+    </div>
   )
-} 
+}

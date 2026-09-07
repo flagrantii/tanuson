@@ -9,12 +9,29 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'editorial': ['"Playfair Display"', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+        display: ["var(--font-display)", "Instrument Serif", "Georgia", "serif"],
+        body: ["var(--font-body)", "Newsreader", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
       },
       colors: {
+        cream: "#f3efe6",
+        paper: "#ffffff",
+        ink: "#17150f",
+        rust: "#b8442a",
+        muted: "#6b665b",
+        copy: "#3d3930",
+      },
+      borderColor: {
+        hair: "rgba(0,0,0,.14)",
+      },
+      letterSpacing: {
+        tightest: "-.04em",
+        headline: "-.035em",
+      },
+      keyframes: {
+        "draw-x": { from: { transform: "scaleX(0)" }, to: { transform: "scaleX(1)" } },
       },
     },
   },
   plugins: [],
 };
-
