@@ -3,8 +3,30 @@ import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 
-export const INK = 0x17150f
-export const RUST = 0xb8442a
+/**
+ * Palette is read from the stylesheet so the 3D figures re-tint with the rest
+ * of the site — `--rust` in app/globals.css is the only place the accent lives.
+ * Called from the builders (not at module scope) so the CSS is definitely
+ * applied, with the shipped values as a fallback.
+ */
+function paletteColor(name: string, fallback: number): number {
+  if (typeof window !== 'undefined') {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+    if (v) {
+      try {
+        // Round-trips through Color so any CSS notation (hex, rgb(), oklch())
+        // resolves to the plain hex int the line materials require.
+        return new THREE.Color(v).getHex()
+      } catch {
+        /* fall through to the literal */
+      }
+    }
+  }
+  return fallback
+}
+
+const ink = () => paletteColor('--ink', 0x17150f)
+const rust = () => paletteColor('--rust', 0x30236e)
 
 /** The figures the page can ask for, by `data-figure` value. */
 export type FigureKind = 'knot' | 'helix' | 'lattice' | 'orbit' | 'coil'
@@ -115,7 +137,7 @@ function buildKnot(): Figure {
     for (let i = 0; i <= SEG; i++) pts.push(...at(i, angle))
     // Alternate weights so the ribbon reads as a drawn object, not a mesh.
     const heavy = j % 3 === 0
-    parts.fat(ribs, pts, INK, heavy ? 1.7 : 1.05, heavy ? 0.62 : 0.34)
+    parts.fat(ribs, pts, ink(), heavy ? 1.7 : 1.05, heavy ? 0.62 : 0.34)
   }
   root.add(ribs)
 
@@ -125,12 +147,12 @@ function buildKnot(): Figure {
   for (let i = 0; i <= SEG; i += RING_EVERY) {
     const pts: number[] = []
     for (let k = 0; k <= RING_RES; k++) pts.push(...at(i, (k / RING_RES) * Math.PI * 2))
-    parts.fat(rings, pts, RUST, 1.35, 0.9)
+    parts.fat(rings, pts, rust(), 1.35, 0.9)
   }
   root.add(rings)
 
   const cageGeo = new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.6, 1))
-  const cageMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.1 })
+  const cageMat = new THREE.LineBasicMaterial({ color: ink(), transparent: true, opacity: 0.1 })
   const cage = new THREE.LineSegments(cageGeo, cageMat)
   parts.geometries.push(cageGeo)
   parts.plain.push(cageMat)
@@ -180,7 +202,7 @@ function buildHelix(): Figure {
       const a = u * Math.PI * 2 * TURNS + phase
       pts.push(Math.cos(a) * R, (u - 0.5) * H, Math.sin(a) * R)
     }
-    parts.fat(root, pts, INK, 1.6, 0.6)
+    parts.fat(root, pts, ink(), 1.6, 0.6)
   }
 
   const rungs = new THREE.Group()
@@ -191,7 +213,7 @@ function buildHelix(): Figure {
     parts.fat(
       rungs,
       [Math.cos(a) * R, y, Math.sin(a) * R, -Math.cos(a) * R, y, -Math.sin(a) * R],
-      RUST,
+      rust(),
       1.15,
       0.85,
     )
@@ -224,14 +246,14 @@ function buildLattice(): Figure {
   const parts = new Parts()
 
   const outerGeo = new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.1, 0))
-  const outerMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.5 })
+  const outerMat = new THREE.LineBasicMaterial({ color: ink(), transparent: true, opacity: 0.5 })
   const outer = new THREE.LineSegments(outerGeo, outerMat)
   parts.geometries.push(outerGeo)
   parts.plain.push(outerMat)
   root.add(outer)
 
   const innerGeo = new THREE.EdgesGeometry(new THREE.OctahedronGeometry(1.2, 0))
-  const innerMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.28 })
+  const innerMat = new THREE.LineBasicMaterial({ color: ink(), transparent: true, opacity: 0.28 })
   const inner = new THREE.LineSegments(innerGeo, innerMat)
   parts.geometries.push(innerGeo)
   parts.plain.push(innerMat)
@@ -244,7 +266,7 @@ function buildLattice(): Figure {
   hull.dispose()
   // Fixed pixel size: attenuated points scale off the full canvas height, which
   // makes them enormous inside a small slot viewport.
-  const nodeMat = new THREE.PointsMaterial({ color: RUST, size: 5, sizeAttenuation: false })
+  const nodeMat = new THREE.PointsMaterial({ color: rust(), size: 5, sizeAttenuation: false })
   const nodes = new THREE.Points(nodeGeo, nodeMat)
   parts.geometries.push(nodeGeo)
   parts.plain.push(nodeMat)
@@ -287,10 +309,10 @@ function buildOrbit(): Figure {
   }
 
   const specs = [
-    { r: 2.15, tilt: 0, spin: 0.0, color: INK, w: 1.7, o: 0.55 },
-    { r: 1.72, tilt: Math.PI / 3, spin: 0.5, color: INK, w: 1.25, o: 0.4 },
-    { r: 1.3, tilt: -Math.PI / 4, spin: 1.1, color: RUST, w: 1.5, o: 0.9 },
-    { r: 0.85, tilt: Math.PI / 2.2, spin: 1.8, color: INK, w: 1.1, o: 0.3 },
+    { r: 2.15, tilt: 0, spin: 0.0, color: ink(), w: 1.7, o: 0.55 },
+    { r: 1.72, tilt: Math.PI / 3, spin: 0.5, color: ink(), w: 1.25, o: 0.4 },
+    { r: 1.3, tilt: -Math.PI / 4, spin: 1.1, color: rust(), w: 1.5, o: 0.9 },
+    { r: 0.85, tilt: Math.PI / 2.2, spin: 1.8, color: ink(), w: 1.1, o: 0.3 },
   ]
 
   const shells = specs.map((s) => {
@@ -304,7 +326,7 @@ function buildOrbit(): Figure {
 
   const coreGeo = new THREE.BufferGeometry()
   coreGeo.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0], 3))
-  const coreMat = new THREE.PointsMaterial({ color: RUST, size: 6, sizeAttenuation: false })
+  const coreMat = new THREE.PointsMaterial({ color: rust(), size: 6, sizeAttenuation: false })
   parts.geometries.push(coreGeo)
   parts.plain.push(coreMat)
   root.add(new THREE.Points(coreGeo, coreMat))
@@ -349,14 +371,14 @@ function buildCoil(): Figure {
     const z = r * Math.sin(v)
     pts.push(x, y, z)
   }
-  parts.fat(root, pts, INK, 1.15, 0.5)
+  parts.fat(root, pts, ink(), 1.15, 0.5)
 
   const guide: number[] = []
   for (let i = 0; i <= 200; i++) {
     const u = (i / 200) * Math.PI * 2
     guide.push(Math.cos(u) * R, Math.sin(u) * R, 0)
   }
-  parts.fat(root, guide, RUST, 1.5, 0.85)
+  parts.fat(root, guide, rust(), 1.5, 0.85)
 
   return {
     scene,

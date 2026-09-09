@@ -94,7 +94,7 @@ export default function ExperienceSkills() {
                   exit={{ pathLength: 0, opacity: 0 }}
                   transition={{ duration: 0.45, ease: 'easeInOut' }}
                   d={`M ${from.x} ${from.y} Q ${midX} ${midY - 46} ${to.x} ${to.y}`}
-                  stroke="#b8442a"
+                  stroke="var(--rust)"
                   strokeWidth="1"
                   strokeDasharray="4 4"
                   fill="none"
@@ -107,7 +107,7 @@ export default function ExperienceSkills() {
                   cx={from.x}
                   cy={from.y}
                   r={2.5}
-                  fill="#b8442a"
+                  fill="var(--rust)"
                 />
               </motion.g>
             )

@@ -24,14 +24,15 @@ body {
 }
 
 a { color: #17150f; }
-a:hover { color: #b8442a; }
+a:hover { color: var(--rust); }
 button { font-family: inherit; }
 ul { margin: 0; }
 
 :root {
   --cream: #f3efe6;
   --ink: #17150f;
-  --rust: #b8442a;
+  /* Accent. Change this one value to re-tint the whole site. */
+  --rust: #30236e;
   --muted: #6b665b;
   --copy: #3d3930;
   --hair: rgba(0, 0, 0, .14);
@@ -60,7 +61,17 @@ ul { margin: 0; }
   outline-offset: 3px;
 }
 
-::selection { background: #b8442a; color: #f3efe6; }
+::selection { background: var(--rust); color: var(--cream); }
+
+/* Route entrance — see components/PageTransition.tsx */
+.page-enter {
+  animation: pageEnter 320ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
 
 /* Subtle initial fade-in */
 body {

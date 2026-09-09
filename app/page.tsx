@@ -53,8 +53,8 @@ export default function Home() {
       {/* ── Practice + Now, each with its own figure ──────────────────── */}
       <section className="gutter grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-x-16 gap-y-14 border-t border-hair py-[clamp(36px,5vw,64px)]">
         <Reveal>
-          <div className="flex items-start gap-6">
-            <Figure3D kind="helix" className="h-44 w-32 shrink-0" />
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
+            <Figure3D kind="helix" className="h-32 w-28 shrink-0 sm:h-44 sm:w-32" />
             <div>
               <div className="mb-3.5 font-mono text-[12px] text-muted">§ 01 — practice</div>
               <p className="m-0 font-body text-[clamp(18px,1.7vw,22px)] font-light leading-[1.4] [text-wrap:pretty]">
@@ -89,9 +89,9 @@ export default function Home() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="flex items-start gap-6">
-            <Figure3D kind="lattice" className="h-44 w-32 shrink-0" />
-            <div className="flex-1">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
+            <Figure3D kind="lattice" className="h-32 w-28 shrink-0 sm:h-44 sm:w-32" />
+            <div className="w-full flex-1">
               <div className="mb-3.5 font-mono text-[12px] text-muted">§ 02 — now</div>
               <div className="flex flex-col gap-3.5">
                 {NOW.map((n, i) => (
@@ -112,8 +112,8 @@ export default function Home() {
       {/* ── Selected work ─────────────────────────────────────────────── */}
       <section className="border-t border-hair py-[clamp(36px,5vw,64px)]">
         <div className="gutter flex flex-wrap items-end justify-between gap-6">
-          <div className="flex items-center gap-5">
-            <Figure3D kind="orbit" className="h-32 w-32 shrink-0" />
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
+            <Figure3D kind="orbit" className="h-24 w-24 shrink-0 sm:h-32 sm:w-32" />
             <div>
               <div className="mb-2 font-mono text-[12px] text-muted">§ 03 — selected work</div>
               <h2 className="m-0 font-display text-[clamp(34px,4.6vw,64px)] leading-[.98] tracking-tightest">

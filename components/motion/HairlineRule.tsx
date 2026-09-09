@@ -10,9 +10,9 @@ type HairlineRuleProps = {
 }
 
 const TONE = {
-  hair: 'rgba(0,0,0,.14)',
-  ink: '#17150f',
-  rust: '#b8442a',
+  hair: 'var(--hair)',
+  ink: 'var(--ink)',
+  rust: 'var(--rust)',
 }
 
 /** A 1px rule that draws itself left-to-right when scrolled into view. */
