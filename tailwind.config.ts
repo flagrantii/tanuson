@@ -17,7 +17,8 @@ module.exports = {
         cream: "#f3efe6",
         paper: "#ffffff",
         ink: "#17150f",
-        rust: "#b8442a",
+        // Single source of truth is --rust in app/globals.css.
+        rust: "var(--rust)",
         muted: "#6b665b",
         copy: "#3d3930",
       },
