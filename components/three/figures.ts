@@ -26,7 +26,7 @@ function paletteColor(name: string, fallback: number): number {
 }
 
 const ink = () => paletteColor('--ink', 0x17150f)
-const rust = () => paletteColor('--rust', 0x30236e)
+const rust = () => paletteColor('--rust', 0x0000f2)
 
 /** The figures the page can ask for, by `data-figure` value. */
 export type FigureKind = 'knot' | 'helix' | 'lattice' | 'orbit' | 'coil'
