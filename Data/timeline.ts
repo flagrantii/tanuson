@@ -10,6 +10,21 @@ export type TimelineItem = {
 export const timelineItems: TimelineItem[] = [
   {
     id: 1,
+    company: "LINE MAN Wongnai",
+    role: "Software Engineer, backend",
+    type: "Full-Time",
+    period: "May 2026 – Now",
+    bullets: [
+      "Built and shipped a merchant-message service powering the Merchant App inbox and in-app notice banners, migrating merchant messaging off the legacy monolith with dual-write and a feature-flagged rollout to every merchant.",
+      "Designed the datastore capacity and sharding strategy for high-volume merchant messaging — shard-key analysis, index and TTL policy — and documented the decision to stay on a single replica set instead of sharding.",
+      "Delivered deterministic field-level encryption for merchant contact data: flag-gated dual-write, Airflow backfill pipelines, and a staged rollout plan reviewed with SRE.",
+      "Ran production on-call for the merchant platform — root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and guardrails behind them.",
+      "Built the team's AI engineering toolkit — shared skills for design docs, RFCs and implementation — and rolled it out across the organization alongside a lighter RFC/ADR practice.",
+      "Mentored the 2026 intern cohort: scoped their tickets, reviewed their code, and ran feedback sessions.",
+    ],
+  },
+  {
+    id: 2,
     company: "Mee Palang Mai Co., Ltd.",
     role: "Technical Lead & Co-Founder",
     type: "Co-Founder",
@@ -23,11 +38,11 @@ export const timelineItems: TimelineItem[] = [
     ],    
   },
   {
-    id: 2,
+    id: 3,
     company: "LINE MAN Wongnai",
     role: "Software Engineer, platform",
     type: "Part-Time",
-    period: "Aug 2025 – Now",
+    period: "Aug 2025 – Apr 2026",
     bullets: [
       "Developed a unified observability pipeline using OpenTelemetry and ClickHouse to improve telemetry completeness and system scalability.",
       "Implemented high-throughput ingestion pipelines and performed load tests supporting 200K+ logs/sec and 400K+ traces/sec.",
@@ -38,7 +53,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     company: "LINE MAN Wongnai",
     role: "Software Engineer, backend",
     type: "Internship",
@@ -50,7 +65,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     company: "Swipe",
     role: "Full‑Stack Developer",
     type: "Part‑Time",
@@ -62,7 +77,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     company: "Blockfint",
     role: "Software Developer",
     type: "Internship",
@@ -74,7 +89,7 @@ export const timelineItems: TimelineItem[] = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     company: "Freelance",
     role: "Solo Full-Stack Operator",
     type: "Since 2022",

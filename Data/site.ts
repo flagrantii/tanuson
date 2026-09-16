@@ -125,7 +125,7 @@ export const CONTACT = {
 }
 
 export const NOW = [
-  { org: 'LINE MAN Wongnai', line: 'Software Engineer, Platform · Aug 2025 —' },
+  { org: 'LINE MAN Wongnai', line: 'Software Engineer, Backend · May 2026 —' },
   { org: 'Mee Palang Mai Co., Ltd.', line: 'Technical Lead & Co-Founder · Nov 2025 —' },
   { org: 'Chulalongkorn University', line: 'B.Eng. Computer Engineering · 2023 —' },
 ]
@@ -137,7 +137,7 @@ export const PRACTICE =
 export const BIO = [
   'I grew up in Nakhon Si Thammarat and moved to Bangkok to study computer engineering at Chulalongkorn. I started taking freelance work in 2022, partway through school, and learned most of this job the way people usually do — by shipping something to people who were already waiting for it.',
   'A lot of my work has been for my own university: the site freshmen use before they have friends yet, the queue on open-house morning, the registration everyone opens at the same minute. When it works, nobody notices it. That is the part I like.',
-  'These days I split my time between platform work at LINE MAN Wongnai and Mee Palang Mai, the studio I co-founded. The part I have come to enjoy most is not writing the code — it is reading someone else\'s, and watching them get faster.',
+  'These days I split my time between the merchant platform at LINE MAN Wongnai and Mee Palang Mai, the studio I co-founded. The part I have come to enjoy most is not writing the code — it is reading someone else\'s, and watching them get faster.',
 ]
 
 /** How I work — the human version of a methodology section. */
