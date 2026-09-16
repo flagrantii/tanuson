@@ -29,7 +29,7 @@ const ink = () => paletteColor('--ink', 0x17150f)
 const rust = () => paletteColor('--rust', 0x0000f2)
 
 /** The figures the page can ask for, by `data-figure` value. */
-export type FigureKind = 'knot' | 'helix' | 'lattice' | 'orbit' | 'coil'
+export type FigureKind = 'knot' | 'helix' | 'lattice' | 'orbit' | 'coil' | 'field'
 
 export type FrameContext = {
   /** Pointer position, -1..1 across the viewport. */
@@ -37,6 +37,8 @@ export type FrameContext = {
   pointerY: number
   /** Document scroll progress, 0..1. */
   scroll: number
+  /** Reduced motion: the figure must look finished in a single frame. */
+  still: boolean
 }
 
 export type Figure = {
@@ -66,6 +68,12 @@ function fatLine(
   })
   const line = new Line2(geometry, material)
   line.computeLineDistances()
+  // Total arc length in world units — `drawIn` needs it to size the dash.
+  let length = 0
+  for (let i = 3; i < pts.length; i += 3) {
+    length += Math.hypot(pts[i] - pts[i - 3], pts[i + 1] - pts[i - 2], pts[i + 2] - pts[i - 1])
+  }
+  material.userData.length = length
   return { line, material, geometry }
 }
 
@@ -87,6 +95,43 @@ class Parts {
     this.geometries.forEach((g) => g.dispose())
     this.materials.forEach((m) => m.dispose())
     this.plain.forEach((m) => m.dispose())
+  }
+}
+
+/**
+ * Plotter reveal. Dashes each line with a gap longer than the line itself, then
+ * grows the dash from nothing — so the stroke appears to be drawn from its
+ * start, once, and then settles. The dash define is dropped on completion so
+ * the shader goes back to the cheap solid path.
+ */
+function drawIn(materials: LineMaterial[], duration: number) {
+  materials.forEach((m) => {
+    m.dashed = true
+    m.dashOffset = 0
+    m.gapSize = 1e4
+    m.dashSize = 0
+  })
+
+  let start = -1
+  let done = false
+  const finish = () => {
+    materials.forEach((m) => {
+      m.dashed = false
+    })
+    done = true
+  }
+
+  return (t: number, still: boolean) => {
+    if (done) return
+    if (still) return finish()
+    if (start < 0) start = t
+    const p = Math.min(1, (t - start) / duration)
+    const eased = 1 - Math.pow(1 - p, 3)
+    materials.forEach((m) => {
+      // 1.02 overshoots the end so the last vertex is never left clipped.
+      m.dashSize = (m.userData.length ?? 100) * eased * 1.02 + 1e-4
+    })
+    if (p >= 1) finish()
   }
 }
 
@@ -158,11 +203,15 @@ function buildKnot(): Figure {
   parts.plain.push(cageMat)
   root.add(cage)
 
+  // The hero is the one figure worth watching arrive.
+  const reveal = drawIn(parts.materials, 1.6)
+
   return {
     scene,
     camera,
     materials: parts.materials,
     update: (t, c) => {
+      reveal(t, c.still)
       // Scroll adds a slow extra revolution so the object tracks the reader.
       root.rotation.y = t * 0.15 + c.pointerX * 0.5 + c.scroll * Math.PI * 1.4
       root.rotation.x = Math.sin(t * 0.23) * 0.15 + c.pointerY * -0.32
@@ -393,12 +442,134 @@ function buildCoil(): Figure {
   }
 }
 
+/* ----------------------------------------------------------------- field --
+ * A contour field: plotter lines running across a ground plane that rolls
+ * under a slow wave, drawn full-bleed behind the hero so the type has a floor
+ * instead of blank paper. Deliberately the faintest thing on screen — if it
+ * ever competes with the headline, lower BASE_ALPHA or drop the slot from the
+ * page; nothing else depends on it.
+ *
+ * Displacement happens in the vertex shader, so the whole field is one draw
+ * call with no per-frame vertex work on the main thread.
+ */
+function buildField(): Figure {
+  const scene = new THREE.Scene()
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200)
+  camera.position.set(0, 3.1, 8)
+  camera.lookAt(0, -0.2, -6)
+
+  const parts = new Parts()
+
+  const ROWS = 30
+  const SEG = 130
+  const SPAN_X = 44
+  const NEAR_Z = 6
+  const FAR_Z = -19
+  const BASE_ALPHA = 0.13
+  // Every fifth contour is a rust one, the way a survey sheet indexes its lines.
+  const ACCENT_EVERY = 5
+
+  const position: number[] = []
+  const accent: number[] = []
+  for (let r = 0; r < ROWS; r++) {
+    const z = NEAR_Z + ((FAR_Z - NEAR_Z) * r) / (ROWS - 1)
+    const a = r % ACCENT_EVERY === 2 ? 1 : 0
+    for (let i = 0; i < SEG; i++) {
+      const x0 = (i / SEG - 0.5) * SPAN_X
+      const x1 = ((i + 1) / SEG - 0.5) * SPAN_X
+      position.push(x0, 0, z, x1, 0, z)
+      accent.push(a, a)
+    }
+  }
+
+  const geo = new THREE.BufferGeometry()
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(position, 3))
+  geo.setAttribute('aAccent', new THREE.Float32BufferAttribute(accent, 1))
+  parts.geometries.push(geo)
+
+  const mat = new THREE.ShaderMaterial({
+    transparent: true,
+    // Pure backdrop: never writes or tests depth against the figure over it.
+    depthWrite: false,
+    depthTest: false,
+    uniforms: {
+      uTime: { value: 0 },
+      uPointer: { value: new THREE.Vector2() },
+      uInk: { value: new THREE.Color(ink()) },
+      uRust: { value: new THREE.Color(rust()) },
+      uAlpha: { value: BASE_ALPHA },
+    },
+    vertexShader: `
+      uniform float uTime;
+      uniform vec2 uPointer;
+      attribute float aAccent;
+      varying float vFade;
+      varying float vAccent;
+
+      void main() {
+        vec3 p = position;
+        // Three incommensurate waves, so the surface never visibly repeats.
+        p.y +=
+          sin(p.x * 0.23 + uTime * 0.31) * 0.62 +
+          sin(p.z * 0.38 - uTime * 0.24) * 0.46 +
+          sin((p.x + p.z) * 0.14 + uTime * 0.17) * 0.38;
+
+        // Parallax: the ground leans away from the cursor, the figure toward it.
+        p.x += uPointer.x * 1.3;
+        p.z += uPointer.y * 0.9;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+
+        // Fade at every edge: no horizon line, no hard cut at the run's ends.
+        float far = smoothstep(-19.0, -7.0, p.z);
+        float near = 1.0 - smoothstep(2.0, 6.0, p.z);
+        float side = 1.0 - smoothstep(10.0, 21.0, abs(p.x));
+        // Quietest on the left, where the headline and lead sit.
+        float bias = mix(0.3, 1.0, smoothstep(-17.0, 5.0, p.x));
+        vFade = far * near * side * bias;
+        vAccent = aAccent;
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 uInk;
+      uniform vec3 uRust;
+      uniform float uAlpha;
+      varying float vFade;
+      varying float vAccent;
+
+      void main() {
+        float a = vFade * mix(uAlpha, uAlpha * 1.9, vAccent);
+        if (a < 0.003) discard;
+        gl_FragColor = vec4(mix(uInk, uRust, vAccent), a);
+      }
+    `,
+  })
+  parts.plain.push(mat)
+
+  const contours = new THREE.LineSegments(geo, mat)
+  contours.frustumCulled = false
+  scene.add(contours)
+
+  return {
+    scene,
+    camera,
+    materials: parts.materials,
+    update: (t, c) => {
+      // A fixed phase that happens to look composed, for reduced motion.
+      mat.uniforms.uTime.value = c.still ? 7.4 : t
+      mat.uniforms.uPointer.value.set(c.pointerX, c.pointerY)
+    },
+    dispose: () => parts.dispose(),
+  }
+}
+
 const BUILDERS: Record<FigureKind, () => Figure> = {
   knot: buildKnot,
   helix: buildHelix,
   lattice: buildLattice,
   orbit: buildOrbit,
   coil: buildCoil,
+  field: buildField,
 }
 
 export function createFigure(kind: FigureKind): Figure {

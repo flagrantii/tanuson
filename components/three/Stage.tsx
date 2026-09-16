@@ -77,7 +77,12 @@ export default function Stage() {
       resize()
       renderer.clear()
 
-      const ctx = { pointerX: pointer.x, pointerY: pointer.y, scroll: scrollProgress() }
+      const ctx = {
+        pointerX: pointer.x,
+        pointerY: pointer.y,
+        scroll: scrollProgress(),
+        still: reduced,
+      }
 
       slots.forEach((el) => {
         const kind = el.dataset.figure as FigureKind | undefined
@@ -100,6 +105,9 @@ export default function Stage() {
         renderer.setViewport(x, y, r.width, r.height)
         renderer.setScissor(x, y, r.width, r.height)
         renderer.setScissorTest(true)
+        // Slots may overlap (the hero figure sits inside the hero's field), and
+        // `autoClear` is off — without this the earlier slot's depth occludes.
+        renderer.clearDepth()
 
         f.camera.aspect = r.width / r.height
         f.camera.updateProjectionMatrix()

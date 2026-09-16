@@ -17,25 +17,34 @@ export default function Home() {
   return (
     <div>
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="gutter pt-[clamp(40px,7vw,88px)]">
-        <h1 className="m-0 font-display text-[clamp(52px,10.5vw,136px)] leading-[.92] tracking-headline">
-          <LineReveal>{HERO.line1}</LineReveal>
-          <LineReveal delay={0.09}>
-            <em className="italic text-rust">{HERO.line2}</em>
-          </LineReveal>
-        </h1>
+      <section className="gutter relative pb-[clamp(24px,4vw,56px)] pt-[clamp(40px,7vw,88px)]">
+        {/* Ambient floor. First in the DOM because the stage composites figures
+            in document order — later slots draw over earlier ones. */}
+        <Figure3D kind="field" className="pointer-events-none absolute inset-0" />
 
-        <Reveal delay={0.34} className="mt-[clamp(24px,3vw,40px)] max-w-2xl">
-          <p className="m-0 font-body text-[clamp(18px,1.7vw,21px)] font-light leading-[1.45] text-copy [text-wrap:pretty]">
-            {HERO.lead}
-          </p>
-        </Reveal>
+        <div className="relative grid items-center gap-x-[clamp(24px,4vw,72px)] gap-y-[clamp(16px,3vw,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(300px,38%)]">
+          <div>
+            <h1 className="m-0 font-display text-[clamp(52px,8.6vw,124px)] leading-[.92] tracking-headline">
+              <LineReveal>{HERO.line1}</LineReveal>
+              <LineReveal delay={0.09}>
+                <em className="italic text-rust">{HERO.line2}</em>
+              </LineReveal>
+            </h1>
+
+            <Reveal delay={0.34} className="mt-[clamp(24px,3vw,40px)] max-w-2xl">
+              <p className="m-0 font-body text-[clamp(18px,1.7vw,21px)] font-light leading-[1.45] text-copy [text-wrap:pretty]">
+                {HERO.lead}
+              </p>
+            </Reveal>
+          </div>
+
+          {/* The hero figure — the shared stage draws the knot into this slot. */}
+          <Figure3D
+            kind="knot"
+            className="h-[clamp(260px,62vw,420px)] w-full lg:h-[clamp(400px,36vw,560px)]"
+          />
+        </div>
       </section>
-
-      {/* The hero figure — the shared stage draws the knot into this slot. */}
-      <div className="gutter pt-[clamp(20px,3vw,36px)]">
-        <Figure3D kind="knot" className="h-[clamp(300px,48vw,600px)] w-full" />
-      </div>
 
       {/* ── Statement ─────────────────────────────────────────────────── */}
       <section className="gutter border-t border-hair py-[clamp(40px,6vw,80px)]">
