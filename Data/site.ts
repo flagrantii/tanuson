@@ -119,8 +119,8 @@ export const CONTACT = {
   github: 'https://github.com/flagrantii',
   githubLabel: 'github.com/flagrantii',
   linkedin: 'https://www.linkedin.com/in/tanuson-deachaboonchana-743a3029b/',
-  site: 'https://personal.tanuson.work',
-  siteLabel: 'personal.tanuson.work',
+  site: 'https://tanuson.com',
+  siteLabel: 'tanuson.com',
   location: 'Suan Luang, Bangkok',
 }
 
