@@ -50,7 +50,7 @@ export default function ServicesPage() {
       <div className="mx-[var(--gutter)] grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] border-l border-t border-ink">
         {SERVICES.map((s, i) => (
           <Reveal key={s.title} delay={i * 0.06}>
-            <div className="flex h-full min-h-[220px] flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-white">
+            <div className="flex h-full min-h-[220px] flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-ink/[.035]">
               <div className="font-mono text-label text-muted">
                 {String(i + 1).padStart(2, '0')}
               </div>

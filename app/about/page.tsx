@@ -132,7 +132,7 @@ export default function AboutPage() {
           {cers.map((c, i) => (
             // The reveal wraps the card so its own hover transition stays its own.
             <Reveal key={c.id} direction="none" duration={0.5} delay={i * 0.07}>
-            <article className="flex h-full flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-white">
+            <article className="flex h-full flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-ink/[.035]">
               <div>
                 <div className="mb-4 flex justify-between gap-2 font-mono text-label text-muted">
                   <span>

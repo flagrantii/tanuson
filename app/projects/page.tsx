@@ -85,7 +85,7 @@ export default function ProjectsPage() {
                   href={p.href}
                   data-cover={p.images[0] || p.cover || undefined}
                   data-label={`${p.idx} · ${p.title}`}
-                  className="group flex min-h-[200px] flex-col justify-between px-[22px] pb-[26px] pt-[22px] text-inherit no-underline transition-colors duration-300 hover:bg-white"
+                  className="group flex min-h-[200px] flex-col justify-between px-[22px] pb-[26px] pt-[22px] text-inherit no-underline transition-colors duration-300 hover:bg-ink/[.035]"
                 >
                   <div className="flex justify-between gap-2 font-mono text-label text-muted">
                     <span>
