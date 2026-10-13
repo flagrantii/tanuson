@@ -14,6 +14,9 @@ Fits because: it is one engineer's site, read by people deciding whether to hire
 | serif display with an italic accent clause | cool greys, a second accent colour |
 | hatch for missing art | stock 3D (torus knot with stars and sparkles) |
 | 3D figures drawn as pen-plotter strokes | realistic AI images |
+| figure plates: crop marks and a `fig. n` caption | stat bars and big-number rows |
+| footnotes quoting the project record | captions or notes that say more than `Data/web.ts` |
+| covers printed in ink, colour when reached for | full-colour screenshots as decoration |
 
 ## Colour
 All in `app/globals.css` `:root`; `tailwind.config.ts` only points at them.
@@ -44,14 +47,19 @@ One fixed WebGL stage draws every figure (knot, helix, lattice, orbit, coil, con
 - The loop runs only while a slot is on screen and the tab is visible.
 - Reduced motion: one finished still frame, redrawn on scroll.
 - No WebGL: the slot stays empty (or hatched).
+- The hero knot is set as plate `fig. 1` (`components/three/FigurePlate.tsx`). Clicking it, or its `replot ↺`, plots it again from nothing; the control only shows with JS and without reduced motion.
 
 ## Page
-Home: masthead → hero (headline, knot over the contour field) → statement → practice and now → selected work plates → closing → footer. 404: `app/not-found.tsx`, in theme.
+Home: masthead → hero (headline, knot plate over the contour field) → statement with footnotes → practice and now → selected work plates → closing → footer.
+- **Statement** (`components/home/Statement.tsx`): each example carries a footnote to the project behind it, and the note is that project's `about` line from `Data/web.ts`, word for word. Hovering a note underlines its phrase.
+- **Plates:** covers are printed in ink on the paper (grayscale under a multiply paper layer) and take their colour on hover or focus; on touch screens, while centred. Projects index: hovering a card with a cover floats it beside the pointer as a small ink plate (fine pointers only). 404: `app/not-found.tsx`, in theme.
 
 ## Motion
 `--ease` `cubic-bezier(.22,1,.36,1)`; `--ease-line` `(.16,1,.3,1)` for line reveals. Fade-up .55s, line rise .95s, word split .7s, rule draw .9s, page enter 320ms.
 - Content is hidden only under `html.js` (set before first paint, dropped after 4s if the reveal code never starts). Without JS every word shows.
 - Pointer lean (`Magnetic`): hovering fine pointers only.
+- Statement ink-in: words wait at 50% ink (the faintest that clears 3:1, AA for type that large) and take full ink as they scroll up to 60% of the screen. Driven by scroll events, no standing loop.
+- Print: a 1px `--accent` head passes down each cover once (1.15s, `--ease-line`), after the image has loaded. A paper mask is torn back, never the image clipped, so lazy loading still works.
 - Everything respects `prefers-reduced-motion`.
 
 ## Facts fence
