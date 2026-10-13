@@ -175,8 +175,16 @@ export const HERO = {
 export const STATEMENT = {
   before: 'Most of what I build is ',
   accent: 'invisible on purpose',
-  after:
-    ': the registration that holds at nine in the morning, the queue that keeps moving, the answer that lands before you think to refresh.',
+  /**
+   * Each example is footnoted to the project behind it. The note quotes that
+   * project's `about` line from Data/web.ts word for word, so the footnotes
+   * can never say more than the project record does.
+   */
+  examples: [
+    { text: 'the registration that holds at nine in the morning', slug: 'rub-puen-kao-mai-2024' },
+    { text: 'the queue that keeps moving', slug: 'cu-openhouse' },
+    { text: 'the answer that lands before you think to refresh', slug: 'nodi' },
+  ],
 }
 
 export const CLOSING = {

@@ -4,7 +4,10 @@ import Reveal from '@/components/motion/Reveal'
 import LineReveal from '@/components/motion/LineReveal'
 import HairlineRule from '@/components/motion/HairlineRule'
 import Magnetic from '@/components/motion/Magnetic'
-import { CLOSING, CONTACT, HERO, NOW, PRACTICE, STATEMENT } from '@/Data/site'
+import PrintPlate from '@/components/motion/PrintPlate'
+import FigurePlate from '@/components/three/FigurePlate'
+import Statement from '@/components/home/Statement'
+import { CLOSING, CONTACT, HERO, NOW, PRACTICE } from '@/Data/site'
 import { getRecentProjects } from '@/lib/projects'
 
 export default function Home() {
@@ -39,26 +42,19 @@ export default function Home() {
             </Reveal>
           </div>
 
-          {/* The hero figure — the shared stage draws the knot into this slot. */}
-          <Figure3D
+          {/* The hero figure, set as plate 1: the shared stage draws the knot
+              into its slot, and a click plots it again. */}
+          <FigurePlate
             kind="knot"
-            className="h-[clamp(260px,62vw,420px)] w-full lg:h-[clamp(400px,36vw,560px)]"
+            n="1"
+            caption="trefoil knot, plotted live"
+            className="h-[clamp(260px,62vw,420px)] w-full lg:h-[clamp(380px,34vw,520px)]"
           />
         </div>
       </section>
 
-      {/* ── Statement ─────────────────────────────────────────────────── */}
-      <section className="gutter border-t border-hair py-[clamp(40px,6vw,80px)]">
-        <p className="m-0 max-w-5xl font-display text-[clamp(28px,4.4vw,62px)] leading-[1.06] tracking-[-.025em] [text-wrap:balance]">
-          <LineReveal duration={1.05}>
-            <span>
-              {STATEMENT.before}
-              <em className="italic text-accent">{STATEMENT.accent}</em>
-              {STATEMENT.after}
-            </span>
-          </LineReveal>
-        </p>
-      </section>
+      {/* ── Statement, footnoted to the work behind it ─────────────────── */}
+      <Statement />
 
       {/* ── Practice + Now, each with its own figure ──────────────────── */}
       <section className="gutter grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-x-16 gap-y-14 border-t border-hair py-[clamp(36px,5vw,64px)]">
@@ -155,12 +151,7 @@ export default function Home() {
                 >
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-ink">
                     {cover ? (
-                      <img
-                        src={cover}
-                        alt={`${p.title}, cover`}
-                        loading="lazy"
-                        className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
-                      />
+                      <PrintPlate src={cover} alt={`${p.title}, cover`} delay={0.15 + i * 0.12} />
                     ) : (
                       <div className="hatch h-full w-full" />
                     )}

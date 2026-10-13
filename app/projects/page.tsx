@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { webs, type WebView } from '@/Data/web'
 import Reveal from '@/components/motion/Reveal'
+import CursorPlate from '@/components/projects/CursorPlate'
 
 const CHIPS = ['All', 'UX/UI', 'Frontend', 'Fullstack', 'AI', 'DevOps', 'Have Demo'] as const
 type Chip = (typeof CHIPS)[number]
@@ -64,48 +65,52 @@ export default function ProjectsPage() {
         </span>
       </div>
 
-      <motion.div
-        layout={!reduced}
-        className="mx-[var(--gutter)] mb-14 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] border-l border-t border-ink"
-      >
-        <AnimatePresence mode="popLayout" initial={false}>
-          {list.map((p) => (
-            <motion.div
-              key={p.slug}
-              layout={!reduced}
-              initial={reduced ? undefined : { opacity: 0, scale: 0.97 }}
-              animate={reduced ? undefined : { opacity: 1, scale: 1 }}
-              exit={reduced ? undefined : { opacity: 0, scale: 0.97 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              className="border-b border-r border-ink"
-            >
-              <Link
-                href={p.href}
-                className="group flex min-h-[200px] flex-col justify-between px-[22px] pb-[26px] pt-[22px] text-inherit no-underline transition-colors duration-300 hover:bg-white"
+      <CursorPlate>
+        <motion.div
+          layout={!reduced}
+          className="mx-[var(--gutter)] mb-14 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] border-l border-t border-ink"
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
+            {list.map((p) => (
+              <motion.div
+                key={p.slug}
+                layout={!reduced}
+                initial={reduced ? undefined : { opacity: 0, scale: 0.97 }}
+                animate={reduced ? undefined : { opacity: 1, scale: 1 }}
+                exit={reduced ? undefined : { opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                className="border-b border-r border-ink"
               >
-                <div className="flex justify-between gap-2 font-mono text-label text-muted">
-                  <span>
-                    {p.idx} · {p.type}
-                  </span>
-                  <span className="text-accent">{p.isDemo ? '→ live demo' : ''}</span>
-                </div>
-                <div>
-                  <div className="mb-2.5 mt-[26px] font-display text-[clamp(28px,2.6vw,34px)] leading-none tracking-[-.02em] transition-colors duration-300 group-hover:text-accent">
-                    {p.title}
+                <Link
+                  href={p.href}
+                  data-cover={p.images[0] || p.cover || undefined}
+                  data-label={`${p.idx} · ${p.title}`}
+                  className="group flex min-h-[200px] flex-col justify-between px-[22px] pb-[26px] pt-[22px] text-inherit no-underline transition-colors duration-300 hover:bg-white"
+                >
+                  <div className="flex justify-between gap-2 font-mono text-label text-muted">
+                    <span>
+                      {p.idx} · {p.type}
+                    </span>
+                    <span className="text-accent">{p.isDemo ? '→ live demo' : ''}</span>
                   </div>
-                  <div className="font-body text-[16px] font-light leading-[1.4] text-copy">
-                    {p.description}
+                  <div>
+                    <div className="mb-2.5 mt-[26px] font-display text-[clamp(28px,2.6vw,34px)] leading-none tracking-[-.02em] transition-colors duration-300 group-hover:text-accent">
+                      {p.title}
+                    </div>
+                    <div className="font-body text-[16px] font-light leading-[1.4] text-copy">
+                      {p.description}
+                    </div>
                   </div>
-                </div>
-                <div className="mt-[18px] flex justify-between gap-2 font-mono text-label text-muted">
-                  <span>{p.tagline}</span>
-                  <span className="whitespace-nowrap">{p.date}</span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+                  <div className="mt-[18px] flex justify-between gap-2 font-mono text-label text-muted">
+                    <span>{p.tagline}</span>
+                    <span className="whitespace-nowrap">{p.date}</span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </CursorPlate>
     </div>
   )
 }

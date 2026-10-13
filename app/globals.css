@@ -141,6 +141,123 @@ ul { margin: 0; }
 [data-rule] { transition: transform .9s var(--ease) var(--d, 0s); }
 .js [data-rule]:not(.is-in) { transform: scaleX(0); }
 
+/* Figure plates (components/three/FigurePlate.tsx): corner crop marks, and a
+   drawing that replots when clicked. The replot control is only offered where
+   it can work: with JavaScript and without reduced motion. */
+.plate-crop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  --m: 14px;
+  --c: color-mix(in srgb, var(--ink) 45%, transparent);
+  background:
+    linear-gradient(var(--c), var(--c)) left top / var(--m) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / 1px var(--m) no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / var(--m) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / 1px var(--m) no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / var(--m) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / 1px var(--m) no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / var(--m) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / 1px var(--m) no-repeat;
+}
+.plate-replot { display: none; }
+.js .plate-replot { display: inline; }
+.js .plate-crop { cursor: crosshair; }
+
+/* Statement ink-in (components/home/Statement.tsx). Words wait on the paper
+   in a faint impression and take the ink as the reader scrolls through. Only
+   once the component has armed the paragraph, so it is never faint without
+   JavaScript. */
+.ink-w { transition: color .45s var(--ease); }
+/* 50% is the faintest impression that still clears 3:1, AA for type this
+   large, so the words are readable before they are inked. */
+.js .ink-in[data-armed] .ink-w:not(.on) { color: color-mix(in srgb, var(--ink) 50%, var(--cream)); }
+.js .ink-in[data-armed] em .ink-w:not(.on) { color: color-mix(in srgb, var(--accent) 50%, var(--cream)); }
+
+/* Footnotes: the mark, and the phrase and note lighting each other up. */
+.fn-mark {
+  font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+  font-size: max(15px, .32em);
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 0;
+  vertical-align: super;
+  /* Tucked against the punctuation it follows. */
+  margin-left: -.06em;
+}
+.fn-mark a { color: var(--accent); text-decoration: none; }
+.fn-mark a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.fn-phrase { text-decoration: underline 1px transparent; text-underline-offset: .14em; transition: text-decoration-color .3s var(--ease); }
+.statement:has(.fn-note[data-n="1"]:hover, .fn-note[data-n="1"]:focus-visible) .fn-phrase[data-n="1"],
+.statement:has(.fn-note[data-n="2"]:hover, .fn-note[data-n="2"]:focus-visible) .fn-phrase[data-n="2"],
+.statement:has(.fn-note[data-n="3"]:hover, .fn-note[data-n="3"]:focus-visible) .fn-phrase[data-n="3"] {
+  text-decoration-color: var(--accent);
+}
+.fn-note .text-copy { transition: color .3s var(--ease); }
+.fn-note:hover .text-copy { color: var(--ink); }
+
+/* Print plates (components/motion/PrintPlate.tsx): covers printed in ink on
+   the paper, in colour when reached for. On arrival a 1px accent print head
+   passes down the plate and leaves the picture behind it.
+   The paper is a multiply layer over the picture rather than a blend mode on
+   the <img>: the page sits in its own stacking group (the route entrance
+   animation), so an <img> blend would have no paper beneath it to blend with. */
+.print-plate img {
+  filter: grayscale(1) contrast(1.06);
+  transition: filter .6s var(--ease), transform 1.2s var(--ease);
+}
+.print-plate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.group:hover .print-plate img,
+.group:focus-visible .print-plate img,
+.print-plate[data-colour] img { filter: none; }
+.print-head {
+  position: absolute;
+  inset: 0;
+  border-top: 1px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+/* The unprinted part of the plate is a sheet of paper over the picture,
+   torn back as the head passes. Clipping the <img> itself would stop the
+   browser lazy-loading it (a fully clipped image never counts as visible). */
+.print-mask { display: none; }
+.js .print-mask {
+  display: block;
+  position: absolute;
+  inset: 0;
+  /* White, because the paper layer above multiplies it to exactly --cream. */
+  background: #fff;
+  pointer-events: none;
+}
+.js .print-plate.is-in .print-mask { animation: printIn 1.15s var(--ease-line) var(--d, 0s) both; }
+.js .print-plate.is-in .print-head { animation: printHead 1.15s var(--ease-line) var(--d, 0s) both; }
+@keyframes printIn {
+  from { clip-path: inset(0 0 0 0); }
+  to   { clip-path: inset(100% 0 0 0); }
+}
+@keyframes printHead {
+  0%   { transform: translateY(0); opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* The projects index's floating plate (components/projects/CursorPlate.tsx). */
+.cursor-plate {
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+  will-change: transform;
+}
+.cursor-plate.is-on { opacity: 1; }
+.cursor-plate img { filter: grayscale(1) contrast(1.06); mix-blend-mode: multiply; }
+
 @media (prefers-reduced-motion: reduce) {
   html, body { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -155,6 +272,9 @@ ul { margin: 0; }
   .js [data-split]:not(.is-in) .w,
   .js [data-rule]:not(.is-in) { opacity: 1; transform: none; filter: none; }
   [data-reveal-line] { overflow: visible; padding-bottom: 0; }
+  .print-head, .js .print-mask { display: none; }
+  .plate-replot, .js .plate-replot { display: none; }
+  .js .plate-crop { cursor: auto; }
 }
 
 /* Print ----------------------------------------------------------------- */
