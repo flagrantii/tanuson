@@ -13,28 +13,34 @@ html, body {
 }
 
 html {
-  background: #f3efe6;
+  background: var(--cream);
 }
 
 body {
-  background: #f3efe6;
-  color: #17150f;
+  background: var(--cream);
+  color: var(--ink);
   font-family: var(--font-body), Newsreader, Georgia, serif;
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: #17150f; }
-a:hover { color: var(--rust); }
+a { color: var(--ink); }
+a:hover { color: var(--accent); }
 button { font-family: inherit; }
 ul { margin: 0; }
 
+/*
+ * The palette. Every colour on the site, Tailwind classes and the WebGL
+ * figures included, reads these variables; tailwind.config.ts only points at
+ * them. Named by role. Keep --accent a plain colour (hex or rgb()), because
+ * components/three/figures.ts parses it with THREE.Color.
+ */
 :root {
-  --cream: #f3efe6;
-  --ink: #17150f;
-  /* Accent. Change this one value to re-tint the whole site. */
-  --rust: #0000f2;
-  --muted: #6b665b;
-  --copy: #3d3930;
+  --cream: #f3efe6;   /* paper */
+  --ink: #17150f;     /* type and rules */
+  /* The one accent. Change this value to re-tint the whole site and the figures. */
+  --accent: #0000f2;
+  --muted: #6b665b;   /* labels and meta: 5.0:1 on paper, the lightest grey that stays AA */
+  --copy: #3d3930;    /* body copy */
   --hair: rgba(0, 0, 0, .14);
   --gutter: clamp(20px, 4vw, 48px);
   /* Motion: one settle curve for everything, a steeper one for line reveals. */
@@ -46,9 +52,12 @@ ul { margin: 0; }
 
 .gutter { padding-left: var(--gutter); padding-right: var(--gutter); }
 
+/* Same as `font-mono text-label text-muted`: a folio mark at the 15px floor. */
 .mono {
   font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: -.01em;
   color: var(--muted);
 }
 
@@ -64,7 +73,7 @@ ul { margin: 0; }
   outline-offset: 3px;
 }
 
-::selection { background: var(--rust); color: var(--cream); }
+::selection { background: var(--accent); color: var(--cream); }
 
 /* Route entrance (see components/PageTransition.tsx). A keyframe with `both`
    fill always completes, so it can't strand a page invisible. */

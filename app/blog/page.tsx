@@ -186,7 +186,7 @@ export default async function BlogPage() {
                   className="group grid grid-cols-1 gap-5 border-b border-hair py-6 text-inherit no-underline sm:grid-cols-[minmax(120px,160px)_1fr]"
                 >
                   <div className="font-mono text-label text-muted">
-                    <span className="mr-2 text-rust">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="mr-2 text-accent">{String(i + 1).padStart(2, '0')}</span>
                     {item.pubDate
                       ? new Date(item.pubDate).toLocaleDateString('en-US', {
                           month: 'short',
@@ -195,7 +195,7 @@ export default async function BlogPage() {
                       : ''}
                   </div>
                   <div>
-                    <div className="font-display text-[clamp(24px,2.6vw,32px)] leading-[1.1] transition-colors group-hover:text-rust">
+                    <div className="font-display text-[clamp(24px,2.6vw,32px)] leading-[1.1] transition-colors group-hover:text-accent">
                       {item.title}
                     </div>
                     {snippet && (

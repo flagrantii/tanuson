@@ -133,7 +133,7 @@ export default function Masthead() {
                   <Link
                     href={item.href}
                     className={`block border-t border-hair px-5 py-4 font-display text-[28px] no-underline ${
-                      isActive(item.href) ? 'text-rust' : 'text-ink'
+                      isActive(item.href) ? 'text-accent' : 'text-ink'
                     }`}
                   >
                     {item.label}

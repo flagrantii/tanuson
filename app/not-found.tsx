@@ -5,7 +5,7 @@ export default function NotFound() {
     <div className="gutter flex min-h-[60vh] flex-col justify-center py-20">
       <div className="font-mono text-label text-muted">error 404</div>
       <h1 className="m-0 mt-3 font-display text-[clamp(56px,9vw,120px)] leading-[.92] tracking-tightest">
-        Nothing set on <em className="text-rust">this page.</em>
+        Nothing set on <em className="text-accent">this page.</em>
       </h1>
       <p className="mt-5 max-w-lg font-body text-[18px] font-light leading-[1.45] text-copy">
         The link may be old, or the piece may have moved. The catalogue is the best place to

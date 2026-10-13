@@ -28,7 +28,7 @@ export default function Home() {
               {/* The space keeps the text "intelligence that", not "intelligencethat". */}
               <LineReveal>{HERO.line1}</LineReveal>{' '}
               <LineReveal delay={0.09}>
-                <em className="italic text-rust">{HERO.line2}</em>
+                <em className="italic text-accent">{HERO.line2}</em>
               </LineReveal>
             </h1>
 
@@ -53,7 +53,7 @@ export default function Home() {
           <LineReveal duration={1.05}>
             <span>
               {STATEMENT.before}
-              <em className="italic text-rust">{STATEMENT.accent}</em>
+              <em className="italic text-accent">{STATEMENT.accent}</em>
               {STATEMENT.after}
             </span>
           </LineReveal>
@@ -127,7 +127,7 @@ export default function Home() {
             <div>
               <div className="mb-2 font-mono text-label text-muted">§ 03 — selected work</div>
               <h2 className="m-0 font-display text-[clamp(34px,4.6vw,64px)] leading-[.98] tracking-tightest">
-                Recent things<span className="text-rust">.</span>
+                Recent things<span className="text-accent">.</span>
               </h2>
             </div>
           </div>
@@ -170,7 +170,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-1 flex-col justify-between gap-5 p-[22px]">
                     <div>
-                      <div className="font-display text-[clamp(26px,2.4vw,32px)] leading-[1.02] tracking-[-.02em] transition-colors duration-300 group-hover:text-rust">
+                      <div className="font-display text-[clamp(26px,2.4vw,32px)] leading-[1.02] tracking-[-.02em] transition-colors duration-300 group-hover:text-accent">
                         {p.title}
                       </div>
                       <p className="m-0 mt-2.5 font-body text-[16px] font-light leading-[1.4] text-copy">
@@ -196,7 +196,7 @@ export default function Home() {
             <LineReveal duration={1}>
               <span>
                 {CLOSING.before}
-                <em className="italic text-rust">{CLOSING.accent}</em>
+                <em className="italic text-accent">{CLOSING.accent}</em>
               </span>
             </LineReveal>
           </p>
@@ -210,7 +210,7 @@ export default function Home() {
               <Magnetic>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="text-muted underline decoration-1 underline-offset-[5px] hover:text-rust"
+                  className="text-muted underline decoration-1 underline-offset-[5px] hover:text-accent"
                 >
                   {CONTACT.email}
                 </a>

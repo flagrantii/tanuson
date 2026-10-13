@@ -10,7 +10,7 @@ const formEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || ''
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 const field =
-  'mt-1.5 w-full border border-ink bg-transparent px-3 py-2.5 font-body text-[16px] outline-none transition-shadow placeholder:text-muted/60 focus:shadow-[inset_0_-2px_0_0_var(--rust)]'
+  'mt-1.5 w-full border border-ink bg-transparent px-3 py-2.5 font-body text-[16px] outline-none transition-shadow placeholder:text-muted/60 focus:shadow-[inset_0_-2px_0_0_var(--accent)]'
 
 export default function ContactPage() {
   const [status, setStatus] = useState<Status>('idle')
@@ -62,7 +62,7 @@ export default function ContactPage() {
       <div className="gutter grid grid-cols-1 gap-x-14 gap-y-12 border-t border-hair py-[clamp(32px,4vw,48px)] pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(240px,320px)]">
         {/* Form */}
         <Reveal>
-          <div className="mb-6 font-mono text-label text-rust">send a message</div>
+          <div className="mb-6 font-mono text-label text-accent">send a message</div>
           <form onSubmit={onSubmit} className="max-w-xl">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <label className="block">
@@ -105,7 +105,7 @@ export default function ContactPage() {
             </button>
 
             {status === 'success' && (
-              <p className="mt-4 font-mono text-label text-rust">
+              <p className="mt-4 font-mono text-label text-accent">
                 Sent. I&apos;ll come back to you shortly.
               </p>
             )}
@@ -121,7 +121,7 @@ export default function ContactPage() {
 
         {/* Direct */}
         <Reveal delay={0.1}>
-          <div className="mb-6 font-mono text-label text-rust">or reach me directly</div>
+          <div className="mb-6 font-mono text-label text-accent">or reach me directly</div>
           <div className="flex flex-col">
             {[
               { k: 'email', v: CONTACT.email, href: `mailto:${CONTACT.email}` },
@@ -136,7 +136,7 @@ export default function ContactPage() {
                   <a
                     href={r.href}
                     {...(r.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
-                    className="font-body text-[17px] no-underline hover:text-rust"
+                    className="font-body text-[17px] no-underline hover:text-accent"
                   >
                     {r.v}
                   </a>

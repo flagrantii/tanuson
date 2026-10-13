@@ -7,13 +7,13 @@ type HairlineRuleProps = {
   className?: string
   delay?: number
   /** Rule colour; defaults to the hairline token. */
-  tone?: 'hair' | 'ink' | 'rust'
+  tone?: 'hair' | 'ink' | 'accent'
 }
 
 const TONE = {
   hair: 'var(--hair)',
   ink: 'var(--ink)',
-  rust: 'var(--rust)',
+  accent: 'var(--accent)',
 }
 
 /**

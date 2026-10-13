@@ -94,7 +94,7 @@ export default function ExperienceSkills() {
                   exit={{ pathLength: 0, opacity: 0 }}
                   transition={{ duration: 0.45, ease: 'easeInOut' }}
                   d={`M ${from.x} ${from.y} Q ${midX} ${midY - 46} ${to.x} ${to.y}`}
-                  stroke="var(--rust)"
+                  stroke="var(--accent)"
                   strokeWidth="1"
                   strokeDasharray="4 4"
                   fill="none"
@@ -107,7 +107,7 @@ export default function ExperienceSkills() {
                   cx={from.x}
                   cy={from.y}
                   r={2.5}
-                  fill="var(--rust)"
+                  fill="var(--accent)"
                 />
               </motion.g>
             )
@@ -127,7 +127,7 @@ export default function ExperienceSkills() {
                   key={j.id}
                   data-job={j.id}
                   className={`grid grid-cols-1 gap-5 border-t py-[18px] transition-colors duration-300 sm:grid-cols-[minmax(120px,150px)_1fr] ${
-                    lit ? 'border-rust' : 'border-hair'
+                    lit ? 'border-accent' : 'border-hair'
                   }`}
                 >
                   <div className="font-mono text-label leading-[1.6] text-muted">
@@ -138,7 +138,7 @@ export default function ExperienceSkills() {
                   <div>
                     <div
                       className={`font-display text-[clamp(21px,2vw,26px)] transition-colors duration-300 ${
-                        lit ? 'text-rust' : ''
+                        lit ? 'text-accent' : ''
                       }`}
                     >
                       {j.role}
@@ -167,7 +167,7 @@ export default function ExperienceSkills() {
           <div className="flex flex-col gap-6">
             {skillGroups.map((group) => (
               <div key={group.title}>
-                <div className="mb-2.5 font-mono text-label text-rust">
+                <div className="mb-2.5 font-mono text-label text-accent">
                   {group.title.toLowerCase()}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
@@ -184,7 +184,7 @@ export default function ExperienceSkills() {
                         transition={{ type: 'spring', stiffness: 320, damping: 22 }}
                         className={`relative z-20 inline-flex select-none items-center rounded-full border px-[9px] py-[5px] font-mono text-label transition-colors duration-300 ${
                           on
-                            ? 'border-rust bg-rust text-cream'
+                            ? 'border-accent bg-accent text-cream'
                             : linked && isDesktop
                               ? 'cursor-pointer border-ink hover:bg-ink hover:text-cream'
                               : 'border-hair text-copy'

@@ -43,7 +43,7 @@ export default async function ProjectDetailPage({
   return (
     <article>
       <div className="gutter pt-5 font-mono text-label text-muted">
-        <Link href="/projects" className="group text-muted no-underline hover:text-rust">
+        <Link href="/projects" className="group text-muted no-underline hover:text-accent">
           <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">
             ←
           </span>{' '}
@@ -54,7 +54,7 @@ export default async function ProjectDetailPage({
       <header className="gutter grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-end gap-x-12 gap-y-6 pt-[clamp(24px,3vw,40px)]">
         <h1 className="m-0 font-display text-[clamp(56px,9vw,124px)] leading-[.9] tracking-tightest [text-wrap:balance]">
           <SplitText text={p.title} />
-          <span className="text-rust">.</span>
+          <span className="text-accent">.</span>
         </h1>
         <Reveal delay={0.2}>
           <p className="m-0 font-body text-[clamp(19px,1.9vw,24px)] font-light leading-[1.35]">
@@ -77,15 +77,15 @@ export default async function ProjectDetailPage({
 
       <div className="gutter grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-x-10 gap-y-8 pb-10 pt-[clamp(32px,4vw,48px)] font-body text-[18px] font-light leading-[1.5] text-copy">
         <Reveal>
-          <div className="mb-2.5 font-mono text-label text-rust">about</div>
+          <div className="mb-2.5 font-mono text-label text-accent">about</div>
           {p.about}
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="mb-2.5 font-mono text-label text-rust">what i did</div>
+          <div className="mb-2.5 font-mono text-label text-accent">what i did</div>
           {p.role}
         </Reveal>
         <Reveal delay={0.16}>
-          <div className="mb-2.5 font-mono text-label text-rust">stack</div>
+          <div className="mb-2.5 font-mono text-label text-accent">stack</div>
           <ProjectTechStack stack={p.stack} />
         </Reveal>
       </div>
@@ -93,7 +93,7 @@ export default async function ProjectDetailPage({
       {p.features.length > 0 && (
         <div className="gutter pb-12">
           <Reveal>
-            <div className="mb-2.5 font-mono text-label text-rust">features</div>
+            <div className="mb-2.5 font-mono text-label text-accent">features</div>
             <div className="max-w-2xl">
               <ProjectFeatures features={p.features} />
             </div>
@@ -107,7 +107,7 @@ export default async function ProjectDetailPage({
 
       <nav className="mx-[var(--gutter)] mb-16 flex justify-between gap-4 border-t border-ink pt-5 font-mono text-label">
         {prev ? (
-          <Link href={prev.href} className="group text-ink no-underline hover:text-rust">
+          <Link href={prev.href} className="group text-ink no-underline hover:text-accent">
             <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">
               ←
             </span>{' '}
@@ -117,7 +117,7 @@ export default async function ProjectDetailPage({
           <span />
         )}
         {next ? (
-          <Link href={next.href} className="group text-right text-ink no-underline hover:text-rust">
+          <Link href={next.href} className="group text-right text-ink no-underline hover:text-accent">
             {next.title}{' '}
             <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
               →

@@ -58,7 +58,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-x-10 gap-y-8">
           {PRINCIPLES.map((pr, i) => (
             <Reveal key={pr.title} delay={i * 0.06}>
-              <div className="mb-2 font-mono text-label text-rust">
+              <div className="mb-2 font-mono text-label text-accent">
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div className="font-display text-[clamp(22px,2.1vw,26px)] leading-[1.15]">
@@ -144,7 +144,7 @@ export default function AboutPage() {
                   href={c.href}
                   target="_blank"
                   rel="noopener"
-                  className="font-display text-[clamp(22px,2.2vw,26px)] leading-[1.1] no-underline hover:text-rust"
+                  className="font-display text-[clamp(22px,2.2vw,26px)] leading-[1.1] no-underline hover:text-accent"
                 >
                   {c.title}
                 </a>
@@ -168,7 +168,7 @@ export default function AboutPage() {
                     href={c.href}
                     target="_blank"
                     rel="noopener"
-                    className="text-muted underline underline-offset-2 hover:text-rust"
+                    className="text-muted underline underline-offset-2 hover:text-accent"
                   >
                     credential ↗
                   </a>
@@ -176,7 +176,7 @@ export default function AboutPage() {
                     <button
                       type="button"
                       onClick={() => setCert(c.author.cersimage)}
-                      className="cursor-pointer border-0 bg-transparent p-0 text-muted underline underline-offset-2 hover:text-rust"
+                      className="cursor-pointer border-0 bg-transparent p-0 text-muted underline underline-offset-2 hover:text-accent"
                     >
                       preview
                     </button>
@@ -213,7 +213,7 @@ export default function AboutPage() {
               <button
                 type="button"
                 onClick={() => setCert(null)}
-                className="font-mono text-label text-cream/70 hover:text-rust"
+                className="font-mono text-label text-cream/70 hover:text-accent"
               >
                 close
               </button>

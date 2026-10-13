@@ -47,7 +47,7 @@ function Row({
  */
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
-    <div className="resume-section-label mb-2.5 font-mono text-label text-rust">
+    <div className="resume-section-label mb-2.5 font-mono text-label text-accent">
       <span className="resume-section-num">{n} </span>
       <span className="resume-section-text">{children}</span>
     </div>
@@ -102,19 +102,19 @@ export default function ResumePage() {
 
         {show('contact') && (
         <div className="resume-contact flex flex-col border-t border-hair pt-3.5 font-mono text-label leading-[1.65] text-copy">
-          <a href={CONTACT.phoneHref} className="no-underline hover:text-rust">
+          <a href={CONTACT.phoneHref} className="no-underline hover:text-accent">
             {CONTACT.phone}
           </a>
-          <a href={`mailto:${CONTACT.email}`} className="no-underline hover:text-rust">
+          <a href={`mailto:${CONTACT.email}`} className="no-underline hover:text-accent">
             {CONTACT.email}
           </a>
-          <a href={CONTACT.github} target="_blank" rel="noopener" className="no-underline hover:text-rust">
+          <a href={CONTACT.github} target="_blank" rel="noopener" className="no-underline hover:text-accent">
             {CONTACT.githubLabel}
           </a>
-          <a href={CONTACT.linkedin} target="_blank" rel="noopener" className="no-underline hover:text-rust">
+          <a href={CONTACT.linkedin} target="_blank" rel="noopener" className="no-underline hover:text-accent">
             linkedin<span className="print-hide"> ↗</span>
           </a>
-          <a href={CONTACT.site} className="no-underline hover:text-rust">
+          <a href={CONTACT.site} className="no-underline hover:text-accent">
             {CONTACT.siteLabel}
           </a>
         </div>
@@ -158,11 +158,11 @@ export default function ResumePage() {
                     on ? 'text-ink' : 'text-muted'
                   }`}
                 >
-                  <motion.span
+                  <span
                     aria-hidden
-                    animate={{ backgroundColor: on ? '#17150f' : 'rgba(0,0,0,0)' }}
-                    transition={{ duration: 0.2 }}
-                    className="inline-block h-3 w-3 shrink-0 border border-ink"
+                    className={`inline-block h-3 w-3 shrink-0 border border-ink transition-colors duration-200 ${
+                      on ? 'bg-ink' : 'bg-transparent'
+                    }`}
                   />
                   {SECTION_LABELS[k]}
                 </button>
@@ -188,7 +188,7 @@ export default function ResumePage() {
             href="/resume/Tanuson-Deachaboonchana_Resume_Mar2025.pdf"
             target="_blank"
             rel="noopener"
-            className="mt-3 block text-center font-mono text-label text-muted no-underline hover:text-rust"
+            className="mt-3 block text-center font-mono text-label text-muted no-underline hover:text-accent"
           >
             or download the Mar 2025 PDF ↗
           </a>
@@ -294,7 +294,7 @@ export default function ResumePage() {
               {resumeProjects.map((p) => (
                 <Row key={p.slug} meta={p.date} className="project-row !py-3">
                   <Link href={p.href} className="text-inherit no-underline">
-                    <div className="resume-proj-title font-display text-[clamp(20px,1.8vw,22px)] hover:text-rust">
+                    <div className="resume-proj-title font-display text-[clamp(20px,1.8vw,22px)] hover:text-accent">
                       {p.title}{' '}
                       <span className="resume-proj-stack font-mono text-label text-muted">
                         {p.stackLine}

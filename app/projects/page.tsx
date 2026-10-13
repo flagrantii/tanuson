@@ -28,7 +28,7 @@ export default function ProjectsPage() {
       <div className="gutter grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-end gap-x-8 gap-y-6 pb-7 pt-[clamp(36px,5vw,56px)]">
         <Reveal direction="none" blur>
           <h1 className="m-0 font-display text-[clamp(60px,8vw,96px)] leading-[.95] tracking-tightest">
-            Projects<span className="text-rust">.</span>
+            Projects<span className="text-accent">.</span>
           </h1>
         </Reveal>
         <Reveal delay={0.1}>
@@ -87,10 +87,10 @@ export default function ProjectsPage() {
                   <span>
                     {p.idx} · {p.type}
                   </span>
-                  <span className="text-rust">{p.isDemo ? '→ live demo' : ''}</span>
+                  <span className="text-accent">{p.isDemo ? '→ live demo' : ''}</span>
                 </div>
                 <div>
-                  <div className="mb-2.5 mt-[26px] font-display text-[clamp(28px,2.6vw,34px)] leading-none tracking-[-.02em] transition-colors duration-300 group-hover:text-rust">
+                  <div className="mb-2.5 mt-[26px] font-display text-[clamp(28px,2.6vw,34px)] leading-none tracking-[-.02em] transition-colors duration-300 group-hover:text-accent">
                     {p.title}
                   </div>
                   <div className="font-body text-[16px] font-light leading-[1.4] text-copy">

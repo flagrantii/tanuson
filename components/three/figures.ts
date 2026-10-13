@@ -5,7 +5,7 @@ import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 
 /**
  * Palette is read from the stylesheet so the 3D figures re-tint with the rest
- * of the site — `--rust` in app/globals.css is the only place the accent lives.
+ * of the site — `--accent` in app/globals.css is the only place the accent lives.
  * Called from the builders (not at module scope) so the CSS is definitely
  * applied, with the shipped values as a fallback.
  */
@@ -26,7 +26,7 @@ function paletteColor(name: string, fallback: number): number {
 }
 
 const ink = () => paletteColor('--ink', 0x17150f)
-const rust = () => paletteColor('--rust', 0x0000f2)
+const accent = () => paletteColor('--accent', 0x0000f2)
 
 /** The figures the page can ask for, by `data-figure` value. */
 export type FigureKind = 'knot' | 'helix' | 'lattice' | 'orbit' | 'coil' | 'field'
@@ -136,7 +136,7 @@ function drawIn(materials: LineMaterial[], duration: number) {
 }
 
 /* ------------------------------------------------------------------ knot --
- * The hero: a (2,3) torus knot drawn as longitudinal plotter ribs, with rust
+ * The hero: a (2,3) torus knot drawn as longitudinal plotter ribs, with accent
  * cross-sections at measured intervals inside a faint construction cage.
  */
 function buildKnot(): Figure {
@@ -192,7 +192,7 @@ function buildKnot(): Figure {
   for (let i = 0; i <= SEG; i += RING_EVERY) {
     const pts: number[] = []
     for (let k = 0; k <= RING_RES; k++) pts.push(...at(i, (k / RING_RES) * Math.PI * 2))
-    parts.fat(rings, pts, rust(), 1.35, 0.9)
+    parts.fat(rings, pts, accent(), 1.35, 0.9)
   }
   root.add(rings)
 
@@ -228,7 +228,7 @@ function buildKnot(): Figure {
 }
 
 /* ----------------------------------------------------------------- helix --
- * Two intertwined strands with rust rungs. Used beside the practice column.
+ * Two intertwined strands with accent rungs. Used beside the practice column.
  */
 function buildHelix(): Figure {
   const scene = new THREE.Scene()
@@ -262,7 +262,7 @@ function buildHelix(): Figure {
     parts.fat(
       rungs,
       [Math.cos(a) * R, y, Math.sin(a) * R, -Math.cos(a) * R, y, -Math.sin(a) * R],
-      rust(),
+      accent(),
       1.15,
       0.85,
     )
@@ -283,7 +283,7 @@ function buildHelix(): Figure {
 }
 
 /* --------------------------------------------------------------- lattice --
- * Nested polyhedral cages with rust nodes. Used beside the "now" column.
+ * Nested polyhedral cages with accent nodes. Used beside the "now" column.
  */
 function buildLattice(): Figure {
   const scene = new THREE.Scene()
@@ -315,7 +315,7 @@ function buildLattice(): Figure {
   hull.dispose()
   // Fixed pixel size: attenuated points scale off the full canvas height, which
   // makes them enormous inside a small slot viewport.
-  const nodeMat = new THREE.PointsMaterial({ color: rust(), size: 5, sizeAttenuation: false })
+  const nodeMat = new THREE.PointsMaterial({ color: accent(), size: 5, sizeAttenuation: false })
   const nodes = new THREE.Points(nodeGeo, nodeMat)
   parts.geometries.push(nodeGeo)
   parts.plain.push(nodeMat)
@@ -337,7 +337,7 @@ function buildLattice(): Figure {
 }
 
 /* ----------------------------------------------------------------- orbit --
- * An armillary sphere: tilted rings, one in rust. Used for selected work.
+ * An armillary sphere: tilted rings, one in the accent. Used for selected work.
  */
 function buildOrbit(): Figure {
   const scene = new THREE.Scene()
@@ -360,7 +360,7 @@ function buildOrbit(): Figure {
   const specs = [
     { r: 2.15, tilt: 0, spin: 0.0, color: ink(), w: 1.7, o: 0.55 },
     { r: 1.72, tilt: Math.PI / 3, spin: 0.5, color: ink(), w: 1.25, o: 0.4 },
-    { r: 1.3, tilt: -Math.PI / 4, spin: 1.1, color: rust(), w: 1.5, o: 0.9 },
+    { r: 1.3, tilt: -Math.PI / 4, spin: 1.1, color: accent(), w: 1.5, o: 0.9 },
     { r: 0.85, tilt: Math.PI / 2.2, spin: 1.8, color: ink(), w: 1.1, o: 0.3 },
   ]
 
@@ -375,7 +375,7 @@ function buildOrbit(): Figure {
 
   const coreGeo = new THREE.BufferGeometry()
   coreGeo.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0], 3))
-  const coreMat = new THREE.PointsMaterial({ color: rust(), size: 6, sizeAttenuation: false })
+  const coreMat = new THREE.PointsMaterial({ color: accent(), size: 6, sizeAttenuation: false })
   parts.geometries.push(coreGeo)
   parts.plain.push(coreMat)
   root.add(new THREE.Points(coreGeo, coreMat))
@@ -427,7 +427,7 @@ function buildCoil(): Figure {
     const u = (i / 200) * Math.PI * 2
     guide.push(Math.cos(u) * R, Math.sin(u) * R, 0)
   }
-  parts.fat(root, guide, rust(), 1.5, 0.85)
+  parts.fat(root, guide, accent(), 1.5, 0.85)
 
   return {
     scene,
@@ -466,11 +466,11 @@ function buildField(): Figure {
   const NEAR_Z = 6
   const FAR_Z = -19
   const BASE_ALPHA = 0.13
-  // Every fifth contour is a rust one, the way a survey sheet indexes its lines.
+  // Every fifth contour is an accent one, the way a survey sheet indexes its lines.
   const ACCENT_EVERY = 5
 
   const position: number[] = []
-  const accent: number[] = []
+  const accentRow: number[] = []
   for (let r = 0; r < ROWS; r++) {
     const z = NEAR_Z + ((FAR_Z - NEAR_Z) * r) / (ROWS - 1)
     const a = r % ACCENT_EVERY === 2 ? 1 : 0
@@ -478,13 +478,13 @@ function buildField(): Figure {
       const x0 = (i / SEG - 0.5) * SPAN_X
       const x1 = ((i + 1) / SEG - 0.5) * SPAN_X
       position.push(x0, 0, z, x1, 0, z)
-      accent.push(a, a)
+      accentRow.push(a, a)
     }
   }
 
   const geo = new THREE.BufferGeometry()
   geo.setAttribute('position', new THREE.Float32BufferAttribute(position, 3))
-  geo.setAttribute('aAccent', new THREE.Float32BufferAttribute(accent, 1))
+  geo.setAttribute('aAccent', new THREE.Float32BufferAttribute(accentRow, 1))
   parts.geometries.push(geo)
 
   const mat = new THREE.ShaderMaterial({
@@ -496,7 +496,7 @@ function buildField(): Figure {
       uTime: { value: 0 },
       uPointer: { value: new THREE.Vector2() },
       uInk: { value: new THREE.Color(ink()) },
-      uRust: { value: new THREE.Color(rust()) },
+      uAccent: { value: new THREE.Color(accent()) },
       uAlpha: { value: BASE_ALPHA },
     },
     vertexShader: `
@@ -532,7 +532,7 @@ function buildField(): Figure {
     `,
     fragmentShader: `
       uniform vec3 uInk;
-      uniform vec3 uRust;
+      uniform vec3 uAccent;
       uniform float uAlpha;
       varying float vFade;
       varying float vAccent;
@@ -540,7 +540,7 @@ function buildField(): Figure {
       void main() {
         float a = vFade * mix(uAlpha, uAlpha * 1.9, vAccent);
         if (a < 0.003) discard;
-        gl_FragColor = vec4(mix(uInk, uRust, vAccent), a);
+        gl_FragColor = vec4(mix(uInk, uAccent, vAccent), a);
       }
     `,
   })

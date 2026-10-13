@@ -20,18 +20,18 @@ export default function ProjectDemo({ liveUrl, title }: ProjectDemoProps) {
 
   return (
     <section data-noprint className="mx-[var(--gutter)] mb-14">
-      <div className="mb-2.5 font-mono text-label text-rust">live demo</div>
+      <div className="mb-2.5 font-mono text-label text-accent">live demo</div>
       <div className="border border-ink">
         <div className="flex items-center gap-2 border-b border-ink px-3 py-2 font-mono text-label text-muted">
           <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
           <span className="h-1.5 w-1.5 rounded-full bg-ink/25" />
-          <span className="h-1.5 w-1.5 rounded-full bg-rust" />
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           <span className="ml-2 truncate">{liveUrl}</span>
           <a
             href={liveUrl}
             target="_blank"
             rel="noopener"
-            className="ml-auto whitespace-nowrap text-muted underline underline-offset-2 hover:text-rust"
+            className="ml-auto whitespace-nowrap text-muted underline underline-offset-2 hover:text-accent"
           >
             open ↗
           </a>
@@ -53,7 +53,7 @@ export default function ProjectDemo({ liveUrl, title }: ProjectDemoProps) {
             <button
               type="button"
               onClick={() => setLoad(true)}
-              className="hatch flex h-full w-full cursor-pointer items-center justify-center bg-transparent font-mono text-label text-muted transition-colors hover:text-rust"
+              className="hatch flex h-full w-full cursor-pointer items-center justify-center bg-transparent font-mono text-label text-muted transition-colors hover:text-accent"
             >
               [ load live preview ↵ ]
             </button>

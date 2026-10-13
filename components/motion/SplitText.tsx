@@ -46,7 +46,7 @@ export default function SplitText({
       {words.map((item, i) => (
         <Fragment key={`${i}-${item.w}`}>
           <span
-            className={`w${item.accent ? ' italic text-rust' : ''}`}
+            className={`w${item.accent ? ' italic text-accent' : ''}`}
             style={{ '--i': i } as CSSProperties}
           >
             {item.w}

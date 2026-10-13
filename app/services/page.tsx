@@ -72,7 +72,7 @@ export default function ServicesPage() {
         <div className="mb-8">
           <div className="mb-2 font-mono text-label text-muted">§ 02 — estimate</div>
           <h2 className="m-0 font-display text-[clamp(32px,4.2vw,56px)] leading-[.98] tracking-tightest">
-            Scope it in a minute<span className="text-rust">.</span>
+            Scope it in a minute<span className="text-accent">.</span>
           </h2>
         </div>
         <Estimator />
@@ -83,7 +83,7 @@ export default function ServicesPage() {
           <div className="border-t border-ink pt-6">
             <p className="m-0 max-w-3xl font-body text-[clamp(22px,2.6vw,34px)] font-light leading-[1.25]">
               Have something that needs building properly?{' '}
-              <Link href="/contacts" className="italic text-rust underline underline-offset-4">
+              <Link href="/contacts" className="italic text-accent underline underline-offset-4">
                 Start a conversation
               </Link>
               .

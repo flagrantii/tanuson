@@ -19,7 +19,7 @@ export default function ProjectFeatures({ features }: ProjectFeaturesProps) {
           delay={i * 0.06}
           className="border-t border-hair py-2 font-body text-[16px] font-light leading-[1.5] text-copy first:border-t-0 first:pt-0"
         >
-          <span className="mr-2.5 font-mono text-label text-rust">
+          <span className="mr-2.5 font-mono text-label text-accent">
             {String(i + 1).padStart(2, '0')}
           </span>
           {f}

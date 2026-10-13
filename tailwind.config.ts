@@ -1,3 +1,6 @@
+/** A colour from the CSS palette, with Tailwind's opacity modifier support. */
+const token = (name: string) => `rgb(from var(--${name}) r g b / <alpha-value>)`
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -13,17 +16,19 @@ module.exports = {
         body: ["var(--font-body)", "Newsreader", "Georgia", "serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
       },
+      // The palette lives in app/globals.css (:root); these only point at it, so
+      // one edit there re-tints every class. `rgb(from …)` keeps opacity
+      // modifiers such as bg-ink/90 and text-cream/70 working on a variable.
       colors: {
-        cream: "#f3efe6",
+        cream: token("cream"),
         paper: "#ffffff",
-        ink: "#17150f",
-        // Single source of truth is --rust in app/globals.css.
-        rust: "var(--rust)",
-        muted: "#6b665b",
-        copy: "#3d3930",
+        ink: token("ink"),
+        accent: token("accent"),
+        muted: token("muted"),
+        copy: token("copy"),
       },
       borderColor: {
-        hair: "rgba(0,0,0,.14)",
+        hair: "var(--hair)",
       },
       fontSize: {
         // The text floor. Mono folio marks, meta rows, chips and small links all
