@@ -66,7 +66,7 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
             <Figure3D kind="helix" className="h-32 w-28 shrink-0 sm:h-44 sm:w-32" />
             <div>
-              <div className="mb-3.5 font-mono text-label text-muted">§ 01 — practice</div>
+              <div className="mb-3.5 font-mono text-label text-muted">§ 01 · practice</div>
               <p className="m-0 font-body text-[clamp(18px,1.7vw,22px)] font-light leading-[1.4] [text-wrap:pretty]">
                 {PRACTICE}
               </p>
@@ -102,7 +102,7 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
             <Figure3D kind="lattice" className="h-32 w-28 shrink-0 sm:h-44 sm:w-32" />
             <div className="w-full flex-1">
-              <div className="mb-3.5 font-mono text-label text-muted">§ 02 — now</div>
+              <div className="mb-3.5 font-mono text-label text-muted">§ 02 · now</div>
               <div className="flex flex-col gap-3.5">
                 {NOW.map((n, i) => (
                   <div key={n.org}>
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
             <Figure3D kind="orbit" className="h-24 w-24 shrink-0 sm:h-32 sm:w-32" />
             <div>
-              <div className="mb-2 font-mono text-label text-muted">§ 03 — selected work</div>
+              <div className="mb-2 font-mono text-label text-muted">§ 03 · selected work</div>
               <h2 className="m-0 font-display text-[clamp(34px,4.6vw,64px)] leading-[.98] tracking-tightest">
                 Recent things<span className="text-accent">.</span>
               </h2>
@@ -157,7 +157,7 @@ export default function Home() {
                     {cover ? (
                       <img
                         src={cover}
-                        alt={`${p.title} — cover`}
+                        alt={`${p.title}, cover`}
                         loading="lazy"
                         className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
                       />

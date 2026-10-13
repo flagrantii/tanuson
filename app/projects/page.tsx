@@ -33,7 +33,7 @@ export default function ProjectsPage() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="m-0 mb-4 font-body text-[clamp(17px,1.6vw,20px)] font-light leading-[1.4] text-copy">
-            Fourteen things shipped since 2023 — from a freshman orientation system serving
+            Fourteen things shipped since 2023, from a freshman orientation system serving
             3,000 a day to a browser extension that argues with Shopee. Filter by area.
           </p>
           <div className="flex flex-wrap gap-2">

@@ -118,7 +118,7 @@ export default function ExperienceSkills() {
       <div className="grid grid-cols-1 gap-x-14 gap-y-12 lg:grid-cols-[1fr_minmax(280px,380px)]">
         {/* Experience ledger */}
         <div>
-          <div className="mb-6 font-mono text-label text-muted">§ 02 — experience</div>
+          <div className="mb-6 font-mono text-label text-muted">§ 02 · experience</div>
           <div className="flex flex-col">
             {timelineItems.map((j) => {
               const lit = active.includes(j.id)
@@ -159,7 +159,7 @@ export default function ExperienceSkills() {
         {/* Skill map */}
         <div>
           <div className="mb-6 font-mono text-label text-muted">
-            § 03 — skill map
+            § 03 · skill map
             {isDesktop && !reduced && (
               <span className="ml-2 text-muted">· hover to trace</span>
             )}

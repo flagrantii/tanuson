@@ -16,10 +16,10 @@ export const timelineItems: TimelineItem[] = [
     period: "May 2026 – Now",
     bullets: [
       "Built and shipped a merchant-message service powering the Merchant App inbox and in-app notice banners, migrating merchant messaging off the legacy monolith with dual-write and a feature-flagged rollout to every merchant.",
-      "Designed the datastore capacity and sharding strategy for high-volume merchant messaging — shard-key analysis, index and TTL policy — and documented the decision to stay on a single replica set instead of sharding.",
+      "Designed the datastore capacity and sharding strategy for high-volume merchant messaging, including shard-key analysis and the index and TTL policy, and documented the decision to stay on a single replica set instead of sharding.",
       "Delivered deterministic field-level encryption for merchant contact data: flag-gated dual-write, Airflow backfill pipelines, and a staged rollout plan reviewed with SRE.",
-      "Ran production on-call for the merchant platform — root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and guardrails behind them.",
-      "Built the team's AI engineering toolkit — shared skills for design docs, RFCs and implementation — and rolled it out across the organization alongside a lighter RFC/ADR practice.",
+      "Ran production on-call for the merchant platform: root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and guardrails behind them.",
+      "Built the team's AI engineering toolkit: shared skills for design docs, RFCs and implementation. Rolled it out across the organization alongside a lighter RFC/ADR practice.",
       "Mentored the 2026 intern cohort: scoped their tickets, reviewed their code, and ran feedback sessions.",
     ],
   },

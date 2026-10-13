@@ -72,7 +72,7 @@ export const cers = [
     title: 'AI Engineer Agentic Track: The Complete Agent & MCP Course',
     href: 'https://www.udemy.com/certificate/UC-38ae6e43-1326-41c8-b5c6-12bd25424b1a/',
     description:
-      'Learners develop a deep understanding of agentic AI architectures, including multi-agent collaboration, memory systems, feedback loops, and real-time tool integrations. Through 8 real-world projects, students build advanced AI systems capable of web search, file handling, Python execution, and automated decision-making — similar to real digital assistants or AI copilots.',
+      'Learners develop a deep understanding of agentic AI architectures, including multi-agent collaboration, memory systems, feedback loops, and real-time tool integrations. Through 8 real-world projects, students build advanced AI systems capable of web search, file handling, Python execution, and automated decision-making, similar to real digital assistants or AI copilots.',
     date: 'May 2025',
     datetime: '2020-03-16',
     category: { title: 'Udemy', org: 'Udemy' },

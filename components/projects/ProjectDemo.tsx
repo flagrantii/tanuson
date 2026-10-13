@@ -44,7 +44,7 @@ export default function ProjectDemo({ liveUrl, title }: ProjectDemoProps) {
               animate={reduced ? undefined : { opacity: 1 }}
               transition={{ duration: 0.5 }}
               src={liveUrl}
-              title={`${title} — live demo`}
+              title={`${title}, live demo`}
               className="demo-iframe border-none"
               loading="lazy"
               allow="clipboard-write; encrypted-media; fullscreen"

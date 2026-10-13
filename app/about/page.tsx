@@ -54,7 +54,7 @@ export default function AboutPage() {
 
       {/* How I work */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)]">
-        <div className="mb-6 font-mono text-label text-muted">§ 01 — how i work</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 01 · how i work</div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-x-10 gap-y-8">
           {PRINCIPLES.map((pr, i) => (
             <Reveal key={pr.title} delay={i * 0.06}>
@@ -79,7 +79,7 @@ export default function AboutPage() {
 
       {/* Education */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)]">
-        <div className="mb-6 font-mono text-label text-muted">§ 04 — education</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 04 · education</div>
         <div className="flex flex-col">
           {[...education].reverse().map((e, i) => (
             <Reveal key={e.institution} delay={i * 0.06}>
@@ -103,7 +103,7 @@ export default function AboutPage() {
 
       {/* Extracurricular */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)]">
-        <div className="mb-6 font-mono text-label text-muted">§ 05 — extracurricular</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 05 · extracurricular</div>
         <div className="flex flex-col">
           {EXTRA.map((e, i) => (
             <Reveal key={e.org} delay={i * 0.05}>
@@ -127,7 +127,7 @@ export default function AboutPage() {
 
       {/* Certificates */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)] pb-16">
-        <div className="mb-6 font-mono text-label text-muted">§ 06 — certificates</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 06 · certificates</div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] border-l border-t border-ink">
           {cers.map((c, i) => (
             // The reveal wraps the card so its own hover transition stays its own.

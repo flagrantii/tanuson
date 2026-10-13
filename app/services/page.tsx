@@ -8,7 +8,7 @@ import SplitText from '@/components/motion/SplitText'
 const SERVICES = [
   {
     title: 'Platform & Observability',
-    desc: 'Telemetry your team will actually open — traces, logs and dashboards that answer the question someone is asking at 2am.',
+    desc: 'Telemetry your team will actually open: traces, logs and dashboards that answer the question someone is asking at 2am.',
   },
   {
     title: 'Backend & Scale',
@@ -20,7 +20,7 @@ const SERVICES = [
   },
   {
     title: 'AI Integration',
-    desc: 'RAG systems, agentic workflows and LLM features wired into real products — with retrieval you can debug and citations you can trust.',
+    desc: 'RAG systems, agentic workflows and LLM features wired into real products, with retrieval you can debug and citations you can trust.',
   },
   {
     title: 'DevOps & Delivery',
@@ -28,7 +28,7 @@ const SERVICES = [
   },
   {
     title: 'Technical Leadership',
-    desc: 'Architecture reviews, standards and mentoring for small teams — the part that decides whether the codebase survives next year.',
+    desc: 'Architecture reviews, standards and mentoring for small teams. That is the part that decides whether the codebase survives next year.',
   },
 ]
 
@@ -41,7 +41,7 @@ export default function ServicesPage() {
         </h1>
         <Reveal delay={0.18}>
           <p className="m-0 font-body text-[clamp(17px,1.6vw,20px)] font-light leading-[1.4] text-copy">
-            Available for selected freelance and consulting work through Mee Palang Mai — from
+            Available for selected freelance and consulting work through Mee Palang Mai, from
             a single service to an entire platform.
           </p>
         </Reveal>
@@ -70,7 +70,7 @@ export default function ServicesPage() {
       {/* The real AI quote estimator lives here. */}
       <section id="ai-estimator" className="gutter border-t border-hair py-[clamp(36px,5vw,64px)]">
         <div className="mb-8">
-          <div className="mb-2 font-mono text-label text-muted">§ 02 — estimate</div>
+          <div className="mb-2 font-mono text-label text-muted">§ 02 · estimate</div>
           <h2 className="m-0 font-display text-[clamp(32px,4.2vw,56px)] leading-[.98] tracking-tightest">
             Scope it in a minute<span className="text-accent">.</span>
           </h2>

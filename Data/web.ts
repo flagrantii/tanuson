@@ -84,7 +84,7 @@ export const webItems: WebItem[] = [
     stack: ['React Native', 'TypeScript', 'Firebase'],
     about:
       'One place for students to discover, register for and check into events across the Chulalongkorn campus.',
-    role: 'Owned the mobile frontend — discovery, registration and check-in screens.',
+    role: 'Owned the mobile frontend: discovery, registration and check-in screens.',
     cover: '/background/event.png',
     images: [
       '/projects/event/event-1.png',
@@ -141,7 +141,7 @@ export const webItems: WebItem[] = [
     tags: ['Backend', 'DevOps'],
     stack: ['Golang', 'Fiber', 'Redis', 'Docker'],
     about:
-      'An API server built to study Go concurrency patterns under load — worker pools, bounded channels, graceful shutdown.',
+      'An API server built to study Go concurrency patterns under load: worker pools, bounded channels, graceful shutdown.',
     role: 'Designed, benchmarked and deployed the service.',
     cover: '/background/golang.png',
     images: [],
@@ -193,7 +193,7 @@ export const webItems: WebItem[] = [
     tags: ['AI', 'Frontend', 'Fullstack'],
     stack: ['RAG', 'Qdrant', 'Python', 'Vercel', 'OpenAI API', 'Scopus API', 'Vertex AI'],
     about:
-      'Discover research papers through conversation — a RAG system over Scopus that answers like a colleague and cites like a librarian.',
+      'Discover research papers through conversation: a RAG system over Scopus that answers like a colleague and cites like a librarian.',
     role:
       'Designed the interface and built the retrieval pipeline: chunked abstracts embedded into Qdrant, re-ranked with Vertex AI, streamed answers with inline citations.',
     cover: '/background/nodi.png',
@@ -221,7 +221,7 @@ export const webItems: WebItem[] = [
     tags: ['Frontend'],
     stack: ['Next.js', 'Tailwind CSS', 'Vercel'],
     about:
-      'A brand site for a premium Thai rice label — product story, origin and where to buy.',
+      'A brand site for a premium Thai rice label: product story, origin and where to buy.',
     role: 'Designed and built the static site.',
     cover: '/background/rice.png',
     images: ['/projects/rice/rice-1.png', '/projects/rice/rice-2.png'],
@@ -343,7 +343,7 @@ export const webItems: WebItem[] = [
     tags: ['Fullstack', 'DevOps', 'Integration'],
     stack: ['Next.js', 'Golang', 'LINE LIFF', 'PostgreSQL'],
     about:
-      'Registration, QR check-in and live schedule updates for the university open house — 120,000 registered, 12,000 concurrent on the day.',
+      'Registration, QR check-in and live schedule updates for the university open house: 120,000 registered, 12,000 concurrent on the day.',
     role: 'Architected the Go backend for the traffic peak and built the LINE LIFF frontend.',
     cover: '',
     images: [],
@@ -362,7 +362,7 @@ export const webItems: WebItem[] = [
     tags: ['Fullstack', 'DevOps', 'Integration'],
     stack: ['Golang', 'AWS S3', 'PostgreSQL'],
     about:
-      'Ticket registration and announcements for the Thammasat—Chula football match, with 3,000 students registering at the same moment.',
+      'Ticket registration and announcements for the Thammasat vs Chula football match, with 3,000 students registering at the same moment.',
     role: 'Backend in Go with S3-backed assets; capacity planning for the registration window.',
     cover: '',
     images: [],

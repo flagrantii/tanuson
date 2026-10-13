@@ -95,7 +95,7 @@ export default function ResumePage() {
             Tanuson Deachaboonchana
           </h1>
           <p className="resume-tagline m-0 mt-3.5 font-body text-[17px] font-light leading-[1.45] text-copy">
-            Software engineer — platform, backend, and the interfaces on top.{' '}
+            Software engineer: platform, backend, and the interfaces on top.{' '}
             {CONTACT.location}.
           </p>
         </div>

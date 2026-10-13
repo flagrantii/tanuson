@@ -170,7 +170,7 @@ export default async function BlogPage() {
           <div className="hatch flex min-h-[220px] items-center justify-center border border-ink p-8 text-center font-mono text-label leading-[1.8] text-muted">
             {!MEDIUM_FEED
               ? '[ no feed configured · set NEXT_PUBLIC_MEDIUM_RSS ]'
-              : `[ ${errorMsg ?? 'the feed returned nothing — check back shortly'} ]`}
+              : `[ ${errorMsg ?? 'the feed returned nothing · check back shortly'} ]`}
           </div>
         </div>
       ) : (

@@ -53,8 +53,8 @@ export default function ContactPage() {
         </h1>
         <Reveal delay={0.18}>
           <p className="m-0 font-body text-[clamp(17px,1.6vw,20px)] font-light leading-[1.4] text-copy">
-            Freelance work, platform problems, or just a good argument about observability —
-            all welcome. I read everything.
+            Freelance work, platform problems, or just a good argument about observability.
+            All welcome, and I read everything.
           </p>
         </Reveal>
       </div>
@@ -113,7 +113,7 @@ export default function ContactPage() {
               <p className="mt-4 max-w-md font-mono text-label leading-[1.6] text-muted">
                 {formEndpoint
                   ? 'Something went wrong. Try again, or email me directly below.'
-                  : `The form isn't wired up yet — email me directly at ${CONTACT.email}.`}
+                  : `The form isn't wired up yet. Email me directly at ${CONTACT.email}.`}
               </p>
             )}
           </form>

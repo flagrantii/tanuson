@@ -22,7 +22,7 @@ export default function ProjectMeta({
 }: ProjectMetaProps) {
   const links: React.ReactNode =
     !live && !repo ? (
-      <span className="text-muted">—</span>
+      <span className="text-muted">none</span>
     ) : (
       <>
         {live && (

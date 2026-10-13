@@ -35,7 +35,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Tanuson Deachaboonchana',
   description:
-    'Software engineer — platform, backend, and the interfaces on top. Bangkok.',
+    'Software engineer: platform, backend, and the interfaces on top. Bangkok.',
 }
 
 /*
