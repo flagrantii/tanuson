@@ -37,6 +37,9 @@ ul { margin: 0; }
   --copy: #3d3930;
   --hair: rgba(0, 0, 0, .14);
   --gutter: clamp(20px, 4vw, 48px);
+  /* Motion: one settle curve for everything, a steeper one for line reveals. */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-line: cubic-bezier(.16, 1, .3, 1);
 }
 
 /* Editorial primitives -------------------------------------------------- */
@@ -63,9 +66,10 @@ ul { margin: 0; }
 
 ::selection { background: var(--rust); color: var(--cream); }
 
-/* Route entrance — see components/PageTransition.tsx */
+/* Route entrance (see components/PageTransition.tsx). A keyframe with `both`
+   fill always completes, so it can't strand a page invisible. */
 .page-enter {
-  animation: pageEnter 320ms cubic-bezier(.22, 1, .36, 1) both;
+  animation: pageEnter 320ms var(--ease) both;
 }
 
 @keyframes pageEnter {
@@ -73,24 +77,75 @@ ul { margin: 0; }
   to   { opacity: 1; transform: none; }
 }
 
-/* Subtle initial fade-in */
-body {
+/* Reveals ----------------------------------------------------------------
+ * Content is hidden only under `html.js`, which the head script in
+ * app/layout.tsx sets before first paint (and drops again after 4s if the
+ * reveal code never starts). components/motion/useReveal.ts adds `.is-in`.
+ * Without JavaScript none of these rules match and the page is complete.
+ * Timing comes from inline custom properties: --d delay, --dur duration.
+ */
+
+/* Reveal: fade up (or along --rx/--ry), optionally out of a slight blur. */
+[data-reveal] {
+  transition:
+    opacity var(--dur, .55s) var(--ease) var(--d, 0s),
+    transform var(--dur, .55s) var(--ease) var(--d, 0s),
+    filter var(--dur, .55s) var(--ease) var(--d, 0s);
+}
+.js [data-reveal]:not(.is-in) {
   opacity: 0;
-  animation: bodyFadeIn 300ms ease-out forwards;
+  transform: translate3d(var(--rx, 0px), var(--ry, 14px), 0);
+}
+.js [data-reveal][data-blur]:not(.is-in) { filter: blur(6px); }
+
+/* A cover plate settles from a slight zoom as its reveal lands. */
+[data-reveal] .reveal-zoom { transition: transform 1.4s var(--ease); }
+.js [data-reveal]:not(.is-in) .reveal-zoom { transform: scale(1.06); }
+
+/* LineReveal: the line rises out of its own baseline mask. */
+[data-reveal-line] { overflow: hidden; padding-bottom: .06em; }
+[data-reveal-line] > span {
+  transition: transform var(--dur, .95s) var(--ease-line) var(--d, 0s);
+}
+.js [data-reveal-line]:not(.is-in) > span { transform: translateY(110%); }
+
+/* SplitText: each word rises and untilts, staggered by its --i. */
+[data-split] { perspective: 600px; }
+[data-split] .w {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition:
+    opacity .7s var(--ease) calc(var(--d, .05s) + var(--i, 0) * var(--st, .045s)),
+    transform .7s var(--ease) calc(var(--d, .05s) + var(--i, 0) * var(--st, .045s));
+}
+.js [data-split]:not(.is-in) .w {
+  opacity: 0;
+  transform: translateY(.45em) rotateX(-35deg);
 }
 
-@keyframes bodyFadeIn {
-  to { opacity: 1; }
-}
+/* The projects counter blinks up from faint when the filter changes. CSS with
+   `both` fill, so the server-rendered count is never left faint. */
+.count-flash { animation: countFlash .3s var(--ease) both; }
+@keyframes countFlash { from { opacity: .35; } to { opacity: 1; } }
+
+/* HairlineRule: the rule draws itself left to right. */
+[data-rule] { transition: transform .9s var(--ease) var(--d, 0s); }
+.js [data-rule]:not(.is-in) { transform: scaleX(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  body { animation: none; opacity: 1; }
   html, body { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: .001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
+  /* Nothing waits on a reveal: content is in place from the first frame. */
+  .js [data-reveal]:not(.is-in),
+  .js [data-reveal]:not(.is-in) .reveal-zoom,
+  .js [data-reveal-line]:not(.is-in) > span,
+  .js [data-split]:not(.is-in) .w,
+  .js [data-rule]:not(.is-in) { opacity: 1; transform: none; filter: none; }
+  [data-reveal-line] { overflow: visible; padding-bottom: 0; }
 }
 
 /* Print ----------------------------------------------------------------- */

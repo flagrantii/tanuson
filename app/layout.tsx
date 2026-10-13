@@ -38,13 +38,30 @@ export const metadata: Metadata = {
     'Software engineer — platform, backend, and the interfaces on top. Bangkok.',
 }
 
+/*
+ * Runs before first paint. `js` lets the reveal CSS hide content that is about
+ * to animate in; if the reveal code hasn't started within 4s (bundle failed or
+ * very slow), `js` is dropped again so every word still shows.
+ */
+const JS_GATE =
+  "var d=document.documentElement;d.classList.add('js');" +
+  "setTimeout(function(){if(!d.classList.contains('reveal-ready'))d.classList.remove('js')},4000);"
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    // The head script changes <html>'s classes before React hydrates it.
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: JS_GATE }} />
+      </head>
       <body className="bg-cream text-ink antialiased">
         {/* One shared WebGL canvas behind the page; figure slots draw into it. */}
         <StageMount />

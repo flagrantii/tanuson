@@ -25,7 +25,8 @@ export default function Home() {
         <div className="relative grid items-center gap-x-[clamp(24px,4vw,72px)] gap-y-[clamp(16px,3vw,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(300px,38%)]">
           <div>
             <h1 className="m-0 font-display text-[clamp(52px,8.6vw,124px)] leading-[.92] tracking-headline">
-              <LineReveal>{HERO.line1}</LineReveal>
+              {/* The space keeps the text "intelligence that", not "intelligencethat". */}
+              <LineReveal>{HERO.line1}</LineReveal>{' '}
               <LineReveal delay={0.09}>
                 <em className="italic text-rust">{HERO.line2}</em>
               </LineReveal>

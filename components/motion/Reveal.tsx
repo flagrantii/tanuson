@@ -1,7 +1,7 @@
 "use client"
 
-import { ReactNode } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import type { CSSProperties, ReactNode } from 'react'
+import { useReveal } from './useReveal'
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none'
 
@@ -19,21 +19,26 @@ type RevealProps = {
   as?: 'div' | 'section' | 'article' | 'li' | 'span'
 }
 
-const offset = (direction: Direction, distance: number) => {
+const offset = (direction: Direction, distance: number): [number, number] => {
   switch (direction) {
     case 'up':
-      return { y: distance }
+      return [0, distance]
     case 'down':
-      return { y: -distance }
+      return [0, -distance]
     case 'left':
-      return { x: distance }
+      return [distance, 0]
     case 'right':
-      return { x: -distance }
+      return [-distance, 0]
     default:
-      return {}
+      return [0, 0]
   }
 }
 
+/**
+ * Fades its content up into place when scrolled into view. The motion is CSS
+ * (`[data-reveal]` in app/globals.css); this only marks the element `is-in`.
+ * Without JavaScript nothing is hidden in the first place.
+ */
 export default function Reveal({
   children,
   delay = 0,
@@ -41,26 +46,28 @@ export default function Reveal({
   direction = 'up',
   distance = 14,
   blur = false,
-  className,
-  as = 'div',
+  className = '',
+  as: Tag = 'div',
 }: RevealProps) {
-  const reduced = useReducedMotion()
-  const MotionTag = motion[as]
-
-  if (reduced) {
-    const Tag = as
-    return <Tag className={className}>{children}</Tag>
-  }
+  const [ref, shown] = useReveal<HTMLElement>()
+  const [x, y] = offset(direction, distance)
+  const style = {
+    '--d': `${delay}s`,
+    '--dur': `${duration}s`,
+    '--rx': `${x}px`,
+    '--ry': `${y}px`,
+  } as CSSProperties
 
   return (
-    <MotionTag
-      className={className}
-      initial={{ opacity: 0, ...offset(direction, distance), ...(blur ? { filter: 'blur(6px)' } : {}) }}
-      whileInView={{ opacity: 1, x: 0, y: 0, ...(blur ? { filter: 'blur(0px)' } : {}) }}
-      viewport={{ once: true, margin: '-8%' }}
-      transition={{ duration, ease: [0.22, 1, 0.36, 1], delay }}
+    <Tag
+      // The intrinsic tags can't share one ref type; all of them are HTMLElements.
+      ref={ref as never}
+      data-reveal=""
+      data-blur={blur ? '' : undefined}
+      className={`${className}${shown ? ' is-in' : ''}`}
+      style={style}
     >
       {children}
-    </MotionTag>
+    </Tag>
   )
 }

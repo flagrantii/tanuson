@@ -130,14 +130,9 @@ export default function AboutPage() {
         <div className="mb-6 font-mono text-[12px] text-muted">§ 06 — certificates</div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] border-l border-t border-ink">
           {cers.map((c, i) => (
-            <motion.article
-              key={c.id}
-              initial={reduced ? undefined : { opacity: 0 }}
-              whileInView={reduced ? undefined : { opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="flex flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-white"
-            >
+            // The reveal wraps the card so its own hover transition stays its own.
+            <Reveal key={c.id} direction="none" duration={0.5} delay={i * 0.07}>
+            <article className="flex h-full flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-white">
               <div>
                 <div className="mb-4 flex justify-between gap-2 font-mono text-[11px] text-muted">
                   <span>
@@ -188,7 +183,8 @@ export default function AboutPage() {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </article>
+            </Reveal>
           ))}
         </div>
 

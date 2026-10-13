@@ -1,6 +1,7 @@
 "use client"
 
-import { motion, useReducedMotion } from 'framer-motion'
+import type { CSSProperties } from 'react'
+import { useReveal } from './useReveal'
 
 type HairlineRuleProps = {
   className?: string
@@ -15,19 +16,21 @@ const TONE = {
   rust: 'var(--rust)',
 }
 
-/** A 1px rule that draws itself left-to-right when scrolled into view. */
+/**
+ * A 1px rule that draws itself left-to-right when scrolled into view. The draw
+ * is CSS (`[data-rule]` in app/globals.css); without JavaScript the rule is
+ * simply there.
+ */
 export default function HairlineRule({ className = '', delay = 0, tone = 'hair' }: HairlineRuleProps) {
-  const reduced = useReducedMotion()
+  const [ref, shown] = useReveal<HTMLDivElement>()
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       aria-hidden
-      className={`h-px w-full origin-left ${className}`}
-      style={{ background: TONE[tone] }}
-      initial={reduced ? undefined : { scaleX: 0 }}
-      whileInView={reduced ? undefined : { scaleX: 1 }}
-      viewport={{ once: true, margin: '-4%' }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }}
+      data-rule=""
+      className={`h-px w-full origin-left ${className}${shown ? ' is-in' : ''}`}
+      style={{ background: TONE[tone], '--d': `${delay}s` } as CSSProperties}
     />
   )
 }

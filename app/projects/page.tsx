@@ -58,9 +58,10 @@ export default function ProjectsPage() {
       </div>
 
       <div className="gutter pb-2 font-mono text-[11px] text-muted">
-        <motion.span key={list.length} initial={{ opacity: 0.35 }} animate={{ opacity: 1 }}>
+        {/* Keyed so the count blinks up from faint each time the filter changes. */}
+        <span key={list.length} className="count-flash">
           {list.length} / {webs.length} shown
-        </motion.span>
+        </span>
       </div>
 
       <motion.div

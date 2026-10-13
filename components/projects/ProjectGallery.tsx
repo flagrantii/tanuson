@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import Reveal from '@/components/motion/Reveal'
 
 type ProjectGalleryProps = {
   images?: string[]
@@ -42,25 +43,22 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
       <div className="mb-2.5 font-mono text-[11px] text-rust">plates</div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] border-l border-t border-ink">
         {images.map((src, i) => (
-          <motion.button
-            key={src}
-            type="button"
-            onClick={() => setIndex(i)}
-            initial={reduced ? undefined : { opacity: 0 }}
-            whileInView={reduced ? undefined : { opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.05 }}
-            className="group relative block cursor-pointer overflow-hidden border-b border-r border-ink bg-transparent p-0"
-          >
-            <img
-              src={src}
-              alt={`${title} — plate ${i + 1}`}
-              className="block h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-            />
-            <span className="absolute left-2 top-2 bg-cream px-1.5 py-0.5 font-mono text-[10px] text-muted">
-              pl. {String(i + 1).padStart(2, '0')}
-            </span>
-          </motion.button>
+          <Reveal key={src} direction="none" duration={0.5} delay={i * 0.05}>
+            <button
+              type="button"
+              onClick={() => setIndex(i)}
+              className="group relative block w-full cursor-pointer overflow-hidden border-b border-r border-ink bg-transparent p-0"
+            >
+              <img
+                src={src}
+                alt={`${title}, plate ${i + 1}`}
+                className="block h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+              />
+              <span className="absolute left-2 top-2 bg-cream px-1.5 py-0.5 font-mono text-[10px] text-muted">
+                pl. {String(i + 1).padStart(2, '0')}
+              </span>
+            </button>
+          </Reveal>
         ))}
       </div>
 
@@ -80,7 +78,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
             <motion.img
               key={images[index]}
               src={images[index]}
-              alt={`${title} — plate ${index + 1}`}
+              alt={`${title}, plate ${index + 1}`}
               initial={reduced ? undefined : { scale: 0.96, opacity: 0 }}
               animate={reduced ? undefined : { scale: 1, opacity: 1 }}
               exit={reduced ? undefined : { scale: 0.96, opacity: 0 }}

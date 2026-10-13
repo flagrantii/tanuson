@@ -1,7 +1,7 @@
 "use client"
 
-import { ReactNode, useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import type { CSSProperties, ReactNode } from 'react'
+import { useReveal } from './useReveal'
 
 type LineRevealProps = {
   children: ReactNode
@@ -11,17 +11,18 @@ type LineRevealProps = {
 }
 
 /**
- * Slides a line up from behind its own baseline — the typographic reveal, where
+ * Slides a line up from behind its own baseline: the typographic reveal, where
  * the text appears to rise out of the page rather than fade onto it. Needs one
  * wrapper per visual line, since the mask clips at the element's box.
  *
  * The viewport is watched on the *wrapper*, never on the sliding span. The span
  * starts translated fully below the mask, where `overflow: hidden` clips it out
- * of view — an IntersectionObserver on the span itself would therefore report it
- * as off-screen and the reveal would never fire, leaving the line permanently
- * hidden. That deadlock only showed up on remount (navigating back to a page),
- * because on first paint the observer sometimes sampled before the initial
- * transform was applied.
+ * of view, so an observer on the span itself would report it as off-screen and
+ * the reveal would never fire.
+ *
+ * The mask and the slide are CSS (`[data-reveal-line]` in app/globals.css) and
+ * only apply once JavaScript has marked the page, so without it the line is
+ * simply there.
  */
 export default function LineReveal({
   children,
@@ -29,26 +30,16 @@ export default function LineReveal({
   duration = 0.95,
   className = '',
 }: LineRevealProps) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-6%' })
-  const reduced = useReducedMotion()
-
-  if (reduced) return <span className={`block ${className}`}>{children}</span>
+  const [ref, shown] = useReveal<HTMLSpanElement>()
 
   return (
     <span
       ref={ref}
-      className={`block overflow-hidden ${className}`}
-      style={{ paddingBottom: '0.06em' }}
+      data-reveal-line=""
+      className={`block ${className}${shown ? ' is-in' : ''}`}
+      style={{ '--d': `${delay}s`, '--dur': `${duration}s` } as CSSProperties}
     >
-      <motion.span
-        className="block"
-        initial={{ y: '110%' }}
-        animate={inView ? { y: '0%' } : { y: '110%' }}
-        transition={{ duration, ease: [0.16, 1, 0.3, 1], delay }}
-      >
-        {children}
-      </motion.span>
+      <span className="block">{children}</span>
     </span>
   )
 }
