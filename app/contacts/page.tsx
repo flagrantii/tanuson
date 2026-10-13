@@ -10,7 +10,7 @@ const formEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || ''
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 const field =
-  'mt-1.5 w-full border border-ink bg-transparent px-3 py-2.5 font-body text-[16px] outline-none transition-shadow placeholder:text-muted/60 focus:shadow-[inset_0_-2px_0_0_var(--accent)]'
+  'mt-1.5 w-full border border-ink bg-transparent px-3 py-2.5 font-body text-[16px] transition-shadow placeholder:text-muted/60 focus:shadow-[inset_0_-2px_0_0_var(--accent)]'
 
 export default function ContactPage() {
   const [status, setStatus] = useState<Status>('idle')

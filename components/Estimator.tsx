@@ -154,7 +154,7 @@ export default function Estimator() {
       {mode === 'freeform' && (
         <div className="mt-6">
           <label className="block text-[15px] font-medium">Describe your project</label>
-          <textarea value={description} onChange={e=>setDescription(e.target.value)} rows={5} className="mt-1 w-full rounded border p-2 text-[15px] focus:outline-none focus:ring-2 focus:ring-black" placeholder="e.g. A 5 page marketing site with blog, contact form, and basic analytics." />
+          <textarea value={description} onChange={e=>setDescription(e.target.value)} rows={5} className="mt-1 w-full rounded border p-2 text-[15px]" placeholder="e.g. A 5 page marketing site with blog, contact form, and basic analytics." />
           <p className={tooltipClass}>Mention pages/screens, key features, auth, admin needs, timeline.</p>
         </div>
       )}
