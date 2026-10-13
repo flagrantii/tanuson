@@ -40,7 +40,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
 
   return (
     <section data-noprint className="mx-[var(--gutter)] mb-14">
-      <div className="mb-2.5 font-mono text-[11px] text-rust">plates</div>
+      <div className="mb-2.5 font-mono text-label text-rust">plates</div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] border-l border-t border-ink">
         {images.map((src, i) => (
           <Reveal key={src} direction="none" duration={0.5} delay={i * 0.05}>
@@ -54,7 +54,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
                 alt={`${title}, plate ${i + 1}`}
                 className="block h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
               />
-              <span className="absolute left-2 top-2 bg-cream px-1.5 py-0.5 font-mono text-[10px] text-muted">
+              <span className="absolute left-2 top-2 bg-cream px-1.5 py-0.5 font-mono text-label text-muted">
                 pl. {String(i + 1).padStart(2, '0')}
               </span>
             </button>
@@ -87,7 +87,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
               className="max-h-[78vh] max-w-[92vw] border border-cream/25 object-contain"
             />
             <div
-              className="flex items-center gap-6 font-mono text-[12px] text-cream"
+              className="flex items-center gap-6 font-mono text-label text-cream"
               onClick={(e) => e.stopPropagation()}
             >
               <button type="button" onClick={() => step(-1)} className="text-cream hover:text-rust">

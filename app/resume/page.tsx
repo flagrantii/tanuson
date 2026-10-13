@@ -35,7 +35,7 @@ function Row({
     <div
       className={`resume-row print-avoid-break grid grid-cols-1 gap-5 border-t border-hair py-[18px] sm:grid-cols-[minmax(120px,150px)_1fr] ${className}`}
     >
-      <div className="resume-meta font-mono text-[12px] leading-[1.6] text-muted">{meta}</div>
+      <div className="resume-meta font-mono text-label leading-[1.6] text-muted">{meta}</div>
       <div className="resume-body">{children}</div>
     </div>
   )
@@ -47,7 +47,7 @@ function Row({
  */
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
-    <div className="resume-section-label mb-2.5 font-mono text-[11px] text-rust">
+    <div className="resume-section-label mb-2.5 font-mono text-label text-rust">
       <span className="resume-section-num">{n} </span>
       <span className="resume-section-text">{children}</span>
     </div>
@@ -101,7 +101,7 @@ export default function ResumePage() {
         </div>
 
         {show('contact') && (
-        <div className="resume-contact flex flex-col border-t border-hair pt-3.5 font-mono text-[12px] leading-[1.9] text-copy">
+        <div className="resume-contact flex flex-col border-t border-hair pt-3.5 font-mono text-label leading-[1.65] text-copy">
           <a href={CONTACT.phoneHref} className="no-underline hover:text-rust">
             {CONTACT.phone}
           </a>
@@ -122,7 +122,7 @@ export default function ResumePage() {
 
         {/* Export controls — never printed */}
         <div data-noprint className="border-t border-hair pt-3.5">
-          <div className="mb-2.5 font-mono text-[11px] text-muted">version</div>
+          <div className="mb-2.5 font-mono text-label text-muted">version</div>
           <div className="flex flex-col gap-1.5">
             {RESUME_MODES.map((m) => {
               const on = mode === m
@@ -132,7 +132,7 @@ export default function ResumePage() {
                   type="button"
                   onClick={() => pickMode(m)}
                   aria-pressed={on}
-                  className={`flex cursor-pointer items-center justify-between border border-ink px-3 py-2.5 text-left font-mono text-[12px] transition-colors duration-300 ${
+                  className={`flex cursor-pointer items-center justify-between border border-ink px-3 py-2.5 text-left font-mono text-label transition-colors duration-300 ${
                     on ? 'bg-ink text-cream' : 'bg-transparent text-ink hover:bg-ink/5'
                   }`}
                 >
@@ -143,7 +143,7 @@ export default function ResumePage() {
             })}
           </div>
 
-          <div className="mb-2 mt-[18px] font-mono text-[11px] text-muted">include in export</div>
+          <div className="mb-2 mt-[18px] font-mono text-label text-muted">include in export</div>
           <div className="flex flex-col">
             {SECTION_KEYS.map((k) => {
               const on = show(k)
@@ -154,7 +154,7 @@ export default function ResumePage() {
                   onClick={() => toggle(k)}
                   role="checkbox"
                   aria-checked={on}
-                  className={`flex cursor-pointer items-center gap-2.5 border-0 bg-transparent py-[7px] text-left font-mono text-[12px] transition-colors ${
+                  className={`flex cursor-pointer items-center gap-2.5 border-0 bg-transparent py-[7px] text-left font-mono text-label transition-colors ${
                     on ? 'text-ink' : 'text-muted'
                   }`}
                 >
@@ -170,7 +170,7 @@ export default function ResumePage() {
             })}
           </div>
 
-          <div className="mb-3.5 mt-2.5 font-mono text-[11px] text-muted">
+          <div className="mb-3.5 mt-2.5 font-mono text-label text-muted">
             {sections.size} / 7 sections included
           </div>
 
@@ -179,7 +179,7 @@ export default function ResumePage() {
             onClick={() => window.print()}
             whileHover={{ y: -1 }}
             whileTap={{ y: 0 }}
-            className="w-full cursor-pointer border-0 bg-ink px-4 py-3.5 font-mono text-[12px] font-medium text-cream"
+            className="w-full cursor-pointer border-0 bg-ink px-4 py-3.5 font-mono text-label font-medium text-cream"
           >
             Export selected as PDF →
           </motion.button>
@@ -188,7 +188,7 @@ export default function ResumePage() {
             href="/resume/Tanuson-Deachaboonchana_Resume_Mar2025.pdf"
             target="_blank"
             rel="noopener"
-            className="mt-3 block text-center font-mono text-[11px] text-muted no-underline hover:text-rust"
+            className="mt-3 block text-center font-mono text-label text-muted no-underline hover:text-rust"
           >
             or download the Mar 2025 PDF ↗
           </a>
@@ -296,7 +296,7 @@ export default function ResumePage() {
                   <Link href={p.href} className="text-inherit no-underline">
                     <div className="resume-proj-title font-display text-[clamp(20px,1.8vw,22px)] hover:text-rust">
                       {p.title}{' '}
-                      <span className="resume-proj-stack font-mono text-[11px] text-muted">
+                      <span className="resume-proj-stack font-mono text-label text-muted">
                         {p.stackLine}
                       </span>
                     </div>

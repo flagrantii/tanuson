@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer
       data-noprint
-      className="gutter mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-hair py-[18px] font-mono text-[11px] text-muted"
+      className="gutter mt-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-hair py-[18px] font-mono text-label text-muted"
     >
       <span>© {new Date().getFullYear()} Tanuson Deachaboonchana. All rights reserved.</span>
       <div className="flex flex-wrap gap-4">

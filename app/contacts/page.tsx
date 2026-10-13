@@ -62,11 +62,11 @@ export default function ContactPage() {
       <div className="gutter grid grid-cols-1 gap-x-14 gap-y-12 border-t border-hair py-[clamp(32px,4vw,48px)] pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(240px,320px)]">
         {/* Form */}
         <Reveal>
-          <div className="mb-6 font-mono text-[11px] text-rust">send a message</div>
+          <div className="mb-6 font-mono text-label text-rust">send a message</div>
           <form onSubmit={onSubmit} className="max-w-xl">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <label className="block">
-                <span className="font-mono text-[11px] text-muted">name</span>
+                <span className="font-mono text-label text-muted">name</span>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 />
               </label>
               <label className="block">
-                <span className="font-mono text-[11px] text-muted">email</span>
+                <span className="font-mono text-label text-muted">email</span>
                 <input
                   type="email"
                   value={email}
@@ -86,7 +86,7 @@ export default function ContactPage() {
               </label>
             </div>
             <label className="mt-5 block">
-              <span className="font-mono text-[11px] text-muted">message</span>
+              <span className="font-mono text-label text-muted">message</span>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -99,18 +99,18 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="mt-6 w-full cursor-pointer border-0 bg-ink px-4 py-3.5 font-mono text-[12px] font-medium text-cream transition-opacity disabled:opacity-60 sm:w-auto sm:px-8"
+              className="mt-6 w-full cursor-pointer border-0 bg-ink px-4 py-3.5 font-mono text-label font-medium text-cream transition-opacity disabled:opacity-60 sm:w-auto sm:px-8"
             >
               {status === 'loading' ? 'sending…' : 'Send message →'}
             </button>
 
             {status === 'success' && (
-              <p className="mt-4 font-mono text-[12px] text-rust">
+              <p className="mt-4 font-mono text-label text-rust">
                 Sent. I&apos;ll come back to you shortly.
               </p>
             )}
             {status === 'error' && (
-              <p className="mt-4 max-w-md font-mono text-[12px] leading-[1.6] text-muted">
+              <p className="mt-4 max-w-md font-mono text-label leading-[1.6] text-muted">
                 {formEndpoint
                   ? 'Something went wrong. Try again, or email me directly below.'
                   : `The form isn't wired up yet — email me directly at ${CONTACT.email}.`}
@@ -121,7 +121,7 @@ export default function ContactPage() {
 
         {/* Direct */}
         <Reveal delay={0.1}>
-          <div className="mb-6 font-mono text-[11px] text-rust">or reach me directly</div>
+          <div className="mb-6 font-mono text-label text-rust">or reach me directly</div>
           <div className="flex flex-col">
             {[
               { k: 'email', v: CONTACT.email, href: `mailto:${CONTACT.email}` },
@@ -131,7 +131,7 @@ export default function ContactPage() {
               { k: 'based', v: `${CONTACT.location}, Thailand`, href: '' },
             ].map((r) => (
               <div key={r.k} className="border-t border-hair py-3">
-                <div className="font-mono text-[11px] text-muted">{r.k}</div>
+                <div className="font-mono text-label text-muted">{r.k}</div>
                 {r.href ? (
                   <a
                     href={r.href}

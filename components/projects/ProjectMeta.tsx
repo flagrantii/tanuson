@@ -50,7 +50,7 @@ export default function ProjectMeta({
   return (
     <div className="mx-[var(--gutter)] mt-10">
       <HairlineRule tone="ink" />
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] border-b border-ink font-mono text-[12px] leading-[1.7] text-copy">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] border-b border-ink font-mono text-label leading-[1.7] text-copy">
         {cells.map((c, i) => (
           <div key={c.k} className={i === cells.length - 1 ? 'py-3.5' : 'py-3.5 pr-4'}>
             <span className="text-muted">{c.k}</span>

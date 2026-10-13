@@ -54,11 +54,11 @@ export default function AboutPage() {
 
       {/* How I work */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)]">
-        <div className="mb-6 font-mono text-[12px] text-muted">§ 01 — how i work</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 01 — how i work</div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-x-10 gap-y-8">
           {PRINCIPLES.map((pr, i) => (
             <Reveal key={pr.title} delay={i * 0.06}>
-              <div className="mb-2 font-mono text-[11px] text-rust">
+              <div className="mb-2 font-mono text-label text-rust">
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div className="font-display text-[clamp(22px,2.1vw,26px)] leading-[1.15]">
@@ -79,13 +79,13 @@ export default function AboutPage() {
 
       {/* Education */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)]">
-        <div className="mb-6 font-mono text-[12px] text-muted">§ 04 — education</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 04 — education</div>
         <div className="flex flex-col">
           {[...education].reverse().map((e, i) => (
             <Reveal key={e.institution} delay={i * 0.06}>
               <HairlineRule delay={i * 0.06} />
               <div className="grid grid-cols-1 gap-5 py-[18px] sm:grid-cols-[minmax(120px,160px)_1fr]">
-                <div className="font-mono text-[12px] text-muted">{e.period}</div>
+                <div className="font-mono text-label text-muted">{e.period}</div>
                 <div>
                   <div className="font-display text-[clamp(20px,2vw,24px)]">{e.institution}</div>
                   <div className="font-body text-[16px] text-copy">{e.program}</div>
@@ -103,13 +103,13 @@ export default function AboutPage() {
 
       {/* Extracurricular */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)]">
-        <div className="mb-6 font-mono text-[12px] text-muted">§ 05 — extracurricular</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 05 — extracurricular</div>
         <div className="flex flex-col">
           {EXTRA.map((e, i) => (
             <Reveal key={e.org} delay={i * 0.05}>
               <HairlineRule delay={i * 0.05} />
               <div className="grid grid-cols-1 gap-5 py-[18px] sm:grid-cols-[minmax(120px,160px)_1fr]">
-                <div className="font-mono text-[12px] text-muted">{e.range}</div>
+                <div className="font-mono text-label text-muted">{e.range}</div>
                 <div>
                   <div className="font-display text-[clamp(20px,2vw,24px)]">{e.org}</div>
                   <div className="mb-1.5 font-body text-[16px] text-copy">{e.role}</div>
@@ -127,14 +127,14 @@ export default function AboutPage() {
 
       {/* Certificates */}
       <section className="gutter border-t border-hair py-[clamp(32px,4vw,48px)] pb-16">
-        <div className="mb-6 font-mono text-[12px] text-muted">§ 06 — certificates</div>
+        <div className="mb-6 font-mono text-label text-muted">§ 06 — certificates</div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] border-l border-t border-ink">
           {cers.map((c, i) => (
             // The reveal wraps the card so its own hover transition stays its own.
             <Reveal key={c.id} direction="none" duration={0.5} delay={i * 0.07}>
             <article className="flex h-full flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-white">
               <div>
-                <div className="mb-4 flex justify-between gap-2 font-mono text-[11px] text-muted">
+                <div className="mb-4 flex justify-between gap-2 font-mono text-label text-muted">
                   <span>
                     {c.category.title} · {c.category.org}
                   </span>
@@ -157,13 +157,13 @@ export default function AboutPage() {
                   {c.skills.slice(0, 6).map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-hair px-2 py-0.5 font-mono text-[10px] text-muted"
+                      className="rounded-full border border-hair px-2 py-0.5 font-mono text-label text-muted"
                     >
                       {s}
                     </span>
                   ))}
                 </div>
-                <div className="mt-4 flex gap-4 font-mono text-[11px]">
+                <div className="mt-4 flex gap-4 font-mono text-label">
                   <a
                     href={c.href}
                     target="_blank"
@@ -213,7 +213,7 @@ export default function AboutPage() {
               <button
                 type="button"
                 onClick={() => setCert(null)}
-                className="font-mono text-[12px] text-cream/70 hover:text-rust"
+                className="font-mono text-label text-cream/70 hover:text-rust"
               >
                 close
               </button>

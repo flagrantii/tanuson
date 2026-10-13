@@ -51,7 +51,7 @@ export default function ServicesPage() {
         {SERVICES.map((s, i) => (
           <Reveal key={s.title} delay={i * 0.06}>
             <div className="flex h-full min-h-[220px] flex-col justify-between border-b border-r border-ink p-[22px] transition-colors duration-300 hover:bg-white">
-              <div className="font-mono text-[11px] text-muted">
+              <div className="font-mono text-label text-muted">
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div>
@@ -70,7 +70,7 @@ export default function ServicesPage() {
       {/* The real AI quote estimator lives here. */}
       <section id="ai-estimator" className="gutter border-t border-hair py-[clamp(36px,5vw,64px)]">
         <div className="mb-8">
-          <div className="mb-2 font-mono text-[12px] text-muted">§ 02 — estimate</div>
+          <div className="mb-2 font-mono text-label text-muted">§ 02 — estimate</div>
           <h2 className="m-0 font-display text-[clamp(32px,4.2vw,56px)] leading-[.98] tracking-tightest">
             Scope it in a minute<span className="text-rust">.</span>
           </h2>
@@ -88,7 +88,7 @@ export default function ServicesPage() {
               </Link>
               .
             </p>
-            <div className="mt-6 flex flex-wrap gap-6 font-mono text-[12px]">
+            <div className="mt-6 flex flex-wrap gap-6 font-mono text-label">
               <Link href="/projects" className="underline underline-offset-[5px]">
                 see the work →
               </Link>

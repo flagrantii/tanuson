@@ -66,11 +66,11 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
             <Figure3D kind="helix" className="h-32 w-28 shrink-0 sm:h-44 sm:w-32" />
             <div>
-              <div className="mb-3.5 font-mono text-[12px] text-muted">§ 01 — practice</div>
+              <div className="mb-3.5 font-mono text-label text-muted">§ 01 — practice</div>
               <p className="m-0 font-body text-[clamp(18px,1.7vw,22px)] font-light leading-[1.4] [text-wrap:pretty]">
                 {PRACTICE}
               </p>
-              <div className="mt-7 flex flex-wrap gap-7 font-mono text-[13px] font-medium">
+              <div className="mt-7 flex flex-wrap gap-7 font-mono text-label font-normal">
                 <Magnetic>
                   <Link
                     href="/projects"
@@ -102,7 +102,7 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
             <Figure3D kind="lattice" className="h-32 w-28 shrink-0 sm:h-44 sm:w-32" />
             <div className="w-full flex-1">
-              <div className="mb-3.5 font-mono text-[12px] text-muted">§ 02 — now</div>
+              <div className="mb-3.5 font-mono text-label text-muted">§ 02 — now</div>
               <div className="flex flex-col gap-3.5">
                 {NOW.map((n, i) => (
                   <div key={n.org}>
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
             <Figure3D kind="orbit" className="h-24 w-24 shrink-0 sm:h-32 sm:w-32" />
             <div>
-              <div className="mb-2 font-mono text-[12px] text-muted">§ 03 — selected work</div>
+              <div className="mb-2 font-mono text-label text-muted">§ 03 — selected work</div>
               <h2 className="m-0 font-display text-[clamp(34px,4.6vw,64px)] leading-[.98] tracking-tightest">
                 Recent things<span className="text-rust">.</span>
               </h2>
@@ -134,7 +134,7 @@ export default function Home() {
           <Magnetic>
             <Link
               href="/projects"
-              className="group font-mono text-[13px] underline decoration-1 underline-offset-[5px]"
+              className="group font-mono text-label underline decoration-1 underline-offset-[5px]"
             >
               all fourteen{' '}
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
@@ -164,7 +164,7 @@ export default function Home() {
                     ) : (
                       <div className="hatch h-full w-full" />
                     )}
-                    <span className="absolute left-3 top-3 bg-cream px-2 py-1 font-mono text-[10px] text-muted">
+                    <span className="absolute left-3 top-3 bg-cream px-2 py-1 font-mono text-label text-muted">
                       {p.idx}
                     </span>
                   </div>
@@ -177,7 +177,7 @@ export default function Home() {
                         {p.description}
                       </p>
                     </div>
-                    <div className="flex justify-between gap-3 font-mono text-[11px] text-muted">
+                    <div className="flex justify-between gap-3 font-mono text-label text-muted">
                       <span>{p.tagline}</span>
                       <span className="whitespace-nowrap">{p.date}</span>
                     </div>
@@ -201,7 +201,7 @@ export default function Home() {
             </LineReveal>
           </p>
           <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-wrap gap-7 font-mono text-[13px]">
+            <div className="mt-8 flex flex-wrap gap-7 font-mono text-label">
               <Magnetic>
                 <Link href="/contacts" className="underline decoration-1 underline-offset-[5px]">
                   Get in touch →

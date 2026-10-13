@@ -118,7 +118,7 @@ export default function ExperienceSkills() {
       <div className="grid grid-cols-1 gap-x-14 gap-y-12 lg:grid-cols-[1fr_minmax(280px,380px)]">
         {/* Experience ledger */}
         <div>
-          <div className="mb-6 font-mono text-[12px] text-muted">§ 02 — experience</div>
+          <div className="mb-6 font-mono text-label text-muted">§ 02 — experience</div>
           <div className="flex flex-col">
             {timelineItems.map((j) => {
               const lit = active.includes(j.id)
@@ -130,7 +130,7 @@ export default function ExperienceSkills() {
                     lit ? 'border-rust' : 'border-hair'
                   }`}
                 >
-                  <div className="font-mono text-[12px] leading-[1.6] text-muted">
+                  <div className="font-mono text-label leading-[1.6] text-muted">
                     {j.period}
                     <br />
                     {j.type}
@@ -158,16 +158,16 @@ export default function ExperienceSkills() {
 
         {/* Skill map */}
         <div>
-          <div className="mb-6 font-mono text-[12px] text-muted">
+          <div className="mb-6 font-mono text-label text-muted">
             § 03 — skill map
             {isDesktop && !reduced && (
-              <span className="ml-2 text-muted/60">· hover to trace</span>
+              <span className="ml-2 text-muted">· hover to trace</span>
             )}
           </div>
           <div className="flex flex-col gap-6">
             {skillGroups.map((group) => (
               <div key={group.title}>
-                <div className="mb-2.5 font-mono text-[11px] text-rust">
+                <div className="mb-2.5 font-mono text-label text-rust">
                   {group.title.toLowerCase()}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
@@ -182,7 +182,7 @@ export default function ExperienceSkills() {
                         onMouseLeave={() => setHovered(null)}
                         whileHover={reduced ? undefined : { y: -2 }}
                         transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-                        className={`relative z-20 inline-flex select-none items-center rounded-full border px-[9px] py-[5px] font-mono text-[11px] transition-colors duration-300 ${
+                        className={`relative z-20 inline-flex select-none items-center rounded-full border px-[9px] py-[5px] font-mono text-label transition-colors duration-300 ${
                           on
                             ? 'border-rust bg-rust text-cream'
                             : linked && isDesktop

@@ -25,6 +25,13 @@ module.exports = {
       borderColor: {
         hair: "rgba(0,0,0,.14)",
       },
+      fontSize: {
+        // The text floor. Mono folio marks, meta rows, chips and small links all
+        // sit here: nothing on the site is set under 15px. They stay quiet through a
+        // light weight rather than a smaller size, and track a hair tight so meta
+        // rows that fitted at 11px still fit on one line.
+        label: ["15px", { lineHeight: "1.45", letterSpacing: "-.01em", fontWeight: "300" }],
+      },
       letterSpacing: {
         tightest: "-.04em",
         headline: "-.035em",

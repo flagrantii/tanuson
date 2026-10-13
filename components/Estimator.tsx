@@ -13,7 +13,7 @@ interface ApiResponse {
   raw?: any;
 }
 
-const tooltipClass = 'text-xs text-gray-500 mt-1';
+const tooltipClass = 'text-[15px] text-muted mt-1';
 
 export default function Estimator() {
   const [mode, setMode] = useState<'freeform' | 'structured'>('freeform');
@@ -144,17 +144,17 @@ export default function Estimator() {
   return (
     <div className="rounded-lg border p-6 bg-white">
       <h2 className="text-xl font-medium">Price Estimator</h2>
-      <p className="text-sm text-gray-600 mt-1">Get a quick project cost range. Choose free-form or structured.</p>
+      <p className="text-[15px] text-muted mt-1">Get a quick project cost range. Choose free-form or structured.</p>
 
-      <div className="mt-4 flex gap-3 text-sm" aria-label="Estimator mode">
-        <button onClick={() => setMode('freeform')} className={`px-4 py-1.5 rounded-full border ${mode==='freeform'?'bg-black text-white':'hover:bg-gray-100'}`}>Free-form</button>
-        <button onClick={() => setMode('structured')} className={`px-4 py-1.5 rounded-full border ${mode==='structured'?'bg-black text-white':'hover:bg-gray-100'}`}>Structured Form</button>
+      <div className="mt-4 flex gap-3 text-[15px]" aria-label="Estimator mode">
+        <button onClick={() => setMode('freeform')} className={`px-4 py-1.5 rounded-full border ${mode==='freeform'?'bg-black text-white':'hover:bg-ink/5'}`}>Free-form</button>
+        <button onClick={() => setMode('structured')} className={`px-4 py-1.5 rounded-full border ${mode==='structured'?'bg-black text-white':'hover:bg-ink/5'}`}>Structured Form</button>
       </div>
 
       {mode === 'freeform' && (
         <div className="mt-6">
-          <label className="block text-sm font-medium">Describe your project</label>
-          <textarea value={description} onChange={e=>setDescription(e.target.value)} rows={5} className="mt-1 w-full rounded border p-2 text-sm focus:outline-none focus:ring-2 focus:ring-black" placeholder="e.g. A 5 page marketing site with blog, contact form, and basic analytics." />
+          <label className="block text-[15px] font-medium">Describe your project</label>
+          <textarea value={description} onChange={e=>setDescription(e.target.value)} rows={5} className="mt-1 w-full rounded border p-2 text-[15px] focus:outline-none focus:ring-2 focus:ring-black" placeholder="e.g. A 5 page marketing site with blog, contact form, and basic analytics." />
           <p className={tooltipClass}>Mention pages/screens, key features, auth, admin needs, timeline.</p>
         </div>
       )}
@@ -162,8 +162,8 @@ export default function Estimator() {
       {mode === 'structured' && (
         <form onSubmit={e=>{e.preventDefault(); calculate();}} className="mt-6 grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-1">
-            <label htmlFor="projectType" className="block text-sm font-medium">Project Type</label>
-            <select id="projectType" value={form.projectType} onChange={e=>updateForm('projectType', e.target.value)} className="mt-1 w-full border rounded p-2 text-sm" aria-describedby="projectTypeHelp">
+            <label htmlFor="projectType" className="block text-[15px] font-medium">Project Type</label>
+            <select id="projectType" value={form.projectType} onChange={e=>updateForm('projectType', e.target.value)} className="mt-1 w-full border rounded p-2 text-[15px]" aria-describedby="projectTypeHelp">
               <option value="landing">Landing</option>
               <option value="web-app">Web App</option>
               <option value="script">Automation Script</option>
@@ -172,7 +172,7 @@ export default function Estimator() {
             <p id="projectTypeHelp" className={tooltipClass}>General category.</p>
           </div>
           <div>
-            <label htmlFor="pages" className="block text-sm font-medium">Pages / Screens</label>
+            <label htmlFor="pages" className="block text-[15px] font-medium">Pages / Screens</label>
             <input
               id="pages"
               type="text"
@@ -196,14 +196,14 @@ export default function Estimator() {
                   setPagesInput(form.pages.toString());
                 }
               }}
-              className="mt-1 w-full border rounded p-2 text-sm"
+              className="mt-1 w-full border rounded p-2 text-[15px]"
               aria-describedby="pagesHelp"
             />
             <p id="pagesHelp" className={tooltipClass}>Unique pages or screen views.</p>
           </div>
           <div>
-            <label htmlFor="complexity" className="block text-sm font-medium">Complexity</label>
-            <select id="complexity" value={form.complexity} onChange={e=>updateForm('complexity', e.target.value as any)} className="mt-1 w-full border rounded p-2 text-sm" aria-describedby="complexityHelp">
+            <label htmlFor="complexity" className="block text-[15px] font-medium">Complexity</label>
+            <select id="complexity" value={form.complexity} onChange={e=>updateForm('complexity', e.target.value as any)} className="mt-1 w-full border rounded p-2 text-[15px]" aria-describedby="complexityHelp">
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -211,8 +211,8 @@ export default function Estimator() {
             <p id="complexityHelp" className={tooltipClass}>Logic depth & integrations.</p>
           </div>
           <div>
-            <label htmlFor="timeline" className="block text-sm font-medium">Timeline</label>
-            <select id="timeline" value={form.timeline} onChange={e=>updateForm('timeline', e.target.value as any)} className="mt-1 w-full border rounded p-2 text-sm" aria-describedby="timelineHelp">
+            <label htmlFor="timeline" className="block text-[15px] font-medium">Timeline</label>
+            <select id="timeline" value={form.timeline} onChange={e=>updateForm('timeline', e.target.value as any)} className="mt-1 w-full border rounded p-2 text-[15px]" aria-describedby="timelineHelp">
               <option value="flexible">Flexible</option>
               <option value="normal">Normal</option>
               <option value="rushed">Rushed</option>
@@ -221,15 +221,15 @@ export default function Estimator() {
           </div>
           <div className="flex items-center gap-2">
             <input id="auth" type="checkbox" checked={form.auth} onChange={e=>updateForm('auth', e.target.checked)} className="h-4 w-4" />
-            <label htmlFor="auth" className="text-sm">Authentication</label>
+            <label htmlFor="auth" className="text-[15px]">Authentication</label>
           </div>
           <div className="flex items-center gap-2">
             <input id="adminPanel" type="checkbox" checked={form.adminPanel} onChange={e=>updateForm('adminPanel', e.target.checked)} className="h-4 w-4" />
-            <label htmlFor="adminPanel" className="text-sm">Admin Panel</label>
+            <label htmlFor="adminPanel" className="text-[15px]">Admin Panel</label>
           </div>
           <div>
-            <label htmlFor="aiFeatures" className="block text-sm font-medium">AI Features</label>
-            <select id="aiFeatures" value={form.aiFeatures} onChange={e=>updateForm('aiFeatures', e.target.value as any)} className="mt-1 w-full border rounded p-2 text-sm" aria-describedby="aiFeaturesHelp">
+            <label htmlFor="aiFeatures" className="block text-[15px] font-medium">AI Features</label>
+            <select id="aiFeatures" value={form.aiFeatures} onChange={e=>updateForm('aiFeatures', e.target.value as any)} className="mt-1 w-full border rounded p-2 text-[15px]" aria-describedby="aiFeaturesHelp">
               <option value="none">None</option>
               <option value="basic">Basic</option>
               <option value="advanced">Advanced</option>
@@ -237,14 +237,14 @@ export default function Estimator() {
             <p id="aiFeaturesHelp" className={tooltipClass}>Chat, generation, etc.</p>
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="notes" className="block text-sm font-medium">Notes (optional)</label>
-            <textarea id="notes" rows={3} value={form.notes} onChange={e=>updateForm('notes', e.target.value)} className="mt-1 w-full border rounded p-2 text-sm" placeholder="Extra context, external APIs, constraints" />
+            <label htmlFor="notes" className="block text-[15px] font-medium">Notes (optional)</label>
+            <textarea id="notes" rows={3} value={form.notes} onChange={e=>updateForm('notes', e.target.value)} className="mt-1 w-full border rounded p-2 text-[15px]" placeholder="Extra context, external APIs, constraints" />
           </div>
         </form>
       )}
 
       {inlineSuggestions.length > 0 && (
-        <div className="mt-4 text-xs text-gray-700 bg-gray-50 border rounded p-3" role="note">
+        <div className="mt-4 text-[15px] text-copy bg-cream border rounded p-3" role="note">
           <span className="font-medium">Suggestions:</span>
           <ul className="list-disc ml-5 mt-1 space-y-0.5">
             {inlineSuggestions.map(s => <li key={s}>{s}</li>)}
@@ -253,32 +253,32 @@ export default function Estimator() {
       )}
 
       <div className="mt-6">
-        <button onClick={calculate} disabled={loading} className="px-5 py-2 rounded-full border border-black text-sm font-medium hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+        <button onClick={calculate} disabled={loading} className="px-5 py-2 rounded-full border border-black text-[15px] font-medium hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
           {loading && <span className="h-3 w-3 animate-spin rounded-full border-2 border-black border-t-transparent" aria-hidden="true"/>}
           Calculate Price
         </button>
       </div>
 
-      {error && <p className="mt-3 text-sm text-red-600" role="alert">{error}</p>}
+      {error && <p className="mt-3 text-[15px] text-red-600" role="alert">{error}</p>}
 
       {result && (
         <div className="mt-8" aria-live="polite">
           <h3 className="text-lg font-semibold">Estimated Range</h3>
-          <p className="text-sm text-gray-600 mt-1">{resultSource === 'ai+rule' ? 'AI interpreted your description, then applied rules.' : resultSource === 'rule' ? 'Rule-based estimate.' : 'Local fallback estimate.'}</p>
+          <p className="text-[15px] text-muted mt-1">{resultSource === 'ai+rule' ? 'AI interpreted your description, then applied rules.' : resultSource === 'rule' ? 'Rule-based estimate.' : 'Local fallback estimate.'}</p>
           <div className="mt-3 flex flex-wrap gap-6">
             <div>
               <div className="text-2xl font-semibold">{result.currency} {numberFmt(result.min)} - {numberFmt(result.max)}</div>
-              <p className="text-xs text-gray-500 mt-1">Approx {result.hours} hrs • ~{result.timelineWeeks} wks</p>
+              <p className="text-[15px] text-muted mt-1">Approx {result.hours} hrs • ~{result.timelineWeeks} wks</p>
             </div>
             <div className="flex items-end">
-              <button onClick={exportInvoicePDF} className="text-sm underline underline-offset-4">Export Invoice (PDF)</button>
+              <button onClick={exportInvoicePDF} className="text-[15px] underline underline-offset-4">Export Invoice (PDF)</button>
             </div>
           </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div>
-                <h4 className="font-medium text-sm mb-2">Breakdown</h4>
-                <ul className="text-sm space-y-1">
+                <h4 className="font-medium text-[15px] mb-2">Breakdown</h4>
+                <ul className="text-[15px] space-y-1">
                   {result.breakdown.map(b => (
                     <li key={b.label} className="flex justify-between gap-4">
                       <span>{b.label}</span>
@@ -288,21 +288,21 @@ export default function Estimator() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-sm mb-2">Assumptions</h4>
-                <ul className="text-xs space-y-1 list-disc ml-5">
+                <h4 className="font-medium text-[15px] mb-2">Assumptions</h4>
+                <ul className="text-[15px] space-y-1 list-disc ml-5">
                   {result.assumptions.map(a => <li key={a}>{a}</li>)}
                 </ul>
                 {result.suggestions && result.suggestions.length > 0 && (
                   <div className="mt-4">
-                    <h4 className="font-medium text-sm mb-1">Optimization Ideas</h4>
-                    <ul className="text-xs space-y-1 list-disc ml-5">
+                    <h4 className="font-medium text-[15px] mb-1">Optimization Ideas</h4>
+                    <ul className="text-[15px] space-y-1 list-disc ml-5">
                       {result.suggestions.map(s => <li key={s}>{s}</li>)}
                     </ul>
                   </div>
                 )}
               </div>
             </div>
-          <p className="text-[11px] text-gray-500 mt-6">This is a non-binding estimate. Final quote may adjust after detailed scoping.</p>
+          <p className="text-[15px] text-muted mt-6">This is a non-binding estimate. Final quote may adjust after detailed scoping.</p>
         </div>
       )}
     </div>

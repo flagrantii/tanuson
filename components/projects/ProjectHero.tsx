@@ -26,7 +26,7 @@ export default function ProjectHero({ title, cover }: ProjectHeroProps) {
           />
         </div>
       ) : (
-        <div className="hatch flex aspect-[16/8] w-full items-center justify-center p-4 text-center font-mono text-[12px] text-muted">
+        <div className="hatch flex aspect-[16/8] w-full items-center justify-center p-4 text-center font-mono text-label text-muted">
           [ {title}: hero screenshot ]
         </div>
       )}

@@ -45,7 +45,7 @@ export default function ProjectsPage() {
                   type="button"
                   onClick={() => setFilter(c)}
                   aria-pressed={on}
-                  className={`cursor-pointer rounded-full border border-ink px-3 py-[7px] font-mono text-[12px] transition-colors duration-300 ${
+                  className={`cursor-pointer rounded-full border border-ink px-3 py-[7px] font-mono text-label transition-colors duration-300 ${
                     on ? 'bg-ink text-cream' : 'bg-transparent text-ink hover:bg-ink/5'
                   }`}
                 >
@@ -57,7 +57,7 @@ export default function ProjectsPage() {
         </Reveal>
       </div>
 
-      <div className="gutter pb-2 font-mono text-[11px] text-muted">
+      <div className="gutter pb-2 font-mono text-label text-muted">
         {/* Keyed so the count blinks up from faint each time the filter changes. */}
         <span key={list.length} className="count-flash">
           {list.length} / {webs.length} shown
@@ -83,7 +83,7 @@ export default function ProjectsPage() {
                 href={p.href}
                 className="group flex min-h-[200px] flex-col justify-between px-[22px] pb-[26px] pt-[22px] text-inherit no-underline transition-colors duration-300 hover:bg-white"
               >
-                <div className="flex justify-between gap-2 font-mono text-[11px] text-muted">
+                <div className="flex justify-between gap-2 font-mono text-label text-muted">
                   <span>
                     {p.idx} · {p.type}
                   </span>
@@ -97,7 +97,7 @@ export default function ProjectsPage() {
                     {p.description}
                   </div>
                 </div>
-                <div className="mt-[18px] flex justify-between gap-2 font-mono text-[11px] text-muted">
+                <div className="mt-[18px] flex justify-between gap-2 font-mono text-label text-muted">
                   <span>{p.tagline}</span>
                   <span className="whitespace-nowrap">{p.date}</span>
                 </div>

@@ -167,7 +167,7 @@ export default async function BlogPage() {
 
       {items.length === 0 ? (
         <div className="gutter pb-20">
-          <div className="hatch flex min-h-[220px] items-center justify-center border border-ink p-8 text-center font-mono text-[12px] leading-[1.8] text-muted">
+          <div className="hatch flex min-h-[220px] items-center justify-center border border-ink p-8 text-center font-mono text-label leading-[1.8] text-muted">
             {!MEDIUM_FEED
               ? '[ no feed configured · set NEXT_PUBLIC_MEDIUM_RSS ]'
               : `[ ${errorMsg ?? 'the feed returned nothing — check back shortly'} ]`}
@@ -185,7 +185,7 @@ export default async function BlogPage() {
                   rel="noreferrer"
                   className="group grid grid-cols-1 gap-5 border-b border-hair py-6 text-inherit no-underline sm:grid-cols-[minmax(120px,160px)_1fr]"
                 >
-                  <div className="font-mono text-[11px] text-muted">
+                  <div className="font-mono text-label text-muted">
                     <span className="mr-2 text-rust">{String(i + 1).padStart(2, '0')}</span>
                     {item.pubDate
                       ? new Date(item.pubDate).toLocaleDateString('en-US', {
@@ -203,7 +203,7 @@ export default async function BlogPage() {
                         {snippet}
                       </p>
                     )}
-                    <span className="mt-3 inline-block font-mono text-[11px] text-muted">
+                    <span className="mt-3 inline-block font-mono text-label text-muted">
                       read on medium{' '}
                       <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
                         ↗

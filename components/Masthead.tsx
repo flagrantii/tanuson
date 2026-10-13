@@ -55,7 +55,7 @@ export default function Masthead() {
 
   return (
     <header data-noprint>
-      <div className="gutter flex items-center justify-between gap-4 border-b border-hair py-[clamp(16px,2.5vw,26px)] font-mono text-[13px]">
+      <div className="gutter flex items-center justify-between gap-4 border-b border-hair py-[clamp(16px,2.5vw,26px)] font-mono">
         <Link
           href="/"
           className="whitespace-nowrap font-display text-[clamp(20px,2vw,24px)] italic text-ink no-underline"
@@ -64,7 +64,7 @@ export default function Masthead() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden gap-8 text-muted md:flex" aria-label="Primary">
+        <nav className="hidden gap-8 text-label text-muted md:flex" aria-label="Primary">
           {NAV.map((item) => {
             const active = isActive(item.href)
             return (
@@ -91,7 +91,9 @@ export default function Masthead() {
           })}
         </nav>
 
-        <div className="hidden text-muted md:block" suppressHydrationWarning>
+        {/* The dateline needs the room of a wide screen; between the phone sheet
+            and 1024px it would wrap the masthead onto three lines. */}
+        <div className="hidden text-label text-muted lg:block" suppressHydrationWarning>
           vol. 2026 · bangkok{clock ? ` · ${clock}` : ''}
         </div>
 
@@ -101,7 +103,7 @@ export default function Masthead() {
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
-          className="cursor-pointer rounded-full border border-ink bg-transparent px-3 py-1.5 font-mono text-[12px] text-ink md:hidden"
+          className="cursor-pointer rounded-full border border-ink bg-transparent px-3 py-1.5 font-mono text-label text-ink md:hidden"
         >
           {menuOpen ? 'close' : 'menu'}
         </button>
@@ -140,7 +142,7 @@ export default function Masthead() {
               ))}
               <a
                 href={`mailto:${CONTACT.email}`}
-                className="block border-t border-hair px-5 py-4 font-mono text-[12px] text-muted no-underline"
+                className="block border-t border-hair px-5 py-4 font-mono text-label text-muted no-underline"
               >
                 {CONTACT.email}
               </a>

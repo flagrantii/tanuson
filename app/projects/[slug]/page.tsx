@@ -42,7 +42,7 @@ export default async function ProjectDetailPage({
 
   return (
     <article>
-      <div className="gutter pt-5 font-mono text-[12px] text-muted">
+      <div className="gutter pt-5 font-mono text-label text-muted">
         <Link href="/projects" className="group text-muted no-underline hover:text-rust">
           <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">
             ←
@@ -77,15 +77,15 @@ export default async function ProjectDetailPage({
 
       <div className="gutter grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-x-10 gap-y-8 pb-10 pt-[clamp(32px,4vw,48px)] font-body text-[18px] font-light leading-[1.5] text-copy">
         <Reveal>
-          <div className="mb-2.5 font-mono text-[11px] text-rust">about</div>
+          <div className="mb-2.5 font-mono text-label text-rust">about</div>
           {p.about}
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="mb-2.5 font-mono text-[11px] text-rust">what i did</div>
+          <div className="mb-2.5 font-mono text-label text-rust">what i did</div>
           {p.role}
         </Reveal>
         <Reveal delay={0.16}>
-          <div className="mb-2.5 font-mono text-[11px] text-rust">stack</div>
+          <div className="mb-2.5 font-mono text-label text-rust">stack</div>
           <ProjectTechStack stack={p.stack} />
         </Reveal>
       </div>
@@ -93,7 +93,7 @@ export default async function ProjectDetailPage({
       {p.features.length > 0 && (
         <div className="gutter pb-12">
           <Reveal>
-            <div className="mb-2.5 font-mono text-[11px] text-rust">features</div>
+            <div className="mb-2.5 font-mono text-label text-rust">features</div>
             <div className="max-w-2xl">
               <ProjectFeatures features={p.features} />
             </div>
@@ -105,7 +105,7 @@ export default async function ProjectDetailPage({
 
       <ProjectGallery images={p.images.slice(1)} title={p.title} />
 
-      <nav className="mx-[var(--gutter)] mb-16 flex justify-between gap-4 border-t border-ink pt-5 font-mono text-[12px]">
+      <nav className="mx-[var(--gutter)] mb-16 flex justify-between gap-4 border-t border-ink pt-5 font-mono text-label">
         {prev ? (
           <Link href={prev.href} className="group text-ink no-underline hover:text-rust">
             <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">
