@@ -157,7 +157,7 @@ export default function AboutPage() {
                   {c.skills.slice(0, 6).map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-hair px-2 py-0.5 font-mono text-label text-muted"
+                      className="rounded-full border border-hair px-[9px] py-[5px] font-mono text-label text-muted"
                     >
                       {s}
                     </span>

@@ -54,7 +54,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
                 alt={`${title}, plate ${i + 1}`}
                 className="block h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
               />
-              <span className="absolute left-2 top-2 bg-cream px-1.5 py-0.5 font-mono text-label text-muted">
+              <span className="absolute left-2 top-2 bg-cream px-2 py-1 font-mono text-label text-muted">
                 pl. {String(i + 1).padStart(2, '0')}
               </span>
             </button>
