@@ -47,6 +47,8 @@ export type Figure = {
   /** Fat-line materials needing a resolution uniform on resize. */
   materials: LineMaterial[]
   update: (t: number, ctx: FrameContext) => void
+  /** Draws the figure in again from nothing, if it has a plotter reveal. */
+  replot?: () => void
   dispose: () => void
 }
 
@@ -105,23 +107,28 @@ class Parts {
  * the shader goes back to the cheap solid path.
  */
 function drawIn(materials: LineMaterial[], duration: number) {
-  materials.forEach((m) => {
-    m.dashed = true
-    m.dashOffset = 0
-    m.gapSize = 1e4
-    m.dashSize = 0
-  })
-
   let start = -1
   let done = false
+
+  const arm = () => {
+    materials.forEach((m) => {
+      m.dashed = true
+      m.dashOffset = 0
+      m.gapSize = 1e4
+      m.dashSize = 0
+    })
+    start = -1
+    done = false
+  }
   const finish = () => {
     materials.forEach((m) => {
       m.dashed = false
     })
     done = true
   }
+  arm()
 
-  return (t: number, still: boolean) => {
+  const step = (t: number, still: boolean) => {
     if (done) return
     if (still) return finish()
     if (start < 0) start = t
@@ -133,6 +140,9 @@ function drawIn(materials: LineMaterial[], duration: number) {
     })
     if (p >= 1) finish()
   }
+
+  // Lifting the pen and plotting again: the next frame starts from nothing.
+  return { step, restart: arm }
 }
 
 /* ------------------------------------------------------------------ knot --
@@ -211,7 +221,7 @@ function buildKnot(): Figure {
     camera,
     materials: parts.materials,
     update: (t, c) => {
-      reveal(t, c.still)
+      reveal.step(t, c.still)
       // Scroll adds a slow extra revolution so the object tracks the reader.
       root.rotation.y = t * 0.15 + c.pointerX * 0.5 + c.scroll * Math.PI * 1.4
       root.rotation.x = Math.sin(t * 0.23) * 0.15 + c.pointerY * -0.32
@@ -223,6 +233,7 @@ function buildKnot(): Figure {
       const s = 1 + Math.sin(t * 0.5) * 0.012
       root.scale.setScalar(s)
     },
+    replot: reveal.restart,
     dispose: () => parts.dispose(),
   }
 }

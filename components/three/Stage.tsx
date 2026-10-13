@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { createFigure, type Figure, type FigureKind } from './figures'
 import { getSlots, onSlotsChange } from './slots'
+import { REPLOT_EVENT } from './replot'
 
 /**
  * A single fixed-position WebGL canvas that draws every figure on the page.
@@ -208,10 +209,20 @@ export default function Stage() {
       readScroll()
       wake()
     }
+    // A figure's caption asks for a replot (see components/three/replot.ts).
+    // With reduced motion the figure stays a finished still, so nothing to do.
+    const onReplot = (e: Event) => {
+      if (reduced) return
+      const kind = (e as CustomEvent<{ kind: FigureKind }>).detail?.kind
+      if (!kind) return
+      getFigure(kind).replot?.()
+      wake()
+    }
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize)
     document.addEventListener('visibilitychange', wake)
+    window.addEventListener(REPLOT_EVENT, onReplot)
     if (!reduced) window.addEventListener('pointermove', onPointerMove, { passive: true })
 
     return () => {
@@ -221,6 +232,7 @@ export default function Stage() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', wake)
+      window.removeEventListener(REPLOT_EVENT, onReplot)
       window.removeEventListener('pointermove', onPointerMove)
       figures.forEach((f) => f.dispose())
       renderer.dispose()
