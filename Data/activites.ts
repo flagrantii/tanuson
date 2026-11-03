@@ -6,9 +6,9 @@
       org: 'Information System Development, SGCU',
       period: 'Jun 2024 – Present',
       bullets: [
-        'Developed user selection group feature for incoming students website; up to 3,000 users/day.',
-        'Designed DB model and project structure for CU Council; scalable and efficient system.',
-        'Led development for Chu News website for university news and highlights.',
+        'Built the group selection feature on the incoming students site, used by up to 3,000 people a day.',
+        'Designed the data model and project structure for the CU Council system.',
+        'Led the build of Chu News, the university news site.',
       ],
     },
     {
@@ -16,8 +16,8 @@
       org: 'Thinc. (Thailand Incubator)',
       period: 'Aug 2024 – Present',
       bullets: [
-        'Contributed to student‑run community focused on societal impact and real‑world skills.',
-        'Supervised multiple projects and engineering teams for successful outcomes.',
+        'Core team of a student-run tech community that builds for social causes.',
+        'Supervised several project teams and the engineers on them.',
       ],
     },
     {
@@ -25,7 +25,7 @@
       org: 'Google Developer Student Club CU',
       period: 'Sep 2023 – Present',
       bullets: [
-        'Leveraged Google tools to enhance teaching and learning experiences campus‑wide.',
+        'Introduced Google developer tools to students across campus.',
       ],
     },
     {
@@ -33,9 +33,8 @@
       org: 'Engineering Student Committee, Chulalongkorn University',
       period: 'Aug 2025 – Present',
       bullets: [
-        'Led development of a useful product for the Engineering Student Committee, Chulalongkorn University.',
-        'Created a software engineer environment for team members.',
-        'Led the software engineering team in developing solutions, troubleshooting issues, reviewing code, and designing system architecture to ensure smooth and efficient operations.',
+        "Led the engineering team building the committee's product: architecture, code review and troubleshooting.",
+        'Set up the development environment and workflow the team works in.',
       ],
     }
   ]

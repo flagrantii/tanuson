@@ -16,7 +16,7 @@ export const cers = [
     title: 'Supervised Machine Learning: Regression and Classification',
     href: 'https://coursera.org/share/1c1244c494a980fd62448707b52a2cab',
     description:
-      'Principles of supervised machine learning By in-depth look at regression and classification methods. Gain practical skills in model training and evaluation. Learn to use algorithms for predictive analytics.',
+      'Regression and classification: training models, evaluating them, and the gradient descent and regularization behind both.',
     date: 'October 2022',
     datetime: '2020-03-16',
     category: { title: 'Coursera', org: 'DeepLearning.AI' },
@@ -38,7 +38,7 @@ export const cers = [
     title: 'Technical Support Fundamentals',
     href: 'https://coursera.org/share/116e66fe61fc085dd32998deaf5dfabe',
     description:
-      'gain expertise in Technical Support Fundamentals, mastering troubleshooting, effective customer communication, and problem-solving techniques. Develop a strong foundation in hardware and software support',
+      'Troubleshooting, hardware and software support, and how to talk to the person reporting the problem.',
     date: 'October 2022',
     datetime: '2020-03-16',
     category: { title: 'Coursera', org: 'Google' },
@@ -55,7 +55,7 @@ export const cers = [
     title: 'Build LookML Objects in Looker',
     href: 'https://www.cloudskillsboost.google/public_profiles/4070637f-c92e-424f-a35e-c071938698cf/badges/9421029',
     description:
-      'Certificate in "Build LookML Objects in Looker" validates proficiency in constructing LookML models within Looker, empowering data analysts to create robust data models for business intelligence.',
+      'Building data models in LookML inside Looker, for analysts to query from.',
     date: 'June 2024',
     datetime: '2020-03-16',
     category: { title: 'Google', org: 'Google Cloud' },
@@ -72,7 +72,7 @@ export const cers = [
     title: 'AI Engineer Agentic Track: The Complete Agent & MCP Course',
     href: 'https://www.udemy.com/certificate/UC-38ae6e43-1326-41c8-b5c6-12bd25424b1a/',
     description:
-      'Learners develop a deep understanding of agentic AI architectures, including multi-agent collaboration, memory systems, feedback loops, and real-time tool integrations. Through 8 real-world projects, students build advanced AI systems capable of web search, file handling, Python execution, and automated decision-making — similar to real digital assistants or AI copilots.',
+      'Agentic AI architectures: multi-agent collaboration, memory, feedback loops and real-time tool integrations, across 8 projects covering web search, file handling and Python execution.',
     date: 'May 2025',
     datetime: '2020-03-16',
     category: { title: 'Udemy', org: 'Udemy' },
@@ -89,7 +89,7 @@ export const cers = [
     title: 'Software Architecture & Technology of Large-Scale Systems',
     href: 'https://www.udemy.com/certificate/UC-0e982c08-430a-456e-969b-e1ce3ae0d817/',
     description:
-      'This advanced course guides experienced software developers through the transition from developer to solution architect. It covers the architecture of large-scale systems, deep dives into non-functional requirements (performance, scalability, reliability, security), and the internal workings of key tools and platforms like Node.js, Redis, Kafka, Cassandra, ELK, Hadoop, Docker, and Kubernetes. By the end you’ll understand how to make meaningful architectural decisions, build high-performance production systems, and lead system design with confidence.',
+      'Architecture of large-scale systems: performance, scalability, reliability and security, and how Node.js, Redis, Kafka, Cassandra, ELK, Hadoop, Docker and Kubernetes work underneath.',
     date: 'Nov 2025',
     datetime: '2020-03-16',
     category: { title: 'Udemy', org: 'Udemy' },

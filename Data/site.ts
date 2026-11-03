@@ -61,12 +61,12 @@ export const EXTRA: Extra[] = activities.map((a) => ({
 }))
 
 export const OBJECTIVE =
-  'Dedicated software developer focused on building scalable, high-performance web applications. Proven experience across full-stack development, backend architecture, frontend engineering, and cloud infrastructure. I aim to leverage my expertise to create impactful digital solutions that enhance user experiences and drive business outcomes.'
+  'Backend engineer at LINE MAN Wongnai and co-founder of Mee Palang Mai. I work mostly in Go, on merchant platform services, observability pipelines and registration systems that a few thousand people open in the same minute. I would rather own a service end to end than hand it off at the API boundary.'
 
 export const EDUCATION_RESUME = {
   range: 'Aug 2023 — present',
   degree: 'Bachelor of Engineering, Computer Engineering',
-  school: 'Chulalongkorn University (not graduated yet)',
+  school: 'Chulalongkorn University, expected 2027',
   coursework:
     'Coursework: Data Structures and Algorithms, Database Systems, OOP, Software Engineering, Computer Networks, Operating Systems, Data Science, System Design.',
 }

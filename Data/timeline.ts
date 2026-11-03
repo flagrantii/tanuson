@@ -15,12 +15,12 @@ export const timelineItems: TimelineItem[] = [
     type: "Full-Time",
     period: "May 2026 – Now",
     bullets: [
-      "Built and shipped a merchant-message service powering the Merchant App inbox and in-app notice banners, migrating merchant messaging off the legacy monolith with dual-write and a feature-flagged rollout to every merchant.",
-      "Designed the datastore capacity and sharding strategy for high-volume merchant messaging — shard-key analysis, index and TTL policy — and documented the decision to stay on a single replica set instead of sharding.",
-      "Delivered deterministic field-level encryption for merchant contact data: flag-gated dual-write, Airflow backfill pipelines, and a staged rollout plan reviewed with SRE.",
-      "Ran production on-call for the merchant platform — root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and guardrails behind them.",
-      "Built the team's AI engineering toolkit — shared skills for design docs, RFCs and implementation — and rolled it out across the organization alongside a lighter RFC/ADR practice.",
-      "Mentored the 2026 intern cohort: scoped their tickets, reviewed their code, and ran feedback sessions.",
+      "Built the merchant-message service behind the Merchant App inbox and in-app notice banners, and moved merchant messaging off the legacy monolith with dual-write and a feature-flagged rollout to every merchant.",
+      "Chose the datastore layout for high-volume merchant messaging: shard-key analysis, index and TTL policy, and a written decision to stay on one replica set instead of sharding.",
+      "Shipped deterministic field-level encryption for merchant contact data, with flag-gated dual-write, Airflow backfill, and a staged rollout reviewed with SRE.",
+      "Carried production on-call for the merchant platform. Root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and the guardrails.",
+      "Built the team's AI engineering toolkit for design docs, RFCs and implementation, and rolled it out across the organization.",
+      "Mentored the 2026 intern cohort: scoped their tickets, reviewed their code, ran feedback sessions.",
     ],
   },
   {
@@ -30,12 +30,11 @@ export const timelineItems: TimelineItem[] = [
     type: "Co-Founder",
     period: "Nov-2025 – Now",
     bullets: [
-      "Co-founded a software development startup, establishing the company’s technical direction and development standards.",
-      "Led end-to-end technical execution for a client project, from requirements discovery to deployment.",
-      "Designed system architectures and selected appropriate technologies to ensure scalability and maintainability.",
-      "Mentored engineers, reviewed code, and created workflows that improved team efficiency and software quality.",
-      "Collaborated with clients to translate business needs into actionable technical solutions."
-    ],    
+      "Co-founded a software studio and set its technical direction and development standards.",
+      "Ran a client project end to end, from requirements to deployment.",
+      "Chose the architecture and the stack for each build.",
+      "Reviewed code and mentored the engineers on the team.",
+    ],
   },
   {
     id: 3,
@@ -44,12 +43,11 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
     period: "Aug 2025 – Apr 2026",
     bullets: [
-      "Developed a unified observability pipeline using OpenTelemetry and ClickHouse to improve telemetry completeness and system scalability.",
-      "Implemented high-throughput ingestion pipelines and performed load tests supporting 200K+ logs/sec and 400K+ traces/sec.",
-      "Optimized system architecture, schemas, and retention strategies to reduce query latency and operational costs.",
-      "Contributed to the design of a near-real-time deployment regression detection system to improve platform reliability.",
-      "Designed UX/UI, system architecture, and implemented a centralized Platform Portal serving as a single source of truth for all engineers across the organization.",
-      "Collaborated with multiple engineering teams to gather requirements, identify pain points, and design an intuitive platform portal that improves developer experience and operational efficiency."
+      "Load-tested the ingestion pipeline at 200K+ logs/sec and 400K+ traces/sec.",
+      "Built a unified observability pipeline on OpenTelemetry and ClickHouse.",
+      "Tuned schemas, retention and queries to cut query latency and storage cost.",
+      "Helped design near-real-time regression detection for deploys.",
+      "Designed and built the Platform Portal, the one place engineers across the organization start from, after collecting requirements from several teams.",
     ],
   },
   {
@@ -59,9 +57,9 @@ export const timelineItems: TimelineItem[] = [
     type: "Internship",
     period: "May 2025 – July 2025",
     bullets: [
-      "Designed and implemented scalable backend services in Go handling 200k+ RPS and >1M DB ops.",
-      "Implemented fault‑tolerant services to ensure seamless UX during traffic surges.",
-      "Reduced database load spike by designing new infrastructure to handle large-scale transactions."
+      "Built Go backend services handling 200K+ RPS and over 1M database operations.",
+      "Made the services degrade gracefully instead of failing when traffic surged.",
+      "Cut a database load spike by redesigning the infrastructure that handles large-scale transactions.",
     ],
   },
   {
@@ -71,9 +69,9 @@ export const timelineItems: TimelineItem[] = [
     type: "Part‑Time",
     period: "Apr 2024 – Nov 2024",
     bullets: [
-      "Developed responsive PWA from detailed Figma designs using Next.js, TypeScript, MUI, Redux.",
-      "Enhanced performance through efficient coding practices and tuning by best‑practice solutions.",
-      "Built and shipped APIs for the main product to extend capabilities and performance.",
+      "Built a responsive PWA from Figma designs in Next.js, TypeScript, MUI and Redux.",
+      "Shipped the APIs behind the main product.",
+      "Tuned frontend performance.",
     ],
   },
   {
@@ -83,9 +81,9 @@ export const timelineItems: TimelineItem[] = [
     type: "Internship",
     period: "May 2024 – Jul 2024",
     bullets: [
-      "Implemented concurrency techniques to boost API speed and strengthen security.",
-      "Built a user‑friendly carbon credit offset calculator in Next.js and TypeScript.",
-      "Improved UX for core-product modules to solve critical challenges with innovative solutions.",
+      "Used concurrency to speed up the API endpoints.",
+      "Built a carbon credit offset calculator in Next.js and TypeScript.",
+      "Reworked the UX of the core product modules.",
     ],
   },
   {
@@ -95,10 +93,9 @@ export const timelineItems: TimelineItem[] = [
     type: "Since 2022",
     period: "Since 2022",
     bullets: [
-      "Translated diverse client needs into clear, scalable technical solutions that directly supported business goals.",
-      "Built and launched full-stack applications (Next.js, Node.js) featuring custom dashboards, secure payments, and smooth integrations.",
-      "Engineered CI/CD pipelines and cloud deployments with real-time monitoring, ensuring reliability at scale.",
-      "Led small cross-functional teams setting direction, reviewing code, and mentoring developers.",
+      "Built and shipped full-stack apps in Next.js and Node.js with custom dashboards, payments and third-party integrations.",
+      "Set up the CI/CD pipelines, cloud deployments and monitoring behind them.",
+      "Led small teams: set direction, reviewed code, mentored developers.",
     ],
   },
 ];
