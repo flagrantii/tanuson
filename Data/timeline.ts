@@ -17,9 +17,9 @@ export const timelineItems: TimelineItem[] = [
     bullets: [
       "Built the merchant-message service behind the Merchant App inbox and in-app notice banners, now serving millions of gRPC calls a day, and moved merchant messaging off the legacy monolith with dual-write and a feature-flagged rollout to every merchant.",
       "Chose the datastore layout for high-volume merchant messaging: shard-key analysis, index and TTL policy, and a written decision to stay on one replica set instead of sharding.",
-      "Shipped deterministic field-level encryption for merchant contact data, with flag-gated dual-write, Airflow backfill, and a staged rollout reviewed with SRE.",
+      "Shipped deterministic field-level encryption for merchant contact data and moved more than 1.7M user records onto it with no interruption to merchants, using flag-gated dual-write, Airflow backfill and a staged rollout reviewed with SRE.",
       "Carried production on-call for the merchant platform. Root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and the guardrails.",
-      "Built the engineering AI toolkit (wma-docs): shared skills for design docs, RFCs and implementation, installable through npm or the Claude plugin marketplace, and rolled it out across the organization.",
+      "Built the engineering AI toolkit (wma-docs): shared skills for design docs, RFCs and implementation, installable through npm or the Claude plugin marketplace and now used by 4 squads and more than 20 engineers.",
       "Mentored the 2026 intern cohort: scoped their tickets, reviewed their code, ran feedback sessions.",
     ],
   },
@@ -35,7 +35,7 @@ export const timelineItems: TimelineItem[] = [
       "Built CUrious, a real-time classroom quiz platform in Go with MongoDB, Redis and WebSocket, including score write-back to the university LMS.",
       "Provisioned the infrastructure from bare metal up: Proxmox VMs with OpenTofu, k3s with Ansible, and a repeatable CloudFront and S3 pipeline now serving 10 live domains.",
       "Run a fleet of 7 AI engineering agents managed as GitOps, which the team uses for design docs, review and operations.",
-      "Reviewed code and mentored the engineers on the team.",
+      "Led a team of 10: set direction, reviewed code and mentored the engineers.",
     ],
   },
   {
