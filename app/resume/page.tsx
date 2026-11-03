@@ -20,6 +20,7 @@ import {
   type SectionKey,
 } from '@/Data/site'
 import { webs } from '@/Data/web'
+import { cers } from '@/Data/cert'
 
 /** Two-column row used throughout the résumé body: meta rail + content. */
 function Row({
@@ -112,7 +113,7 @@ export default function ResumePage() {
             {CONTACT.githubLabel}
           </a>
           <a href={CONTACT.linkedin} target="_blank" rel="noopener" className="no-underline hover:text-rust">
-            linkedin<span className="print-hide"> ↗</span>
+            {CONTACT.linkedinLabel}<span className="print-hide"> ↗</span>
           </a>
           <a href={CONTACT.site} className="no-underline hover:text-rust">
             {CONTACT.siteLabel}
@@ -137,7 +138,9 @@ export default function ResumePage() {
                   }`}
                 >
                   <span>{m}</span>
-                  <span className="opacity-60">{MODE_SECTIONS[m].length}/7</span>
+                  <span className="opacity-60">
+                    {MODE_SECTIONS[m].length}/{SECTION_KEYS.length}
+                  </span>
                 </button>
               )
             })}
@@ -171,12 +174,23 @@ export default function ResumePage() {
           </div>
 
           <div className="mb-3.5 mt-2.5 font-mono text-[11px] text-muted">
-            {sections.size} / 7 sections included
+            {sections.size} / {SECTION_KEYS.length} sections included
           </div>
 
           <motion.button
             type="button"
-            onClick={() => window.print()}
+            onClick={() => {
+              const prev = document.title
+              document.title = 'Tanuson_Deachaboonchana_Resume'
+              window.addEventListener(
+                'afterprint',
+                () => {
+                  document.title = prev
+                },
+                { once: true },
+              )
+              window.print()
+            }}
             whileHover={{ y: -1 }}
             whileTap={{ y: 0 }}
             className="w-full cursor-pointer border-0 bg-ink px-4 py-3.5 font-mono text-[12px] font-medium text-cream"
@@ -184,13 +198,18 @@ export default function ResumePage() {
             Export selected as PDF →
           </motion.button>
 
+          <p className="m-0 mt-3 font-mono text-[11px] leading-[1.5] text-muted">
+            In the print dialog, untick Headers and footers so the date and URL
+            stay off the page.
+          </p>
+
           <a
-            href="/resume/Tanuson-Deachaboonchana_Resume_Mar2025.pdf"
+            href="/resume/Tanuson_Deachaboonchana_Resume.pdf"
             target="_blank"
             rel="noopener"
             className="mt-3 block text-center font-mono text-[11px] text-muted no-underline hover:text-rust"
           >
-            or download the Mar 2025 PDF ↗
+            or download the latest PDF ↗
           </a>
         </div>
       </div>
@@ -238,7 +257,7 @@ export default function ResumePage() {
 
         {show('tech') && (
           <Reveal>
-            <SectionLabel n="03">technologies and languages</SectionLabel>
+            <SectionLabel n="03">skills</SectionLabel>
             <div className="flex flex-col">
               {TECH.map((t) => (
                 <Row key={t.k} meta={t.k} className="tech-row !py-2.5">
@@ -304,6 +323,34 @@ export default function ResumePage() {
                       {p.description}
                     </div>
                   </Link>
+                </Row>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
+        {show('certs') && (
+          <Reveal>
+            <SectionLabel n="07">certificates</SectionLabel>
+            <div className="flex flex-col">
+              {cers.map((c) => (
+                <Row
+                  key={c.id}
+                  meta={
+                    <>
+                      {c.date}
+                      <br />
+                      {c.category.org}
+                    </>
+                  }
+                  className="!py-3"
+                >
+                  <div className="font-display text-[clamp(20px,1.8vw,22px)]">{c.title}</div>
+                  {showBullets && (
+                    <div className="font-body text-[16px] font-light leading-[1.45] text-copy">
+                      {c.description}
+                    </div>
+                  )}
                 </Row>
               ))}
             </div>

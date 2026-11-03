@@ -64,7 +64,7 @@ export const OBJECTIVE =
   'Backend engineer at LINE MAN Wongnai and co-founder of Mee Palang Mai. I work mostly in Go, on merchant platform services, observability pipelines and registration systems that a few thousand people open in the same minute. I would rather own a service end to end than hand it off at the API boundary.'
 
 export const EDUCATION_RESUME = {
-  range: 'Aug 2023 — present',
+  range: 'Aug 2023 – Present',
   degree: 'Bachelor of Engineering, Computer Engineering',
   school: 'Chulalongkorn University, expected 2027',
   coursework:
@@ -78,6 +78,7 @@ export const SECTION_KEYS = [
   'education',
   'extra',
   'projects',
+  'certs',
   'contact',
 ] as const
 
@@ -85,7 +86,7 @@ export type SectionKey = (typeof SECTION_KEYS)[number]
 
 export const MODE_SECTIONS: Record<ResumeMode, readonly SectionKey[]> = {
   Full: SECTION_KEYS,
-  Core: ['experience', 'tech', 'education', 'projects', 'contact'],
+  Core: ['experience', 'tech', 'education', 'projects', 'certs', 'contact'],
   Minimal: ['experience', 'tech', 'contact'],
 }
 
@@ -96,10 +97,11 @@ export const RESUME_MODES: ResumeMode[] = ['Full', 'Core', 'Minimal']
 export const SECTION_LABELS: Record<SectionKey, string> = {
   objective: 'objective',
   experience: 'experience',
-  tech: 'technologies',
+  tech: 'skills',
   education: 'education',
   extra: 'extracurricular',
   projects: 'projects',
+  certs: 'certificates',
   contact: 'contact',
 }
 
@@ -119,6 +121,7 @@ export const CONTACT = {
   github: 'https://github.com/flagrantii',
   githubLabel: 'github.com/flagrantii',
   linkedin: 'https://www.linkedin.com/in/tanuson-deachaboonchana-743a3029b/',
+  linkedinLabel: 'linkedin.com/in/tanuson-deachaboonchana-743a3029b',
   site: 'https://tanuson.com',
   siteLabel: 'tanuson.com',
   location: 'Suan Luang, Bangkok',
