@@ -18,7 +18,7 @@ export const timelineItems: TimelineItem[] = [
       "Built the merchant-message service behind the Merchant App inbox and in-app notice banners, now serving millions of gRPC calls a day, and moved merchant messaging off the legacy monolith with dual-write and a feature-flagged rollout to every merchant.",
       "Chose the datastore layout for high-volume merchant messaging: shard-key analysis, index and TTL policy, and a written decision to stay on one replica set instead of sharding.",
       "Shipped deterministic field-level encryption for merchant contact data and moved more than 1.7M user records onto it with no interruption to merchants, using flag-gated dual-write, Airflow backfill and a staged rollout reviewed with SRE.",
-      "Carried production on-call for the merchant platform. Root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and the guardrails.",
+      "Carried production on-call for the merchant platform through more than 50 incidents: root-caused GraphQL error-rate spikes, Redis circuit-breaker trips and payment status mismatches, then shipped the fixes and the guardrails.",
       "Built the engineering AI toolkit (wma-docs): shared skills for design docs, RFCs and implementation, installable through npm or the Claude plugin marketplace and now used by 4 squads and more than 20 engineers.",
       "Mentored the 2026 intern cohort: scoped their tickets, reviewed their code, ran feedback sessions.",
     ],
@@ -47,9 +47,9 @@ export const timelineItems: TimelineItem[] = [
     bullets: [
       "Load-tested the ingestion pipeline at 200K+ logs/sec and 400K+ traces/sec.",
       "Built a unified observability pipeline on OpenTelemetry and ClickHouse.",
-      "Tuned schemas, retention and queries to cut query latency and storage cost.",
+      "Tuned schemas, retention and queries to halve storage cost and hold full-text log search under a second.",
       "Helped design near-real-time regression detection for deploys.",
-      "Designed and built the Platform Portal, the one place engineers across the organization start from, after collecting requirements from several teams.",
+      "Designed and built the Platform Portal, now the starting point for around 500 engineers across the organization, after collecting requirements from several teams.",
     ],
   },
   {
