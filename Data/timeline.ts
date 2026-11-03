@@ -58,8 +58,8 @@ export const timelineItems: TimelineItem[] = [
     type: "Internship",
     period: "May 2025 – Jul 2025",
     bullets: [
-      "Built Go backend services handling 200K+ RPS and over 1M database operations.",
-      "Made the services degrade gracefully instead of failing when traffic surged.",
+      "Built Announcement V1 in Go, the service that delivers announcements to merchants, handling 200K+ RPS and over 1M database operations.",
+      "Made it degrade gracefully under a traffic surge instead of failing outright.",
       "Cut a database load spike by redesigning the infrastructure that handles large-scale transactions.",
     ],
   },
@@ -70,7 +70,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
     period: "Apr 2024 – Nov 2024",
     bullets: [
-      "Built the product's responsive PWA from Figma designs in Next.js, TypeScript, MUI and Redux.",
+      "Built the PWA for a map-based restaurant discovery product, where people browse reviews, reviewers and review photos by location, from Figma designs in Next.js, TypeScript, MUI and Redux.",
       "Shipped the APIs behind it, and tuned the frontend for load time and responsiveness.",
     ],
   },
@@ -81,9 +81,8 @@ export const timelineItems: TimelineItem[] = [
     type: "Internship",
     period: "May 2024 – Jul 2024",
     bullets: [
-      "Built a carbon credit offset calculator in Next.js and TypeScript.",
+      "Built a carbon credit offset calculator in Next.js and TypeScript, and reworked its UX.",
       "Used concurrency to speed up the API endpoints behind it.",
-      "Reworked the UX of the core product modules.",
     ],
   },
   {
@@ -91,9 +90,9 @@ export const timelineItems: TimelineItem[] = [
     company: "Freelance",
     role: "Full-Stack Developer",
     type: "Self-employed",
-    period: "2022 – Present",
+    period: "2022 – 2025",
     bullets: [
-      "Built and shipped full-stack apps in Next.js and Node.js with custom dashboards, payments and third-party integrations.",
+      "Delivered seven client projects in Next.js and Node.js, with custom dashboards, payments and third-party integrations.",
       "Set up the CI/CD pipelines, cloud deployments and monitoring behind them.",
       "Led small teams: set direction, reviewed code, mentored developers.",
     ],
