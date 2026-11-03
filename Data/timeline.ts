@@ -31,10 +31,10 @@ export const timelineItems: TimelineItem[] = [
     period: "Nov 2025 – Present",
     bullets: [
       "Co-founded a software studio and set its technical direction and development standards.",
-      "Delivered a workforce management platform for a client end to end: attendance, leave, OT, payroll and expenses plus field operations, on NestJS, Prisma, PostgreSQL, AWS Cognito and LINE LIFF.",
+      "Delivered an HR and field operations platform for a client end to end, running around the clock for 10,000 staff across the country: attendance, leave, OT, payroll and expenses, on NestJS, Prisma, PostgreSQL, AWS Cognito and LINE LIFF.",
       "Built CUrious, a real-time classroom quiz platform in Go with MongoDB, Redis and WebSocket, including score write-back to the university LMS.",
       "Provisioned the infrastructure from bare metal up: Proxmox VMs with OpenTofu, k3s with Ansible, and a repeatable CloudFront and S3 pipeline now serving 10 live domains.",
-      "Run a fleet of 7 AI engineering agents managed as GitOps, which the team uses for design docs, review and operations.",
+      "Run a multi-agent AI engineering fleet managed as GitOps, which the team uses for design docs, review and operations.",
       "Led a team of 10: set direction, reviewed code and mentored the engineers.",
     ],
   },
@@ -45,11 +45,10 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
     period: "Aug 2025 – Apr 2026",
     bullets: [
-      "Load-tested the ingestion pipeline at 200K+ logs/sec and 400K+ traces/sec.",
-      "Built a unified observability pipeline on OpenTelemetry and ClickHouse.",
+      "Built the organization's unified observability pipeline on OpenTelemetry and ClickHouse, and load-tested the ingestion path at 200K+ logs/sec and 400K+ traces/sec.",
       "Tuned schemas, retention and queries to halve storage cost and hold full-text log search under a second.",
-      "Helped design near-real-time regression detection for deploys.",
-      "Designed and built the Platform Portal, now the starting point for around 500 engineers across the organization, after collecting requirements from several teams.",
+      "Designed and built the Platform Portal, now the starting point for around 500 engineers across the organization, from requirements gathered across several teams.",
+      "Helped design the near-real-time check that catches a regression in the minutes after a deploy.",
     ],
   },
   {
@@ -71,9 +70,8 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
     period: "Apr 2024 – Nov 2024",
     bullets: [
-      "Built a responsive PWA from Figma designs in Next.js, TypeScript, MUI and Redux.",
-      "Shipped the APIs behind the main product.",
-      "Tuned frontend performance.",
+      "Built the product's responsive PWA from Figma designs in Next.js, TypeScript, MUI and Redux.",
+      "Shipped the APIs behind it, and tuned the frontend for load time and responsiveness.",
     ],
   },
   {
@@ -83,8 +81,8 @@ export const timelineItems: TimelineItem[] = [
     type: "Internship",
     period: "May 2024 – Jul 2024",
     bullets: [
-      "Used concurrency to speed up the API endpoints.",
       "Built a carbon credit offset calculator in Next.js and TypeScript.",
+      "Used concurrency to speed up the API endpoints behind it.",
       "Reworked the UX of the core product modules.",
     ],
   },
